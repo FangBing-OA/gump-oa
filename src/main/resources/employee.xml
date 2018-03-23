@@ -12,6 +12,9 @@
 			<result name="toEdit">/edit.jsp</result>
 			<result name="toAdd">/add.jsp</result>
 		</action>
+		<action name="ChackAccAction" class="com.gump.action.ChackAccAction">
+			<result></result>
+		</action>
 	</package>
 </struts>
 <!-- END SNIPPET: xworkSample -->
