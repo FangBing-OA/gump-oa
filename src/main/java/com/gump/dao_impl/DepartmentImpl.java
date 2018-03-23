@@ -52,8 +52,7 @@ public class DepartmentImpl implements DepartmentDao {
 		return null;
 	}
 	
-	
-	//根据id删除某部门//
+	//根据id删除某部门////-------------------------------
 	public int iddrop(int depId) {
 		int result=0;
 		String sql = "delete from Department where depId=?";
