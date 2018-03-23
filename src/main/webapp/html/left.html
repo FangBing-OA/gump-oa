@@ -4,13 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script language="JavaScript" src="script/jquery.js"></script>
 <script language="JavaScript" src="script/menu.js"></script>
+<script type="text/javascript" src="/gump-oa/src/main/webapp/jquery-3.0.0.js"></script>
 <link type="text/css" rel="stylesheet" href="style/blue/menu.css" />
 </head>
 <body style="margin: 0">
 <div id="Menu">
     <ul id="MenuUl">
         <li class="level1">
-            <div onClick="menuClick(this)" class="level1Style"><img src="style/images/MenuIcon/FUNC20001.gif" class="Icon" />个人办公</div>
+            <div onClick="menuClick(this)" class="level1Style"><img src="style/images/MenuIcon/FUNC20001.gif" class="Icon" />员工管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
                     <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> 个人考勤</div>
@@ -30,7 +31,7 @@
             </ul>
         </li>
         <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20057.gif" class="Icon" /> 审批流转</div>
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20057.gif" class="Icon" /> 部门管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
                     <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="Flow_ProcessDefinition/list.html">审批流程管理</a></div>
@@ -58,15 +59,14 @@
             </ul>
         </li>
         <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /> 网上交流</div>
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /> 信息管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" /><a onclick="check">短消息</a></div>
-                    <ul style="display: inline;" >
+                    <div onclick="check()" class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" /> 短消息</div>
+                    <ul style="display: inline;" id="message" >
                         <li class="level3Head"><a target="right" href="Person_Message/saveUI.html">发送短消息</a></li>
                         <li class="level33"><a target="right" href="Person_Message/inbox.html">已接收</a></li>
                         <li class="level33"><a target="right" href="Person_Message/outbox.html">已发送</a></li>
-                        <li class="level32"><a target="right" href="Person_Message/draftbox.html">草稿箱</a></li>
                     </ul>
                 </li>
                 <li class="level2">
@@ -84,10 +84,10 @@
             </ul>
         </li>
         <li class="level1">
-            <div class="level1Style"><img src="style/images/MenuIcon/FUNC20056.gif" class="Icon" /> <a target="right" href="LanDisk_Folder/list.html">知识管理</a></div>
+            <div class="level1Style"><img src="style/images/MenuIcon/FUNC20056.gif" class="Icon" /> <a target="right" href="LanDisk_Folder/list.html">公告管理</a></div>
         </li>
         <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20070.gif" class="Icon" /> 综合行政</div>
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20070.gif" class="Icon" /> 公文管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
                     <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> 考勤管理</div>
@@ -121,7 +121,7 @@
             </ul>
         </li>
         <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC261000.gif" class="Icon" /> 人力资源</div>
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC261000.gif" class="Icon" /> 职位管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
                     <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> 档案管理</div>
@@ -140,26 +140,6 @@
                 </li>
                 <li class="level2">
                     <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> 类别维护</div>
-                </li>
-            </ul>
-        </li>
-        <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20076.gif" class="Icon" /> 实用工具</div>
-            <ul style="display: none;" class="MenuLevel2">
-                <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="_blank" href="http://www.itcast.cn">公司网站</a></div>
-                </li>
-                <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="_blank" href="http://qq.ip138.com/train/">火车时刻</a></div>
-                </li>
-                <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="_blank" href="http://www.airchina.com.cn/">飞机航班</a></div>
-                </li>
-                <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="_blank" href="http://www.ip138.com/post/">邮编/区号</a></div>
-                </li>
-                <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="_blank" href="http://www.timedate.cn/">国际时间</a></div>
                 </li>
             </ul>
         </li>
@@ -199,11 +179,22 @@
     </ul>
 </div>
 </body>
-<script type="text/javascript">
+ <script type="text/javascript">
+
    function check()
    {
-	  alert("撒旦法")
+	   
+	   var message=document.getElementById("message");
+	   if(message.style.display=="none")
+		   {	 
+		   message.style.display="inline";
+		   }
+	   else
+		   {
+			 message.style.display="none";   
+		   }
+	  // alert(message);
    }
-
+  
 </script>
 </html>

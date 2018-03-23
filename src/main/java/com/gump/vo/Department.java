@@ -1,9 +1,10 @@
 package com.gump.vo;
 
 public class Department {
-	private int depId;
-	private String depName;
-	private String depDescribe;
+	private int depId;			//部门id
+	private String depName;		//部门名字
+	private String depDescribe;	//部门描述
+	private int depNum;			//部门人数
 	public int getDepId() {
 		return depId;
 	}
@@ -22,6 +23,10 @@ public class Department {
 	public void setDepDescribe(String depDescribe) {
 		this.depDescribe = depDescribe;
 	}
-	
-
+	public int getDepNum() {
+		return depNum;
+	}
+	public void setDepNum(int depNum) {
+		this.depNum = depNum;
+	}
 }
