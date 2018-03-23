@@ -3,6 +3,8 @@ package com.gump.dao_impl;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -12,11 +14,12 @@ import com.gump.utils.PoolFactory;
 import com.gump.vo.Department;
 
 public class DepartmentImpl implements DepartmentDao {
+	DataSource ds= PoolFactory.getDS();
 	//查看所有部门
 	public List<Department> selectdep() {
 		String sql = "select * from Department";
 		try {
-			return new QueryRunner(PoolFactory.getDS()).query(sql,new BeanListHandler<Department>(Department.class));
+			return new QueryRunner(ds).query(sql,new BeanListHandler<Department>(Department.class));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,7 +32,7 @@ public class DepartmentImpl implements DepartmentDao {
 	public Department namequert(Department d) {
 		String sql = "select * from Department where depName=?";
 		try {
-			return new QueryRunner(PoolFactory.getDS()).query(sql, new BeanHandler<Department>(Department.class),d.getDepName());
+			return new QueryRunner(ds).query(sql, new BeanHandler<Department>(Department.class),d.getDepName());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +44,7 @@ public class DepartmentImpl implements DepartmentDao {
 	public Department idquert(Department d) {
 		String sql = "select * from Department where depId=?";
 		try {
-			return new QueryRunner(PoolFactory.getDS()).query(sql, new BeanHandler<Department>(Department.class),d.getDepId());
+			return new QueryRunner(ds).query(sql, new BeanHandler<Department>(Department.class),d.getDepId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +95,7 @@ public class DepartmentImpl implements DepartmentDao {
 	
 	//根据部门名字修改部门描述
 	public int nameupdatedepDescribe(Department d,Department d1) {
-		String sql="update deparetment set depDescribe=?,depname=? where depName = ? or depId = ?";
+		String sql="update Deparetment set depDescribe=?,depname=? where depName = ? or depId = ?";
 		/*if(!d.getDepName().equals("")&&null!=d.getDepName()){
 			sql+="depName=?";
 		}
