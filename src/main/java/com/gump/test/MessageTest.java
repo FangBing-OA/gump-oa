@@ -12,7 +12,7 @@ public class MessageTest {
 		mv.setMesRead(false);
 		mv.setMesReceiver("2014302057");
 		mv.setMesSender("2014302058");
-		mv.setMesTime();
+		mv.setMesTime("");
 		mv.setMseTitle("消息测试第一次");
 		
 		boolean flag = md.inMessage(mv);

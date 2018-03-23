@@ -46,19 +46,16 @@ public class MessageVo {
 	public void setMesReceiver(String mesReceiver) {
 		this.mesReceiver = mesReceiver;
 	}
-	public String getMesContent() {
-		return mesContent;
-	}
-	public void setMesTime() {
-		//提交当前时间
-		Date date = new Date();
-		String timeString = TimeCycleUtils.dateToDetailString(date);
-		this.mesTime = timeString;
-	}
 	public String getMesTime() {
 		return mesTime;
 	}
 	public void setMesTime(String mesTime) {
-		this.mesTime = mesTime;
+		Date date = new Date();
+		String timeString = TimeCycleUtils.dateToDetailString(date);
+		this.mesContent = timeString ;
 	}
+	public String getMesContent() {
+		return mesContent;
+	}
+
 }

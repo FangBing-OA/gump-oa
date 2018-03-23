@@ -157,5 +157,4 @@ public class MessageDaoImpl implements MessageDao {
 		}
 		return null;
 	}
-
 }
