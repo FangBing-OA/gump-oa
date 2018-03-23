@@ -14,11 +14,17 @@
 	<constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/>
 	
 	<package name="oa" namespace="/" extends="struts-default">
+<<<<<<< HEAD
 		<action name="DemoAction" class="com.gump.action.DemoAction" method="add">
 			<result name=""></result>
 		</action>
 	</package>
 	<include file="src/main/resources/employee.xml"></include>
+=======
+
+	</package>
+
+>>>>>>> 1fa4393786e06776628d0ab238d60cd9d3b75219
 </struts>
 
 <!-- END SNIPPET: xworkSample -->
