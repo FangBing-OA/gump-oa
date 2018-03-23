@@ -1,6 +1,5 @@
 package com.gump.dao_impl;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 

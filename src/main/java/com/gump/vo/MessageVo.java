@@ -1,6 +1,5 @@
 package com.gump.vo;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import com.gump.utils.TimeCycleUtils;
@@ -50,12 +49,11 @@ public class MessageVo {
 	public String getMesContent() {
 		return mesContent;
 	}
-	public void setMesContent() {
-//		Calendar instance = Calendar.getInstance();
-//		instance.
+	public void setMesTime() {
+		//提交当前时间
 		Date date = new Date();
 		String timeString = TimeCycleUtils.dateToDetailString(date);
-		this.mesContent = timeString ;
+		this.mesTime = timeString;
 	}
 	public String getMesTime() {
 		return mesTime;
