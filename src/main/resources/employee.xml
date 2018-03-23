@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE struts PUBLIC
@@ -18,3 +19,22 @@
 	</package>
 </struts>
 <!-- END SNIPPET: xworkSample -->
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<!-- START SNIPPET: xworkSample -->
+<struts>
+	<package name="oa_employee" namespace="/" extends="struts-default">
+		<action name="EmployeeAction" class="com.gump.action.EmployeeAction">
+			<result name="empList">/list.jsp</result>
+			<result name="toEdit">/edit.jsp</result>
+			<result name="toAdd">/add.jsp</result>
+		</action>
+	</package>
+</struts>
+<!-- END SNIPPET: xworkSample -->
+>>>>>>> b1340d8f0d1bbffbc414567ca23594d5f20d3226
