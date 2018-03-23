@@ -14,11 +14,9 @@
 	<constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/>
 	
 	<package name="oa" namespace="/" extends="struts-default">
-		<action name="" class="" method="">
-			<result name=""></result>
-		</action>
+
 	</package>
-	<include file=""></include>
+
 </struts>
 
 <!-- END SNIPPET: xworkSample -->

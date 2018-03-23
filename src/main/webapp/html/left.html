@@ -61,8 +61,8 @@
             <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /> 网上交流</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
-                    <div onClick="subMenuClick(this);" class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" /> 短消息</div>
-                    <ul style="display: none;" class="MenuLevel2">
+                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" /><a onclick="check">短消息</a></div>
+                    <ul style="display: inline;" >
                         <li class="level3Head"><a target="right" href="Person_Message/saveUI.html">发送短消息</a></li>
                         <li class="level33"><a target="right" href="Person_Message/inbox.html">已接收</a></li>
                         <li class="level33"><a target="right" href="Person_Message/outbox.html">已发送</a></li>
@@ -199,4 +199,11 @@
     </ul>
 </div>
 </body>
+<script type="text/javascript">
+   function check()
+   {
+	  alert("撒旦法")
+   }
+
+</script>
 </html>
