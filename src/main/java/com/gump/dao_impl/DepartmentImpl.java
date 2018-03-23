@@ -25,7 +25,6 @@ public class DepartmentImpl implements DepartmentDao {
 			e.printStackTrace();
 		}
 		return null;
-				
 	}
 	
 	//根据部门名字查看部门信息
@@ -81,10 +80,10 @@ public class DepartmentImpl implements DepartmentDao {
 	
 	//增加某部门
 	public int addDep(Department department) {
-		String sql = "insert into Department(depName,depDescribe) values(?,?)";
+		String sql = "insert into Department(depName,depDescribe,depNum) values(?,?,?)";
 		int result=0;
 		try {
-			result = new QueryRunner().update(sql,department.getDepName(),department.getDepDescribe());
+			result = new QueryRunner().update(sql,department.getDepName(),department.getDepDescribe(),department.getDepNum());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,24 +91,35 @@ public class DepartmentImpl implements DepartmentDao {
 		return result;
 	}
 	
-	//根据部门名字修改部门描述
+	//根据部门名字或者是id修改部门描述
 	public int nameupdatedepDescribe(Department d,Department d1) {
-		String sql="update Deparetment set depDescribe=?,depname=? where depName = ? or depId = ?";
-		/*if(!d.getDepName().equals("")&&null!=d.getDepName()){
-			sql+="depName=?";
-		}
-		if(0!=d.getDepId()&&!d.getDepId().equals("")){
-			
-		}*/
-		/*depName=? and depId=?";*/
+		String sql="update Deparetment set depDescribe=?,depName=?,depNum=? where depName = ? or depId = ?";
+		
 		int result=0;
 		try {
-			result = new QueryRunner().update(sql,d.getDepName(),d.getDepDescribe(),d1.getDepName(),d1.getDepId());
+			result = new QueryRunner().update(sql,d.getDepDescribe(),d.getDepName(),d.getDepNum(),d1.getDepName(),d1.getDepId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public int deletenum(Department department) {
+		/*String sql = "update Deparetment set "
+		int result=0;
+		try {
+			result = new QueryRunner().update(sql,d.getDepDescribe(),d.getDepName(),d.getDepNum(),d1.getDepName(),d1.getDepId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		return 0;
+	}
+
+	public int addnum(Department department) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

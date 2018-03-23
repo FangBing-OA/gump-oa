@@ -26,6 +26,11 @@ public interface DepartmentDao {
 	//修改部门描述  可以根据部门的name和id
 	public int nameupdatedepDescribe(Department d1,Department d2);
 	
+	//部门人数减少
+	public int deletenum(Department department);
+	
+	//部门人数增加
+	public int addnum(Department department);
 	
 
 }
