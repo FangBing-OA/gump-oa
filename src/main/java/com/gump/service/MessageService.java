@@ -1,12 +1,12 @@
-package com.gump.dao;
+package com.gump.service;
 
 import java.util.List;
 
 import com.gump.vo.MessageVo;
 import com.gump.vo.Page;
 
-public interface MessageDao {
-	
+public interface MessageService {
+
 	/**
 	 * 添加消息
 	 * @param message
@@ -55,4 +55,5 @@ public interface MessageDao {
 	 */
 	public Integer countMessageInTimeQuantum(String timeStart,String timeEnd,String account);
 
-} 
+	
+}
