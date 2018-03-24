@@ -15,12 +15,9 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-core -->
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-core</artifactId>
-			<version>2.5.8</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-core 
+			<dependency> <groupId>org.apache.struts</groupId> <artifactId>struts2-core</artifactId> 
+			<version>2.5.8</version> </dependency> -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -28,13 +25,15 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
 		<dependency>
 			<groupId>commons-dbutils</groupId>
 			<artifactId>commons-dbutils</artifactId>
 			<version>1.6</version>
 		</dependency>
+
+		
 	</dependencies>
 	<build>
 		<finalName>gumpOA</finalName>

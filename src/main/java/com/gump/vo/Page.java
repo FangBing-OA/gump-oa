@@ -3,10 +3,10 @@ package com.gump.vo;
 import java.util.List;
 
 public class Page {   
-    private int     pageSize;// 每页显示多少条  
-    private int     count; // 总记录数  
-    private int     pageTotal; // 总页数  
-    private int     currentPage;// 当前页 
+    private int     pageSize;// 每页显示多少条  ----默认为10
+    private int     count; // 总记录数  -----第一set
+    private int     pageTotal; // 总页数  ----不需要set
+    private int     currentPage;// 当前页 -----第二set
     private List<?> data; // 当前页数据
 
     public Page() {
@@ -16,7 +16,11 @@ public class Page {
     public int getPageSize() {
         return pageSize;
     }
-
+    
+    /**
+     * 每页显示多少条  ----默认为10
+     * @param pageSize
+     */
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
@@ -26,7 +30,7 @@ public class Page {
     }
 
     /**
-     * 设置总记录数、总页数
+     * 设置总记录数、总页数-----第一set
      * 
      * @param count
      */
@@ -44,7 +48,7 @@ public class Page {
     }
 
     /**
-     * 设置第几页
+     * 设置当前页-----第二set
      * @param currentPage
      */
     public void setCurrentPage(int currentPage) {
@@ -64,6 +68,5 @@ public class Page {
     public void setData(List<?> data) {
         this.data = data;
     }
-
 }
 

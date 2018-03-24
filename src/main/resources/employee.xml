@@ -12,5 +12,12 @@
 			<result name="toAdd">/html/StaffManagement/StaffAdd.jsp</result>
 			<allowed-methods>getAllEmp</allowed-methods>
 		</action>
+		<action name="ChackAccAction" class="com.gump.action.ChackAccAction">
+			<result></result>
+		</action>
 	</package>
 </struts>
+<<<<<<< HEAD
+=======
+<!-- END SNIPPET: xworkSample -->
+>>>>>>> b09b5c3aed0af5c38a6ee39712a52dbd25613d76
