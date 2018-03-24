@@ -93,7 +93,7 @@ public class PositionDaoImpl implements PositionDao {
 	 * 添加一个新的职位
 	 * @param pos
 	 */
-	public void addPos(PositionVo pos){
+	public void addPos(PositionVo pos){ 
 		String sql = null;
 		System.out.println("职位名称："+pos.getPosName());
 		System.out.println("职位描述："+pos.getPosDescribe());
@@ -101,7 +101,7 @@ public class PositionDaoImpl implements PositionDao {
 			if(pos.getPosName() != null && pos.getPosDescribe() != null){
 				sql = "insert into position(posName,posDescribe) values('"+pos.getPosName()+"','"+pos.getPosDescribe()+"')";
 			}
-			System.out.println("职位新增sql"+sql);
+       			System.out.println("职位新增sql"+sql);
 			new QueryRunner(ds).update(sql);
 		
 		} catch (SQLException e) {
