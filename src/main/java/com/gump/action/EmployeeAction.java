@@ -5,13 +5,18 @@ import java.util.List;
 import com.gump.service.IEmployeeService;
 import com.gump.service_impl.EmployeeServiceImpl;
 import com.gump.vo.Employee;
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 操作员工的Action
  * @author Administrator
  *
  */
-public class EmployeeAction {
+public class EmployeeAction{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//员工对象
 	private Employee emp;
 	//员工对象集合
@@ -19,7 +24,9 @@ public class EmployeeAction {
 	
 	private IEmployeeService iEmployeeService = new EmployeeServiceImpl();
 	
-	
+	public String execute(){
+		return "empList";
+	}
 	public Employee getEmp() {
 		return emp;
 	}

@@ -4,21 +4,27 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 
-<!-- START SNIPPET: xworkSample -->
 <struts>
-
-	<!-- 开启动态方法调用 -->
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    
-    <!-- 开启国际化 -->
-	<constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/>
 	
-	<package name="oa" namespace="/" extends="struts-default">
-		<action name="DemoAction" class="com.gump.action.DemoAction" method="add">
-			<result name=""></result>
+	<!-- 开启动态方法调用-->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 开启开发者模式 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 开启国际化 -->
+	<!-- <constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/> -->
+	
+	<package name="oa" extends="struts-default">
+		<action name="index">
+			<result>/index.jsp</result>
 		</action>
+		<!-- 员工模块 -->
+		<action name="ea!*" class="com.gump.action.EmployeeAction" method="{1}">
+			<result name="empList">/html/StaffManagement/StaffList.jsp</result>
+			<result name="toEdit">/html/StaffManagement/StaffUpdate.jsp</result>
+			<result name="toAdd">/html/StaffManagement/StaffAdd.jsp</result>
+			<allowed-methods>getAllEmp</allowed-methods>
+		</action>
+		
 	</package>
-	<include file="src/main/resources/employee.xml"></include>
 </struts>
 
-<!-- END SNIPPET: xworkSample -->
