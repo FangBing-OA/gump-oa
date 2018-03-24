@@ -8,18 +8,21 @@ public class PositionVo {
 	
 	
 	public int getPosId() {
+		System.out.println(posId);
 		return posId;
 	}
 	public void setPosId(int posId) {
 		this.posId = posId;
 	}
 	public String getPosName() {
+		System.out.println(posId);
 		return posName;
 	}
 	public void setPosName(String posName) {
 		this.posName = posName;
 	}
 	public String getPosDescribe() {
+		System.out.println(posId);
 		return posDescribe;
 	}
 	public void setPosDescribe(String posDescribe) {
