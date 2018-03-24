@@ -5,49 +5,60 @@
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-	
-	<!-- 开启动态方法调用-->
+
+	<!-- 开启动态方法调用 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<!-- 开启开发者模式 -->
-    <constant name="struts.devMode" value="true" />
-    <!-- 开启国际化 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 开启国际化 -->
 	<!-- <constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/> -->
-	
+
 	<package name="oa" extends="struts-default">
 		<action name="index">
 			<result>/index.jsp</result>
 		</action>
 		<!-- 员工模块 -->
-		<action name="ea!*" class="com.gump.action.EmployeeAction" method="{1}">
-			<result name="empList">/html/StaffManagement/StaffList.jsp</result>
-			<result name="toEdit">/html/StaffManagement/StaffUpdate.jsp</result>
-			<result name="toAdd">/html/StaffManagement/StaffAdd.jsp</result>
-			<allowed-methods>getAllEmp</allowed-methods>
+		<action name="ea!*" class="com.gump.action.EmployeeAction"
+			method="{1}">
+			<result name="tolist">/html/StaffManagement/StaffList.jsp</result>
+			<result name="toupdate">/html/StaffManagement/StaffUpdate.jsp</result>
+			<result name="toadd">/html/StaffManagement/StaffAdd.jsp</result>
+			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete</allowed-methods>
 		</action>
 		<!-- 职位模块 -->
 		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
-			<result name="">/demo.jsp</result>
-			<allowed-methods>add,edit,……</allowed-methods>
+			<result name="toPositionList">ml/PositionSystem/PositionList.jsp</result>
+			<result name="goUpdatePage">ml/PositionSystem/PositionUpdate.jsp</result>
+			<result name="goAddPage">ml/PositionSystem/PositionAdd.jsp</result>
+			<allowed-methods>getPositionById,getPositionByName,listPosition,updatePosition,goUpdatePositionPage,addPosition,goAddPositionPage,removePosition</allowed-methods>
 		</action>
 		<!-- 信息模块 -->
-		<action name="ma!*" class="com.gump.action.MessageAction" method="{1}">
+		<action name="ma!*" class="com.gump.action.MessageAction"
+			method="{1}">
 			<result name="">/demo.jsp</result>
 			<allowed-methods>add,edit,……</allowed-methods>
 		</action>
 		<!-- 公文模块 -->
-		<action name="da!*" class="com.gump.action.DocumentAction" method="{1}">
-			<result name="">/demo.jsp</result>
-			<allowed-methods>add,edit,……</allowed-methods>
+		<action name="da!*" class="com.gump.action.DocumentAction"
+			method="{1}">
+			<result name="success">/success.jsp</result>
+			<allowed-methods>add,remove,modify,saveinquery</allowed-methods>
 		</action>
 		<!-- 公告模块 -->
-		<action name="na!*" class="com.gump.action.NotListAction" method="{1}">
-			<result name="">/demo.jsp</result>
-			<allowed-methods>add,edit,……</allowed-methods>
+		<action name="na!*" class="com.gump.action.NotListAction"
+			method="{1}">
+			<result type="dispatcher" name='success'>LanDisk_Folder/list.jsp
+			</result>
+			<result name='sb'>list.jsp</result>
+			<result name='bs'>list.jsp</result>
+			<result name='fail'>list.jsp</result>
+			<allowed-methods>execute,delete,add,update</allowed-methods>
 		</action>
 		<!-- 部门模块 -->
-		<action name="dep!*" class="com.gump.action.DepartmentAction" method="{1}">
+		<action name="dep!*" class="com.gump.action.DepartmentAction"
+			method="{1}">
 			<result name="">/demo.jsp</result>
-			<allowed-methods>add,edit,……</allowed-methods>
+			<allowed-methods>deplist,addDep,updateDep,getname</allowed-methods>
 		</action>
 	</package>
 </struts>
