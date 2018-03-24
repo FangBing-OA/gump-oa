@@ -9,12 +9,12 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import com.gump.dao.MessageDao;
+import com.gump.dao.IMessageDao;
 import com.gump.utils.PoolFactory;
 import com.gump.vo.Message;
 import com.gump.vo.Page;
 
-public class MessageDaoImpl implements MessageDao {
+public class MessageDaoImpl implements IMessageDao {
 
 	public boolean inMessage(Message mes) {
 		// TODO Auto-generated method stub

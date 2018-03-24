@@ -8,12 +8,12 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import com.gump.dao.PositionDao;
+import com.gump.dao.IPositionDao;
 import com.gump.utils.PoolFactory;
 import com.gump.vo.Page;
-import com.gump.vo.PositionVo;
+import com.gump.vo.Position;
 
-public class PositionDaoImpl implements PositionDao {
+public class PositionDaoImpl implements IPositionDao {
 
 	//获取数据源
 	DataSource ds = PoolFactory.getDS();
@@ -25,10 +25,10 @@ public class PositionDaoImpl implements PositionDao {
 	 * @return List<PositionVo>
 	 * @param  page
 	 */
-	public List<PositionVo> selectAllPosition(Page page) {
+	public List<Position> selectAllPosition(Page page) {
 			try {
 				
-				List<PositionVo> ls = null;
+				List<Position> ls = null;
 				
 				//获取每页显示职位数
 				int pageSize = page.getPageSize();
@@ -36,7 +36,7 @@ public class PositionDaoImpl implements PositionDao {
 				int pageLimit = (page.getCurrentPage()-1)*pageSize;
 				
 				String sql = "select * from position limit "+pageLimit+","+pageSize;
-				ls = new QueryRunner(ds).query(sql, new BeanListHandler<PositionVo>(PositionVo.class));
+				ls = new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
 			    return ls;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -50,7 +50,7 @@ public class PositionDaoImpl implements PositionDao {
 	 * @return PositionVo
 	 * @param  positionId
 	 */
-	public PositionVo selectPosById(int posId) {
+	public Position selectPosById(int posId) {
 		
 		try {
 			
@@ -59,7 +59,7 @@ public class PositionDaoImpl implements PositionDao {
 			if(posId > 0){
 				sql += "and positionId = "+posId;
 			}
-			PositionVo pv = (PositionVo) new QueryRunner(ds).query(sql, new BeanListHandler<PositionVo>(PositionVo.class));
+			Position pv = (Position) new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
 		    return pv;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class PositionDaoImpl implements PositionDao {
 	 * @return PositionVo
 	 * @param  positionName
 	 */
-	public PositionVo selectPosByName(String posName) {
+	public Position selectPosByName(String posName) {
 		
 		try {
 			String sql ="select * from position where 1 = 1 ";
@@ -81,7 +81,7 @@ public class PositionDaoImpl implements PositionDao {
 			if(posName != null){
 				sql += "and posName = "+posName;
 			}
-			PositionVo pv = (PositionVo) new QueryRunner(ds).query(sql, new BeanListHandler<PositionVo>(PositionVo.class));
+			Position pv = (Position) new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
 		    return pv;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class PositionDaoImpl implements PositionDao {
 	 * 添加一个新的职位
 	 * @param pos
 	 */
-	public void addPos(PositionVo pos){ 
+	public void addPos(Position pos){ 
 		String sql = null;
 		System.out.println("职位名称："+pos.getPosName());
 		System.out.println("职位描述："+pos.getPosDescribe());
@@ -134,7 +134,7 @@ public class PositionDaoImpl implements PositionDao {
 	 * 根据职位Id修改职位信息
 	 * @param pos
 	 */
-	public void updatePos(PositionVo pos){
+	public void updatePos(Position pos){
 		try {
 			String sql = null;
 			if(pos.getPosName() != null){

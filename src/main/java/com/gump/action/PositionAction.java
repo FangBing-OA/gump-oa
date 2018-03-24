@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.gump.service_impl.PositionServiceImpl;
 import com.gump.vo.Page;
-import com.gump.vo.PositionVo;
+import com.gump.vo.Position;
 
 public class PositionAction{
 	
-	private List<PositionVo> listAllPosition;
+	private List<Position> listAllPosition;
 	
 	public String excute(){
 		System.out.println("euifdbuuireudjrfhdjk");

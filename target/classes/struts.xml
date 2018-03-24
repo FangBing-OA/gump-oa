@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE struts PUBLIC
@@ -25,57 +24,31 @@
 			<result name="toAdd">/html/StaffManagement/StaffAdd.jsp</result>
 			<allowed-methods>getAllEmp</allowed-methods>
 		</action>
-		
-	</package>
-</struts>
-
-=======
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
-	"http://struts.apache.org/dtds/struts-2.5.dtd">
-
-<!-- START SNIPPET: xworkSample -->
-<struts>
-
-	<!-- 开启动态方法调用 -->
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    
-    <!-- 开启国际化 -->
-	<constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/>
-	
-	<package name="oa" namespace="/" extends="struts-default">
-		
-	</package>
-	<include file=""></include>
-</struts>
-
-<!-- END SNIPPET: xworkSample -->
-=======
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
-	"http://struts.apache.org/dtds/struts-2.5.dtd">
-
-<!-- START SNIPPET: xworkSample -->
-<struts>
-
-	<!-- 开启动态方法调用 -->
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    
-    <!-- 开启国际化 -->
-	<constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/>
-	
-	<package name="oa" namespace="/" extends="struts-default">
-		<action name="DemoAction" class="com.gump.action.DemoAction" method="add">
-			<result name=""></result>
+		<!-- 职位模块 -->
+		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
+			<result name="">/demo.jsp</result>
+			<allowed-methods>add,edit,……</allowed-methods>
+		</action>
+		<!-- 信息模块 -->
+		<action name="ma!*" class="com.gump.action.MessageAction" method="{1}">
+			<result name="">/demo.jsp</result>
+			<allowed-methods>add,edit,……</allowed-methods>
+		</action>
+		<!-- 公文模块 -->
+		<action name="da!*" class="com.gump.action.DocumentAction" method="{1}">
+			<result name="">/demo.jsp</result>
+			<allowed-methods>add,edit,……</allowed-methods>
+		</action>
+		<!-- 公告模块 -->
+		<action name="na!*" class="com.gump.action.NotListAction" method="{1}">
+			<result name="">/demo.jsp</result>
+			<allowed-methods>add,edit,……</allowed-methods>
+		</action>
+		<!-- 部门模块 -->
+		<action name="dep!*" class="com.gump.action.DepartmentAction" method="{1}">
+			<result name="">/demo.jsp</result>
+			<allowed-methods>add,edit,……</allowed-methods>
 		</action>
 	</package>
-	<include file="src/main/resources/employee.xml"></include>
 </struts>
 
-<!-- END SNIPPET: xworkSample -->
->>>>>>> d3b7b42b696a5da8d69d77f6daae4c35399ac33b
->>>>>>> b09b5c3aed0af5c38a6ee39712a52dbd25613d76

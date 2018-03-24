@@ -2,13 +2,13 @@ package com.gump.service_impl;
 
 import java.util.List;
 
-import com.gump.dao.MessageDao;
-import com.gump.service.MessageService;
+import com.gump.dao.IMessageDao;
+import com.gump.service.IMessageService;
 import com.gump.vo.Message;
 import com.gump.vo.Page;
 
-public class MessageServiceImpl implements MessageService {
-	private MessageDao md;
+public class MessageServiceImpl implements IMessageService {
+	private IMessageDao md;
 
 	public boolean inMessage(Message message) {
 		// TODO Auto-generated method stub

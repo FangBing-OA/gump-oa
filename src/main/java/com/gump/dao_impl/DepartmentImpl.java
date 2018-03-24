@@ -11,11 +11,11 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.junit.Test;
 
-import com.gump.dao.DepartmentDao;
+import com.gump.dao.IDepartmentDao;
 import com.gump.utils.PoolFactory;
 import com.gump.vo.Department;
 
-public class DepartmentImpl implements DepartmentDao {
+public class DepartmentImpl implements IDepartmentDao {
 	DataSource ds= PoolFactory.getDS();
 	//查看所有部门
 	

@@ -3,17 +3,17 @@ package com.gump.service_impl;
 import java.util.List;
 
 import com.gump.dao_impl.PositionDaoImpl;
-import com.gump.service.PositionService;
+import com.gump.service.IPositionService;
 import com.gump.vo.Page;
-import com.gump.vo.PositionVo;
+import com.gump.vo.Position;
 
-public class PositionServiceImpl implements PositionService {
+public class PositionServiceImpl implements IPositionService {
 
 	/**
 	 * 查询所有的职位信息
 	 * @return List<PositionVo>
 	 */
-	public List<PositionVo> selectAllPosition(Page page){
+	public List<Position> selectAllPosition(Page page){
 		return new PositionDaoImpl().selectAllPosition(page);
 	}
 	
@@ -23,7 +23,7 @@ public class PositionServiceImpl implements PositionService {
 	 * @param posId
 	 * @return PositionVo
 	 */
-	public PositionVo selectPositionById(int posId){
+	public Position selectPositionById(int posId){
 		return new PositionDaoImpl().selectPosById(posId);
 	}
 
@@ -33,7 +33,7 @@ public class PositionServiceImpl implements PositionService {
 	 * @param posName
 	 * @return
 	 */
-	public PositionVo selectPositionByName(String posName){
+	public Position selectPositionByName(String posName){
 		return new PositionDaoImpl().selectPosByName(posName);
 		
 	}
@@ -42,7 +42,7 @@ public class PositionServiceImpl implements PositionService {
 	 * 新增职位
 	 * @param pos
 	 */
-	public void insertPosition(PositionVo pos){
+	public void insertPosition(Position pos){
 		new PositionDaoImpl().addPos(pos);
 		
 	}
@@ -59,7 +59,7 @@ public class PositionServiceImpl implements PositionService {
 	 * 根据职位ID修改职位信息
 	 * @param posId
 	 */
-	public void updatePosition(PositionVo pos){
+	public void updatePosition(Position pos){
 		new PositionDaoImpl().updatePos(pos);
 	}
 }
