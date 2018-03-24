@@ -25,7 +25,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * @return List<PositionVo>
 	 * @param  page
 	 */
-	public List<Position> selectAllPosition(Page page) {
+	public List<Position> listPosition(Page page) {
 			try {
 				
 				List<Position> ls = null;
@@ -50,7 +50,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * @return PositionVo
 	 * @param  positionId
 	 */
-	public Position selectPosById(int posId) {
+	public Position getPositionById(int posId) {
 		
 		try {
 			
@@ -73,7 +73,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * @return PositionVo
 	 * @param  positionName
 	 */
-	public Position selectPosByName(String posName) {
+	public Position getPositionByName(String posName) {
 		
 		try {
 			String sql ="select * from position where 1 = 1 ";
@@ -93,7 +93,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 添加一个新的职位
 	 * @param pos
 	 */
-	public void addPos(Position pos){ 
+	public void savePosition(Position pos){ 
 		String sql = null;
 		System.out.println("职位名称："+pos.getPosName());
 		System.out.println("职位描述："+pos.getPosDescribe());
@@ -114,7 +114,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 根据职位Id删除职位
 	 * @param posId
 	 */
-	public void deletePos(int posId){
+	public void removePosition(int posId){
 		try {
 			
 			String sql = "delete position where 1 = 1 ";
@@ -134,7 +134,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 根据职位Id修改职位信息
 	 * @param pos
 	 */
-	public void updatePos(Position pos){
+	public void updatePosition(Position pos){
 		try {
 			String sql = null;
 			if(pos.getPosName() != null){
@@ -154,7 +154,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 查询所有记录数
 	 * @return
 	 */
-	public long allPositionCount(){
+	public long getPositionCount(){
 		long l = 0;
 		try {
 			String sql = "select count(*) from position";
@@ -162,6 +162,7 @@ public class PositionDaoImpl implements IPositionDao {
 		    l=qr.query(sql, new ScalarHandler<Long>(1));
 			//l = new QueryRunner(ds).query(sql,new ScalarHandler<Long>(1));
 			//System.out.println("总记录数："+l);
+		    System.out.println("总记录数为："+l);
 			return l;
 		} catch (SQLException e) {
 			e.printStackTrace();

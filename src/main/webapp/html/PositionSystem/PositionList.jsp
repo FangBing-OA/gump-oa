@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,24 +23,15 @@
         </div>
         <div id="Title_End"></div>
     </div>
-</div>
 
 
 <div id="QueryArea">
 	<div style="height: 30px">
-		<form action="#">
-		<table border=0 cellspacing=3 cellpadding=5>
-			<tr>
-				<td>按部门名称查询：</td>
-				<td><input type="text"/>
-				</td>
-				<td>按id查询：</td>
-				<td><input type="text"/>
-				</td>
-				<td><a href=""><input type="IMAGE" src="../style/blue/images/button/query.PNG"/></a></td>
-			</tr>
-		</table>
-		</form>
+		<s:form action="pa!listPosition" theme="simple">
+			<s:textfield name="position.posName">按部门名称查询:</s:textfield>
+			<s:textfield name="position.posId">按id查询</s:textfield>
+			<s:submit  type="image" src="../style/blue/images/button/query.PNG"/>
+		</s:form>
 	</div>
 </div>
 
@@ -49,10 +40,9 @@
         <!-- 表头-->
         <thead>
             <tr align="CENTER" valign="MIDDLE" id="TableTitle">
-				<td width="50px">部门id</td>
-				<td width="115px">部门名称</td>
-				<td width="115px">部门人数</td>
-				<td width="115px">部门描述</td>
+				<td width="50px">职位id</td>
+				<td width="115px">职位名称</td>
+				<td width="115px">职位描述</td>
 				<td width="115px">相关操作</td>
 			</tr>
 		</thead>	
@@ -78,15 +68,18 @@
 		<!--显示数据列表：正在审批或审批完成的表单显示示例-->
         <tbody id="TableData" class="dataContainer" datakey="formList">
 			<!-- 正在审批或审批完成的表单显示示例 -->
-			<tr class="TableDetail1 template">
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td><a onClick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="#">删除</a>
-					<a href="saveUI.html">修改</a>
-				</td>
-			</tr>
+			<s:iterator value="positionList" > 
+			  <s:form action="pa!goUpdatePositionPage">
+				<tr class="TableDetail1 template">
+					<td><s:property value="posId"/></td>
+					<td><s:property value="posName"/></td>
+					<td><s:property value="posDescribe"/></td>
+					<td><a onClick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="pa!removePosition?position.posId">删除</a>
+						<s:submit value="修改"/>
+					</td>
+				</tr>
+			  </s:form> 
+			</s:iterator>
         </tbody>
     </table>
     
@@ -101,37 +94,31 @@
 <!--分页信息-->
 <div id=PageSelectorBar>
 	<div id=PageSelectorMemo>
-		页次：7/13页 &nbsp;
-		每页显示：30条 &nbsp;
-		总记录数：385条
+		页次：<s:param value="page.currentPage"/>/<s:param value="page.pageTotal"/>页 &nbsp;
+		每页显示：<s:param value="page.pageSize"/>条 &nbsp;
+		总记录数：<s:param value="page.count"/>条
 	</div>
 	<div id=PageSelectorSelectorArea>
 		<!--
 		<IMG SRC="../style/blue/images/pageSelector/firstPage2.png"/>
 		-->
-		<a href="javascript:void(0)" title="首页" style="cursor: hand;">
-			<img src="../style/blue/images/pageSelector/firstPage.png"/></a>
+		<s:a href="pa!listPosition"  name="page.currentPage" value="1" title="首页" style="cursor: hand;">
+			<img src="../style/blue/images/pageSelector/firstPage.png"/></s:a>
+		
 		
 		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">3</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">4</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">5</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">6</span>
-		<span class="PageSelectorNum PageSelectorSelected">7</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">8</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">9</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">10</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">11</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">12</span>
+		
+		
 		
 		<!--
 		<IMG SRC="../style/blue/images/pageSelector/lastPage2.png"/>
 		-->
-		<a href="#" title="尾页" style="cursor: hand;">
-			<img src="../style/blue/images/pageSelector/lastPage.png"/></a>
+		<s:a href="pa!listPosition" value="page.pageTotal" title="尾页" style="cursor: hand;">
+			<img src="../style/blue/images/pageSelector/lastPage.png"/></s:a>
 		
 		转到：
-		<input onFocus="this.select();" maxlength="2" class="inputStyle" type="text" value="1" name="currPage" tabindex="0"/>
-		<input type="submit" name="goBtn" value="Go" class="MiddleButtonStyle" />
+		<s:form action="pa!listPosition"><input onFocus="this.select();" maxlength="2" class="inputStyle" type="text" value="1" name="page.currentPage" tabindex="0"/>
+		<input type="submit" name="goBtn" value="Go" class="MiddleButtonStyle" /></s:form>
 	</div>
 </div>
 

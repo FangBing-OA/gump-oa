@@ -13,7 +13,7 @@ public interface IPositionService {
 	 * 查询所有的职位信息
 	 * @return List<PositionVo>
 	 */
-	public List<Position> selectAllPosition(Page page);
+	public List<Position> listPosition(Page page);
 	
 	
 	/**
@@ -21,7 +21,7 @@ public interface IPositionService {
 	 * @param posId
 	 * @return List<PositionVo>
 	 */
-	public Position selectPositionById(int posId);
+	public Position getPositionById(int posId);
 
 	
 	/**
@@ -29,23 +29,29 @@ public interface IPositionService {
 	 * @param posName
 	 * @return
 	 */
-	public Position selectPositionByName(String posName);
+	public Position getPositionByName(String posName);
 	
 	/**
 	 * 新增职位
 	 * @param pos
 	 */
-	public void insertPosition(Position pos);
+	public void savePosition(Position pos);
 	
 	/**
 	 * 根据职位ID删除一个职位
 	 * @param posId
 	 */
-	public void deletePostion(int posId);
+	public void removePosition(int posId);
 	
 	/**
 	 * 根据职位ID修改职位信息
 	 * @param posId
 	 */
 	public void updatePosition(Position pos);
+	
+	/**
+	 * 获取总记录数
+	 * @return
+	 */
+	public long getPositionCount();
 }
