@@ -61,10 +61,10 @@
             <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20077.gif" class="Icon" /> 个人设置</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="Person_Config/editUserInfoUI.html">个人信息</a></div>
+                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="/gump-oa/editUserInfoUI_showEmployeeInfo.action">个人信息</a></div>
                 </li>
                 <li class="level2">
-                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="Person_Config/editPasswordUI.html">密码修改</a></div>
+                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> <a target="right" href="/gump-oa/Person_Config/editPasswordUI.action">密码修改</a></div>
                 </li>
 <!--                <li class="level2">
                     <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_single.gif" /> 桌面定义</div>
