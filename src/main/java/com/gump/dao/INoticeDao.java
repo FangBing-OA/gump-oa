@@ -16,7 +16,7 @@ public interface INoticeDao {
 	//删除公告
 	public void deleteNotByID(int notId) throws Exception;
 	//根据Id修改公告
-	public void updateNotById(Notice noticeVo) throws Exception;
+	public void updateNotById(int notId,String notTitle,String notCntent) throws Exception;
 	//根据ID查询公告
 	public Notice queryById(int notId) throws Exception;
 	//添加公告

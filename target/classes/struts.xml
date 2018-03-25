@@ -25,11 +25,20 @@
 			<result name="toadd">/html/StaffManagement/StaffAdd.jsp</result>
 			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete</allowed-methods>
 		</action>
+		
+		<action name="editUserInfoUI_*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
+			<result name="editUserInfoUI">/html/Person_Config/editUserInforUI.jsp</result>
+		</action>
+	
+		<action name="editPasswordUI" class="com.gump.action.ModifyEmployeePasAction">
+			<result name="modify">/html/Person_Config/editPasswordUI.jsp</result>
+		</action>
+		
 		<!-- 职位模块 -->
 		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
-			<result name="toPositionList">ml/PositionSystem/PositionList.jsp</result>
-			<result name="goUpdatePage">ml/PositionSystem/PositionUpdate.jsp</result>
-			<result name="goAddPage">ml/PositionSystem/PositionAdd.jsp</result>
+			<result name="toPositionList">/html/PositionSystem/PositionList.jsp</result>
+			<result name="goUpdatePage">/html/PositionSystem/PositionUpdate.jsp</result>
+			<result name="goAddPage">/html/PositionSystem/PositionAdd.jsp</result>
 			<allowed-methods>getPositionById,getPositionByName,listPosition,updatePosition,goUpdatePositionPage,addPosition,goAddPositionPage,removePosition</allowed-methods>
 		</action>
 		<!-- 信息模块 -->
@@ -47,11 +56,11 @@
 			<allowed-methods>toSave,doSave,doRemove,toShow,doReturn,toInBox,toRedirectInBox,toInBoxAllPage,toInBoxAllPage,toInBoxNotReadPage,toReplyPage,toOutbox,toRedirectOutbox,toOutBoxPage</allowed-methods>
 		</action>
 		<!-- 公文模块 -->
-		<!-- <action name="da!*" class="com.gump.action.DocumentAction"
+		<action name="da!*" class="com.gump.action.DocumentAction"
 			method="{1}">
 			<result name="success">/success.jsp</result>
 			<allowed-methods>add,remove,modify,saveinquery</allowed-methods>
-		</action> -->
+		</action>
 		<!-- 公告模块 -->
 		<action name="na!*" class="com.gump.action.NotListAction"
 			method="{1}">
@@ -63,10 +72,15 @@
 			<allowed-methods>execute,delete,add,update</allowed-methods>
 		</action>
 		<!-- 部门模块 -->
-		<action name="dep!*" class="com.gump.action.DepartmentAction"
-			method="{1}">
-			<result name="">/demo.jsp</result>
-			<allowed-methods>deplist,addDep,updateDep,getname</allowed-methods>
+		<action name="DepartmentAction!*" class="com.gump.action.DepartmentAction" method="{1}">
+			<result name="success">/html/DepartmentSystem/DepartmentList.jsp</result>
+			<result name="success1" type='redirectAction'>
+				<param name="actionName">DepartmentAction!depList</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="success3">/html/DepartmentSystem/DepartmentUpdate.jsp</result>
+			<result name="success4">/html/DepartmentSystem/DepartmentSelect.jsp</result>
+			<allowed-methods>depList,addDep,updateDep,getName,selectByName,selectById</allowed-methods>
 		</action>
 	</package>
 </struts>

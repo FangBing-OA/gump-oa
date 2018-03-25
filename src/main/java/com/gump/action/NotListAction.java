@@ -17,6 +17,36 @@ public class NotListAction {
 	private String title;
 	// 添加提交的内容
 	private String content;
+	//更改时的标题
+	private String updateTitle;
+	//更改时提交的内容
+	private String updateContent;
+	//更改提交的ID
+	private int updateId;
+	
+	public int getUpdateId() {
+		return updateId;
+	}
+
+	public void setUpdateId(int updateId) {
+		this.updateId = updateId;
+	}
+
+	public String getUpdateTitle() {
+		return updateTitle;
+	}
+
+	public void setUpdateTitle(String updateTitle) {
+		this.updateTitle = updateTitle;
+	}
+
+	public String getUpdateContent() {
+		return updateContent;
+	}
+
+	public void setUpdateContent(String updateContent) {
+		this.updateContent = updateContent;
+	}
 
 	public String getTitle() {
 		return title;
@@ -92,5 +122,26 @@ public class NotListAction {
 			noticeDao.addNot(getTitle(), getContent(), "GZB");
 			return "bs";
 		}
+	}
+	/**
+	 * 调到更改的页面自动锁定更改的内容
+	 * @throws Exception 
+	 */
+	public String update() throws Exception{
+		//通过ID查询公告的标题和内容
+		INoticeDao noticeDao = new NoticeDaoImpl();
+		setUpdateTitle(noticeDao.queryById(getNotId()).getNotTitle());
+		setUpdateContent(noticeDao.queryById(getNotId()).getNotContent());
+		return "fail";
+	}
+	
+	/**
+	 * 更改公告内容
+	 * @throws Exception 
+	 */
+	public String doUpdate() throws Exception{
+		INoticeDao noticeDao = new NoticeDaoImpl();
+		noticeDao.updateNotById(getUpdateId(), getUpdateTitle(), getUpdateContent());
+		return "doUpdate";
 	}
 }

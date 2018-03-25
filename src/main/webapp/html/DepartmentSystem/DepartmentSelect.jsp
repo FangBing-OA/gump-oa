@@ -1,5 +1,6 @@
 <%@page import="com.gump.vo.Department"%>
 <%@page import="java.util.List"%>
+<%@page import="com.gump.dao.IDepartmentDao"%>
 <%@page import="com.gump.dao_impl.DepartmentImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -27,8 +28,8 @@
         </div>
         <div id="Title_End"></div>
     </div>
-
-<div id="QueryArea">
+    
+    <div id="QueryArea">
 	<div style="height: 30px; float:left" >
 		<form action="DepartmentAction!selectByName" method="post">
 			<s:textfield name="department.depName" theme="simple">按部门名称查询：</s:textfield>
@@ -43,9 +44,7 @@
 <!-- 			<input type="IMAGE" src="../style/blue/images/button/query.PNG"/> -->
 		</form>
 	</div>
-	
 </div>
-
 <div id="MainArea">
     <table cellspacing="0" cellpadding="0" class="TableStyle">
         <!-- 表头-->
@@ -61,25 +60,23 @@
        <tbody id="TableData">
 			<!-- 正在审批或审批完成的表单显示示例 -->
 		<s:form action="DepartmentAction" method="post">
-		<s:iterator value="#request.li" var="de">
+	 	<s:iterator>
 				<tr class="TableDetail1 template">
-				<td><s:property value="#de.getDepId"/></td>
-				<td><s:property value="#de.getDepName"/></td>
-				<td><s:property value="#de.getDepNum"/></td>
-				<td><s:property value="#de.getDepDescribe"/></td>
+				<td><s:property value="department.depId"/></td>
+				<td><s:property value="department.depName"/></td>
+				<td><s:property value="department.depNum"/></td>
+				<td><s:property value="department.depDescribe"/></td>
 				<td><a onClick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="#">删除</a>
-					<a href="DepartmentAction!getName?department.depName=<s:property value="#de.getDepName"/>">修改</a>
+				<a href="DepartmentAction!getName?department.depName=<s:property value="department.depName"/>">修改</a>
 				</td>
 			</tr>
-			</s:iterator>
+	 		</s:iterator>
 		</s:form>
         </tbody>
     </table>
     <!-- 其他功能超链接 -->
      <div id="TableTail">
-        <div id="TableTail_inside">
-            <a href="DepartmenAdd.jsp"><img src="../style/images/createNew.png" /></a>
-        </div>
+      
     </div>
 </div>
 
@@ -122,11 +119,11 @@
 
 <div class="Description">
 	说明：<br />
-	<!--
+	
 	1，对于退回的表单，可以执行“修改后再次提交”与“删除”的操作。<br />&nbsp;&nbsp;
 	   其他状态表单（正在审批的或是审批完成的）则没有这两个操作。<br />
 	   2，删除退回的申请文档后，此文档相关的审批信息也要同时删除，对应的流程也终止了。<br />
-	   -->
+	   
 </div>
 
 </body>
