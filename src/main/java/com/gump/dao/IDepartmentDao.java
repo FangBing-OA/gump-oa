@@ -9,10 +9,10 @@ public interface IDepartmentDao {
 	public List<Department> selectdep();
 	
 	//根据部门名字查看部门信息
-	public Object[] namequert(String name); 
+	public Department selectDepartmentByName(String name); 
 	
 	//根据部门id查看部门信息
-	public Object[] idquert(int id);
+	public Department selectDepartmentById(int id);
 	
 	//删除某部门    可以根据部门的name和id
 	public int iddrop(int depId);
