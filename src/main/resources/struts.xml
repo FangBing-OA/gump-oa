@@ -33,17 +33,25 @@
 			<allowed-methods>getPositionById,getPositionByName,listPosition,updatePosition,goUpdatePositionPage,addPosition,goAddPositionPage,removePosition</allowed-methods>
 		</action>
 		<!-- 信息模块 -->
-		<action name="ma!*" class="com.gump.action.MessageAction"
-			method="{1}">
-			<result name="">/demo.jsp</result>
-			<allowed-methods>add,edit,……</allowed-methods>
+		<action name="ma!*" class="com.gump.action.MessageAction" method="{1}">
+			<result name="tosave">/staff/MessageSystem/MessageSend.jsp</result>
+			<result name="dosave" type="redirect">/staff/MessageSystem/MessageSend.jsp</result>
+			<result name="toshow">/staff/MessageSystem/MessageShow.jsp</result>
+			<result name="toinbox">/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="toreinbox" type="redirect">/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="toall">/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="tonot">/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="toreply">/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="toout">/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="toreout" type="redirect">/staff/MessageSystem/MessageInBox.jsp</result>
+			<allowed-methods>toSave,doSave,doRemove,toShow,doReturn,toInBox,toRedirectInBox,toInBoxAllPage,toInBoxAllPage,toInBoxNotReadPage,toReplyPage,toOutbox,toRedirectOutbox,toOutBoxPage</allowed-methods>
 		</action>
 		<!-- 公文模块 -->
-		<action name="da!*" class="com.gump.action.DocumentAction"
+		<!-- <action name="da!*" class="com.gump.action.DocumentAction"
 			method="{1}">
 			<result name="success">/success.jsp</result>
 			<allowed-methods>add,remove,modify,saveinquery</allowed-methods>
-		</action>
+		</action> -->
 		<!-- 公告模块 -->
 		<action name="na!*" class="com.gump.action.NotListAction"
 			method="{1}">

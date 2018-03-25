@@ -12,21 +12,28 @@ public interface IMessageDao {
 	 * @param message
 	 * @return
 	 */
-	public boolean inMessage(Message message);
+	public boolean saveMessage(Message message);
 	
 	/**
 	 * 删除消息:集合中为消息ID
 	 * @param mesIdList
 	 * @return
 	 */
-	public boolean deMessage(List<Integer> mesIdList);
+	public boolean removeMessage(List<Integer> mesIdList);
 	
 	/**
 	 * 标记已读
 	 * @param mesId
 	 * @return
 	 */
-	public boolean upMessageRead(int mesId);
+	public boolean updateMessageRead(int mesId);
+	
+	/**
+	 * 通过Id查看消息
+	 * @param mesId
+	 * @return
+	 */
+	public Message getMessageById(int mesId);
 	
 	/**
 	 * 查询未读消息(接受的消息)
@@ -34,7 +41,7 @@ public interface IMessageDao {
 	 * @param page
 	 * @return
 	 */
-	public List<Message> seMessageNotRead(String account ,Page page);
+	public List<Message> listMessageNotRead(String account ,Page page);
 	
 	/**
 	 * 查询某时间段的消息(接受的消息)
@@ -44,7 +51,7 @@ public interface IMessageDao {
 	 * @param page
 	 * @return
 	 */
-	public List<Message> seMessageInTimeQuantum(String timeStart,String timeEnd,String account,Page page);
+	public List<Message> listMessageInTimeQuantum(String timeStart,String timeEnd,String account,Page page);
 	
 	/**
 	 * 查询发送的消息
@@ -52,7 +59,7 @@ public interface IMessageDao {
 	 * @param page
 	 * @return
 	 */
-	public List<Message> seSendMseeage(String account ,Page page); 
+	public List<Message> listSendMseeage(String account ,Page page); 
 	
 	/**
 	 * 查询未读消息总数(接受的消息)
