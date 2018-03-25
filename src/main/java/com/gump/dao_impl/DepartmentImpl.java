@@ -31,10 +31,12 @@ public class DepartmentImpl implements IDepartmentDao {
 	}
 	
 	//根据部门名字查看部门信息
-	public Object[] namequert(String depName) {
+
+	//根据部门名字查看部门信息
+	public Department selectDepartmentByName(String depName) {
 		String sql = "select * from department where depName=?";
 		try {
-			return new QueryRunner(ds).query(sql, new ArrayHandler(),depName);
+			return new QueryRunner(ds).query(sql,new BeanHandler<Department>(Department.class),depName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,16 +45,16 @@ public class DepartmentImpl implements IDepartmentDao {
 	}
 	
 	//根据部门id查看部门信息
-	public Object[] idquert(int id) {
-		String sql = "select * from department where depId=?";
-		try {
-			return new QueryRunner(ds).query(sql, new ArrayHandler(),id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		public Department selectDepartmentById(int id) {
+			String sql = "select * from department where depId=?";
+			try {
+				return new QueryRunner(ds).query(sql,new BeanHandler<Department>(Department.class),id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
 		}
-		return null;
-	}
 	
 	//根据id删除某部门
 	public int iddrop(int depId) {
