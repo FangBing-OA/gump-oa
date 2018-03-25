@@ -25,6 +25,15 @@
 			<result name="toadd">/html/StaffManagement/StaffAdd.jsp</result>
 			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete</allowed-methods>
 		</action>
+		
+		<action name="editUserInfoUI_*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
+			<result name="editUserInfoUI">/html/Person_Config/editUserInforUI.jsp</result>
+		</action>
+	
+		<action name="editPasswordUI" class="com.gump.action.ModifyEmployeePasAction">
+			<result name="modify">/html/Person_Config/editPasswordUI.jsp</result>
+		</action>
+		
 		<!-- 职位模块 -->
 		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
 			<result name="toPositionList">/html/PositionSystem/PositionList.jsp</result>
