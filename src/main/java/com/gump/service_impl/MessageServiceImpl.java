@@ -10,34 +10,34 @@ import com.gump.vo.Page;
 public class MessageServiceImpl implements IMessageService {
 	private IMessageDao md;
 
-	public boolean inMessage(Message message) {
+	public boolean saveMessage(Message message) {
 		// TODO Auto-generated method stub
-		return md.inMessage(message);
+		return md.saveMessage(message);
 	}
 
-	public boolean deMessage(List<Integer> mesIdList) {
+	public boolean removeMessage(List<Integer> mesIdList) {
 		// TODO Auto-generated method stub
-		return md.deMessage(mesIdList);
+		return md.removeMessage(mesIdList);
 	}
 
-	public boolean upMessageRead(int mesId) {
+	public boolean updateMessageRead(int mesId) {
 		// TODO Auto-generated method stub
-		return md.upMessageRead(mesId);
+		return md.updateMessageRead(mesId);
 	}
 
-	public List<Message> seMessageNotRead(String account, Page page) {
+	public List<Message> listMessageNotRead(String account, Page page) {
 		// TODO Auto-generated method stub
-		return md.seMessageNotRead(account, page);
+		return md.listMessageNotRead(account, page);
 	}
 
-	public List<Message> seMessageInTimeQuantum(String timeStart, String timeEnd, String account, Page page) {
+	public List<Message> listMessageInTimeQuantum(String timeStart, String timeEnd, String account, Page page) {
 		// TODO Auto-generated method stub
-		return md.seMessageInTimeQuantum(timeStart, timeEnd, account, page);
+		return md.listMessageInTimeQuantum(timeStart, timeEnd, account, page);
 	}
 
-	public List<Message> seSendMseeage(String account, Page page) {
+	public List<Message> listSendMseeage(String account, Page page) {
 		// TODO Auto-generated method stub
-		return md.seSendMseeage(account, page);
+		return md.listSendMseeage(account, page);
 	}
 
 	public long countMessageNotRead(String account) {
@@ -53,6 +53,11 @@ public class MessageServiceImpl implements IMessageService {
 	public long countSendMessage(String account) {
 		// TODO Auto-generated method stub
 		return md.countSendMessage(account);
+	}
+
+	public Message getMessageById(int mesId) {
+		// TODO Auto-generated method stub
+		return md.getMessageById(mesId);
 	}
 
 }

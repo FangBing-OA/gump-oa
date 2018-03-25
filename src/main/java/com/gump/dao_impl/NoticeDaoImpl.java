@@ -43,12 +43,12 @@ public class NoticeDaoImpl implements INoticeDao{
 	 * 根据Id更改指定的公告
 	 * 
 	 */
-	public void updateNotById(Notice noticeVo) throws Exception {
+	public void updateNotById(int notId,String notTitle,String notCntent) throws Exception {
 		// TODO Auto-generated method stub
 		DataSource ds = PoolFactory.getDS();
 		QueryRunner queryRunner = new QueryRunner(ds);
 		String sql = "update notice set notTitle=?,notContent=? where notId=?";
-		queryRunner.update(sql,noticeVo.getNotTitle(),noticeVo.getNotContent(),noticeVo.getNotId());
+		queryRunner.update(sql,notTitle,notCntent,notId);
 		
 	}
 	/**

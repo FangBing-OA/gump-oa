@@ -6,6 +6,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -16,7 +17,7 @@ import com.gump.vo.Page;
 
 public class MessageDaoImpl implements IMessageDao {
 
-	public boolean inMessage(Message mes) {
+	public boolean saveMessage(Message mes) {
 		// TODO Auto-generated method stub
 		DataSource ds = PoolFactory.getDS();//链接数据库
 		
@@ -36,7 +37,7 @@ public class MessageDaoImpl implements IMessageDao {
 		return false;
 	}
 
-	public boolean deMessage(List<Integer> mesIdList) {
+	public boolean removeMessage(List<Integer> mesIdList) {
 		// TODO Auto-generated method stub
 		System.out.println("--------------------------------");
 		System.out.println("size-----" + mesIdList.size());
@@ -66,7 +67,7 @@ public class MessageDaoImpl implements IMessageDao {
 		return false;
 	}
 
-	public List<Message> seMessageNotRead(String account, Page page) {
+	public List<Message> listMessageNotRead(String account, Page page) {
 		// TODO Auto-generated method stub
 		int pageSize = page.getPageSize();//每页显示多少条  
 		int pageLimit = (page.getCurrentPage()-1)*pageSize;//从第pageLimit条数据拿值
@@ -92,7 +93,7 @@ public class MessageDaoImpl implements IMessageDao {
 		return list;
 	}
 
-	public List<Message> seMessageInTimeQuantum(String timeStart, String timeEnd, String account, Page page) {
+	public List<Message> listMessageInTimeQuantum(String timeStart, String timeEnd, String account, Page page) {
 		// TODO Auto-generated method stub
 		DataSource ds = PoolFactory.getDS();
 		Integer pageSize = page.getPageSize();//每页显示多少条  
@@ -158,7 +159,7 @@ public class MessageDaoImpl implements IMessageDao {
 		return 0;
 	}
 
-	public List<Message> seSendMseeage(String account, Page page) {
+	public List<Message> listSendMseeage(String account, Page page) {
 		// TODO Auto-generated method stub
 		int pageSize = page.getPageSize();//每页显示多少条  
 		int pageLimit = (page.getCurrentPage()-1)*pageSize;//从第pageLimit条数据拿值
@@ -201,7 +202,7 @@ public class MessageDaoImpl implements IMessageDao {
 		return 0;
 	}
 
-	public boolean upMessageRead(int mesId) {
+	public boolean updateMessageRead(int mesId) {
 		// TODO Auto-generated method stub
 		DataSource ds = PoolFactory.getDS();
 		//标记已读
@@ -216,5 +217,20 @@ public class MessageDaoImpl implements IMessageDao {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public Message getMessageById(int mesId) {
+		// TODO Auto-generated method stub
+				DataSource ds = PoolFactory.getDS();
+				Message message = null;
+				//查询某帐号在某时间段中的消息
+				String sql = "select * from message where mesId = ?";
+				try {
+					message = new QueryRunner(ds).query(sql, new BeanHandler<Message>(Message.class), mesId);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return message;
 	}
 }
