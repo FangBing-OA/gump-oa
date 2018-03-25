@@ -4,6 +4,7 @@ public class Employee {
 	private int empId;// 员工ID
 	private String empName;// 员工名
 	private String empAccount;//员工账号
+	private String empPassword;// 员工密码
 	private String empSex;// 员工性别
 	private int empAge;// 员工年龄
 	private int empDepId;// 员工部门ID
@@ -11,6 +12,12 @@ public class Employee {
 	private String empStatus;// 员工状态
 	private String empTel;// 员工电话
 	
+	public String getEmpPassword() {
+		return empPassword;
+	}
+	public void setEmpPassword(String empPassword) {
+		this.empPassword = empPassword;
+	}
 	public String getEmpAccount() {
 		return empAccount;
 	}
