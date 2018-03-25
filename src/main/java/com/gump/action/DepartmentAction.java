@@ -75,8 +75,11 @@ public class DepartmentAction  implements Serializable{
 		setDepartment(ddo.selectDepartmentById(depId));
 		return "success4";
 	}
-
-	
+	public String deleteDep(){
+		String depName=request.getParameter("department.depName");
+		System.out.print(depName);
+		IDepartmentDao ddo = new DepartmentImpl();
+		ddo.namedrop(depName);
+		return "success1";
+	}
 }
-
-

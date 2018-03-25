@@ -7,12 +7,12 @@
 <head>
 	<title>用户信息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script language="javascript" src="../script/jquery.js"></script>
-    <script language="javascript" src="../script/pageCommon.js" charset="utf-8"></script>
-    <script language="javascript" src="../script/PageUtils.js" charset="utf-8"></script>
-    <script language="javascript" src="../script/DemoData.js" charset="utf-8"></script>
-	<script language="javascript" src="../script/DataShowManager.js" charset="utf-8"></script>
-    <link type="text/css" rel="stylesheet" href="../style/blue/pageCommon.css" />
+    <script language="javascript" src="/gump-oa/html/script/jquery.js"></script>
+    <script language="javascript" src="/gump-oa/html/script/pageCommon.js" charset="utf-8"></script>
+    <script language="javascript" src="/gump-oa/html/script/PageUtils.js" charset="utf-8"></script>
+    <script language="javascript" src="/gump-oa/html/script/DemoData.js" charset="utf-8"></script>
+	<script language="javascript" src="/gump-oa/html/script/DataShowManager.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="/gump-oa/html/style/blue/pageCommon.css" />
     <script type="text/javascript">
     </script>
 </head>
@@ -23,7 +23,7 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="../style/images/title_arrow.gif"/> 部门信息
+            <img border="0" width="13" height="13" src="/gump-oa/html/style/images/title_arrow.gif"/> 部门信息
         </div>
         <div id="Title_End"></div>
     </div>
@@ -33,49 +33,30 @@
 <div id=MainArea>
     <form action="DepartmentAction!updateDep">
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
-        	<img border="0" width="4" height="7" src="../style/blue/images/item_point.gif" /> 部门信息 </div> 
+        	<img border="0" width="4" height="7" src="/gump-oa/html/style/blue/images/item_point.gif" /> 部门信息 </div> 
         </div>
         
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
                 <table cellpadding="0" cellspacing="0" class="mainForm">
-                    <tr><td width="100">部门名称</td>
+                    <tr><td width="100"><h1>部门名称</h1></td>
                     	<td><s:textfield name="department.depName" theme="simple"></s:textfield></td>
                     </tr>
-                    <tr><td>部门人数</td>
+                    <tr><td><h1>部门人数</h1></td>
                     	<td><s:textfield name="department.depNum" class="InputStyle" theme="simple"></s:textfield></td>
                     </tr>
-                    <tr><td>备注</td>
-                    	<td><s:textarea name="department.depDescribe" class="TextareaStyle"></s:textarea></td>
+                    <tr><td><h1>备注</h1></td>
+                    	<td><s:textarea name="department.depDescribe" class="TextareaStyle" theme="simple"></s:textarea></td>
                     </tr>
                 </table>
             </div>
         </div>
         <!-- 表单内容显示 -->
-    <%--     <div class="ItemBlockBorder">
-            <div class="ItemBlock">
-                <table cellpadding="0" cellspacing="0" class="mainForm">
-                    <tr>
-						<td width="100">岗位</td>
-                        <td><select name="roleIdList" multiple="true" size="10" class="SelectStyle">
-                                <option value="1">程序员</option>
-                                <option value="2">行政秘书</option>
-                                <option value="3">出纳</option>
-                                <option value="4">总经理</option>
-                                <option value="5">测试员</option>
-                            </select>
-                            按住Ctrl键可以多选或取消选择
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>	 --%>	
-	
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <input type="image" src="../style/images/save.png"/>
-            <a href="javascript:history.go(-1);"><img src="../style/images/goBack.png"/></a>
+            <input type="image" src="/gump-oa/html/style/images/save.png"/>
+            <a href="javascript:history.go(-1);"><img src="/gump-oa/html/style/images/goBack.png"/></a>
         </div>
     </form>
 </div>

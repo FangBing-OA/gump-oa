@@ -72,7 +72,7 @@
 			</result>
 			<result name="success3">/html/DepartmentSystem/DepartmentUpdate.jsp</result>
 			<result name="success4">/html/DepartmentSystem/DepartmentSelect.jsp</result>
-			<allowed-methods>depList,addDep,updateDep,getName,selectByName,selectById</allowed-methods>
+			<allowed-methods>depList,addDep,updateDep,getName,selectByName,selectById,deleteDep</allowed-methods>
 		</action>
 	</package>
 </struts>
