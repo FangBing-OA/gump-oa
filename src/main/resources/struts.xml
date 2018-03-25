@@ -26,7 +26,7 @@
 			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete</allowed-methods>
 		</action>
 		
-		<action name="editUserInfoUI_*" class="com.gump.action.EditUserInfo" method="{1}">
+		<action name="editUserInfoUI_*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
 			<result name="editUserInfoUI">/html/Person_Config/editUserInforUI.jsp</result>
 		</action>
 	
@@ -36,9 +36,9 @@
 		
 		<!-- 职位模块 -->
 		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
-			<result name="toPositionList">ml/PositionSystem/PositionList.jsp</result>
-			<result name="goUpdatePage">ml/PositionSystem/PositionUpdate.jsp</result>
-			<result name="goAddPage">ml/PositionSystem/PositionAdd.jsp</result>
+			<result name="toPositionList">/html/PositionSystem/PositionList.jsp</result>
+			<result name="goUpdatePage">/html/PositionSystem/PositionUpdate.jsp</result>
+			<result name="goAddPage">/html/PositionSystem/PositionAdd.jsp</result>
 			<allowed-methods>getPositionById,getPositionByName,listPosition,updatePosition,goUpdatePositionPage,addPosition,goAddPositionPage,removePosition</allowed-methods>
 		</action>
 		<!-- 信息模块 -->
