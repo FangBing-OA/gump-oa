@@ -19,7 +19,7 @@
         
         <li class="level1">
             <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20057.gif" class="Icon" />  <a target="right"
-			href="Flow_FormFlow_Old/mySubmittedList.html">部门管理</a></div>
+					href="http://localhost:8080/gump-oa/DepartmentAction!depList">部门管理</a></div>
         </li>
         <li class="level1">
             <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /> 信息管理</div>
