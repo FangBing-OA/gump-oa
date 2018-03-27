@@ -43,5 +43,10 @@ public interface IEmployeeService {
 	void doDelete(int empId);
 	
 	List<Employee> findByCom(String empName,int empDepId) throws SQLException;
-
+	
+	/**
+	 * 通过账号获得员工
+	 * @return
+	 */
+	Employee getEmpByAccount(String account);
 }

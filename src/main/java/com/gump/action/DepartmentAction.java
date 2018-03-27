@@ -30,6 +30,7 @@ public class DepartmentAction  implements Serializable{
 		IDepartmentDao d = new DepartmentImpl(); 
 		List<Department> list=d.selectdep();
 		request.setAttribute("li", list);
+		ServletActionContext.getRequest().getSession().setAttribute("lii",list);
 		return "success";
 	}
 	
@@ -45,7 +46,8 @@ public class DepartmentAction  implements Serializable{
 	
 	
 	public String updateDep(){
-		String depName=(String) request.getParameter("department.depName");
+		String depName=(String) ServletActionContext.getRequest().getSession().getAttribute("departmentName");
+		
 		Department de =new Department();
 		de.setDepName(department.getDepName());
 		de.setDepNum(department.getDepNum());
@@ -59,7 +61,7 @@ public class DepartmentAction  implements Serializable{
 		String depName=(String) request.getParameter("department.depName");
 		IDepartmentDao ddo = new DepartmentImpl();
 		setDepartment(ddo.selectDepartmentByName(depName));
-
+		ServletActionContext.getRequest().getSession().setAttribute("departmentName",depName);
 		return "success3";
 	}
 	

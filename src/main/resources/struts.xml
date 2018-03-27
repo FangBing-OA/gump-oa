@@ -36,6 +36,15 @@
 			<result name="modify">/html/Person_Config/editPasswordUI.jsp</result>
 		</action>
 		
+		<!--登录 模块 -->
+		<action name="LoginOrExit!*"  class="com.gump.action.LoginOrExitAction"  method="{1}">
+			<result name="ToLogin">/LoginAndExit/Login.jsp</result>
+			<result name="ToStaffIndex" type="redirect">/staff/index.jsp </result>
+			<result name="ToHtmlIndex"  type="redirect">/html/index.jsp</result>
+			<result name="ToExit">/LoginAndExit/Exit.jsp </result>
+			<allowed-methods>Login,Exit</allowed-methods>
+		</action>
+		
 		<!-- 职位模块 -->
 		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
 			<result name="toPositionList">/html/PositionSystem/PositionList.jsp</result>

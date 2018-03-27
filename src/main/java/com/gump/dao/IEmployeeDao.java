@@ -47,4 +47,10 @@ public interface IEmployeeDao {
 	 */
 	List<Employee> findByCom(String empName,int empDepId) throws SQLException;
 
+	/**
+	 * 通过账号获得员工信息
+	 * @return
+	 */
+	
+	Employee getEmpByAccount(String account);
 }
