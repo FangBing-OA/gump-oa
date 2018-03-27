@@ -11,30 +11,30 @@ public class PositionServiceImpl implements IPositionService {
 
 	/**
 	 * 查询所有的职位信息
-	 * @return List<PositionVo>
+	 * @return List<Position>
 	 */
-	public List<Position> selectAllPosition(Page page){
-		return new PositionDaoImpl().selectAllPosition(page);
+	public List<Position> listPosition(Page page){
+		return new PositionDaoImpl().listPosition(page);
 	}
 	
 	
 	/**
 	 * 根据职位ID查询职位信息
 	 * @param posId
-	 * @return PositionVo
+	 * @return List<Position>
 	 */
-	public Position selectPositionById(int posId){
-		return new PositionDaoImpl().selectPosById(posId);
+	public List<Position> getPositionById(int posId){
+		return new PositionDaoImpl().getPositionById(posId);
 	}
 
 	
 	/**
 	 * 根据职位名查询职位信息
 	 * @param posName
-	 * @return
+	 * @return List<Position>
 	 */
-	public Position selectPositionByName(String posName){
-		return new PositionDaoImpl().selectPosByName(posName);
+	public List<Position> getPositionByName(String posName){
+		return new PositionDaoImpl().getPositionByName(posName);
 		
 	}
 	
@@ -42,8 +42,8 @@ public class PositionServiceImpl implements IPositionService {
 	 * 新增职位
 	 * @param pos
 	 */
-	public void insertPosition(Position pos){
-		new PositionDaoImpl().addPos(pos);
+	public void savePosition(Position pos){
+		new PositionDaoImpl().savePosition(pos);
 		
 	}
 	
@@ -51,8 +51,8 @@ public class PositionServiceImpl implements IPositionService {
 	 * 根据职位ID删除一个职位
 	 * @param posId
 	 */
-	public void deletePostion(int posId){
-		new PositionDaoImpl().deletePos(posId);
+	public void removePosition(int posId){
+		new PositionDaoImpl().removePosition(posId);
 	}
 	
 	/**
@@ -60,6 +60,24 @@ public class PositionServiceImpl implements IPositionService {
 	 * @param posId
 	 */
 	public void updatePosition(Position pos){
-		new PositionDaoImpl().updatePos(pos);
+		new PositionDaoImpl().updatePosition(pos);
+	}
+	
+	
+	/**
+	 * 获取总记录数
+	 * @return
+	 */
+	public long getPositionCount(){
+		return new PositionDaoImpl().getPositionCount();
+	}
+	
+	
+	/**
+	 * 查询所有的职位，不分页
+	 * @return List<Position>
+	 */
+	public List<Position> AllPosition(){
+		return new PositionDaoImpl().AllPosition();
 	}
 }

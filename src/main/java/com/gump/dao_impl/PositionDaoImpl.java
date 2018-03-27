@@ -25,7 +25,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * @return List<PositionVo>
 	 * @param  page
 	 */
-	public List<Position> selectAllPosition(Page page) {
+	public List<Position> listPosition(Page page) {
 			try {
 				
 				List<Position> ls = null;
@@ -47,19 +47,19 @@ public class PositionDaoImpl implements IPositionDao {
 	
 	/**
 	 * 根据Id查询职位
-	 * @return PositionVo
+	 * @return List<Position>
 	 * @param  positionId
 	 */
-	public Position selectPosById(int posId) {
+	public List<Position> getPositionById(int posId) {
 		
 		try {
 			
 			String sql ="select * from position where 1 = 1 ";
 			
 			if(posId > 0){
-				sql += "and positionId = "+posId;
+				sql += "and posId = "+posId;
 			}
-			Position pv = (Position) new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
+			List<Position> pv =  new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
 		    return pv;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,18 +70,18 @@ public class PositionDaoImpl implements IPositionDao {
 	
 	/**
 	 * 根据部门名称查询职位
-	 * @return PositionVo
+	 * @return List<Position>
 	 * @param  positionName
 	 */
-	public Position selectPosByName(String posName) {
+	public List<Position> getPositionByName(String posName) {
 		
 		try {
 			String sql ="select * from position where 1 = 1 ";
 			
 			if(posName != null){
-				sql += "and posName = "+posName;
+				sql += "and posName = '"+posName+"'";
 			}
-			Position pv = (Position) new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
+			List<Position> pv =  new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
 		    return pv;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,13 +93,13 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 添加一个新的职位
 	 * @param pos
 	 */
-	public void addPos(Position pos){ 
+	public void savePosition(Position pos){ 
 		String sql = null;
 		System.out.println("职位名称："+pos.getPosName());
 		System.out.println("职位描述："+pos.getPosDescribe());
 		try {
 			if(pos.getPosName() != null && pos.getPosDescribe() != null){
-				sql = "insert into position(posName,posDescribe) values('"+pos.getPosName()+"','"+pos.getPosDescribe()+"')";
+				sql = "insert into position  (posName,posDescribe) values('"+pos.getPosName()+"','"+pos.getPosDescribe()+"')";
 			}
        			System.out.println("职位新增sql"+sql);
 			new QueryRunner(ds).update(sql);
@@ -114,13 +114,14 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 根据职位Id删除职位
 	 * @param posId
 	 */
-	public void deletePos(int posId){
+	public void removePosition(int posId){
 		try {
 			
-			String sql = "delete position where 1 = 1 ";
-			if(posId > 0){
+			String sql = "delete from position where 1 = 1 ";
+			if(posId >= 0){
 				sql += " and posId = "+posId;
 			}
+			System.out.println("删除sql语句:"+sql);
 			new QueryRunner(ds).update(sql);
 		
 		} catch (SQLException e) {
@@ -134,16 +135,18 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 根据职位Id修改职位信息
 	 * @param pos
 	 */
-	public void updatePos(Position pos){
+	public void updatePosition(Position pos){
 		try {
 			String sql = null;
 			if(pos.getPosName() != null){
-				sql = "update position set posName = '"+pos.getPosName()+"'";
-			}else if(pos.getPosDescribe() != null){
-				sql += ",posDescribe = '"+pos.getPosDescribe()+"'  where posId = "+pos.getPosId();
+				sql = "update position set posName = '"+pos.getPosName()+"' ";
+			}if(pos.getPosDescribe() != null){
+				sql += ", posDescribe = '"+pos.getPosDescribe()+"'";
+				sql += " where posId = "+pos.getPosId();
 			}
 			new QueryRunner(ds).update(sql);
-		
+		System.out.println("修改sql语句:"+sql);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -154,7 +157,7 @@ public class PositionDaoImpl implements IPositionDao {
 	 * 查询所有记录数
 	 * @return
 	 */
-	public long allPositionCount(){
+	public long getPositionCount(){
 		long l = 0;
 		try {
 			String sql = "select count(*) from position";
@@ -167,5 +170,23 @@ public class PositionDaoImpl implements IPositionDao {
 			e.printStackTrace();
 		}
 		return l;
+	}
+	
+	
+	/**
+	 * 查询所有的职位，不分页
+	 * @return
+	 */
+	public List<Position> AllPosition(){
+		try {
+			
+			List<Position> ls = null;
+			String sql = "select * from position";
+			ls = new QueryRunner(ds).query(sql, new BeanListHandler<Position>(Position.class));
+		    return ls;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	return null;
 	}
 }
