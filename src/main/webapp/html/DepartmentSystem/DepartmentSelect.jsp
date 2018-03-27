@@ -80,7 +80,7 @@
     </div>
 </div>
 <!--分页信息-->
-<div id=PageSelectorBar>
+<%-- <div id=PageSelectorBar>
 	<div id=PageSelectorMemo>
 		页次：7/13页 &nbsp;
 		每页显示：30条 &nbsp;
@@ -114,7 +114,7 @@
 		<input onFocus="this.select();" maxlength="2" class="inputStyle" type="text" value="1" name="currPage" tabindex="0"/>
 		<input type="submit" name="goBtn" value="Go" class="MiddleButtonStyle" />
 	</div>
-</div>
+</div> --%>
 
 <div class="Description">
 	说明：<br />

@@ -57,7 +57,6 @@
 		</div>
 
 	</div>
-
 	<div id="MainArea">
 		<s:form action="DepartmentAction" method="post">
 			<table cellspacing="0" cellpadding="0" class="TableStyle">
@@ -100,7 +99,7 @@
 		</div>
 	</div>
 
-	<!--分页信息-->
+	<%-- <!--分页信息-->
 	<div id=PageSelectorBar>
 		<div id=PageSelectorMemo>页次：7/13页 &nbsp; 每页显示：30条 &nbsp;
 			总记录数：385条</div>
@@ -137,15 +136,15 @@
 				type="text" value="1" name="currPage" tabindex="0" /> <input
 				type="submit" name="goBtn" value="Go" class="MiddleButtonStyle" />
 		</div>
-	</div>
+	</div> --%>
 
 	<div class="Description">
 		说明：<br />
-		<!--
+		
 	1，对于退回的表单，可以执行“修改后再次提交”与“删除”的操作。<br />&nbsp;&nbsp;
 	   其他状态表单（正在审批的或是审批完成的）则没有这两个操作。<br />
-	   2，删除退回的申请文档后，此文档相关的审批信息也要同时删除，对应的流程也终止了。<br />
-	   -->
+	2，删除退回的申请文档后，此文档相关的审批信息也要同时删除，对应的流程也终止了。<br />
+	   
 	</div>
 
 </body>
