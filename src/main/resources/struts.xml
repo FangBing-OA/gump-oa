@@ -17,13 +17,14 @@
 		<action name="index">
 			<result>/index.jsp</result>
 		</action>
-		<!-- 员工模块 -->
-		<action name="ea!*" class="com.gump.action.EmployeeAction"
-			method="{1}">
-			<result name="tolist">/html/StaffManagement/StaffList.jsp</result>
-			<result name="toupdate">/html/StaffManagement/StaffUpdate.jsp</result>
-			<result name="toadd">/html/StaffManagement/StaffAdd.jsp</result>
-			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete</allowed-methods>
+        <!-- 员工模块 -->
+		<action name="ea!*" class="com.gump.action.EmployeeAction" method="{1}">
+			<result name="tolist" >html/StaffSystem/StaffList.jsp</result>
+			<result name="toupdate">html/StaffSystem/StaffAdd.jsp</result>
+			<result name="toadd" type="redirectAction">ea!getAllEmp</result>
+			<result name="tofindbycom">html/StaffSystem/StaffList.jsp</result>
+		    <result name="dodelete">html/StaffSystem/StaffList.jsp</result>
+			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom</allowed-methods>
 		</action>
 		
 		<action name="editUserInfoUI_*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">

@@ -1,5 +1,6 @@
 package com.gump.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.gump.vo.Employee;
@@ -40,5 +41,10 @@ public interface IEmployeeDao {
 	 * @param empId
 	 */
 	void doDelete(int empId);
+	/**
+	 * 根据员工姓名和部门名称查询人数
+	 * @throws SQLException 
+	 */
+	List<Employee> findByCom(String empName,int empDepId) throws SQLException;
 
 }
