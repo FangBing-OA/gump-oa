@@ -102,12 +102,12 @@
 	</package>
 	
 	<!-- ajax_消息 -->
-	<package name="mesvalidate" extends="struts-default" namespace="/mesvalidate">  
+	<!-- <package name="mesvalidate" extends="struts-default" namespace="/mesvalidate">  
             <action name="pluginAjax" class="com.gump.action.MessageVaildateAction" method="pluginAjax">  
                 <result type="json">  
                     <param name="excludeNullProperties">true</param>  
                 </result>  
             </action>  
-	</package>  
+	</package>  --> 
 </struts>
 
