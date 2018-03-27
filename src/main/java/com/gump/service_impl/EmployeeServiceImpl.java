@@ -56,4 +56,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return iEmployeeDao.findByCom(empName, empDepId);
 	}
 
+	/**
+	 * 通过账号查询用户并返回一个用户对象
+	 */
+	
+	public Employee getEmpByAccount(String account) {
+		// TODO Auto-generated method stub
+		iEmployeeDao.getEmpByAccount(account);
+		return null;
+	}
 }
