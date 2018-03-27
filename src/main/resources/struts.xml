@@ -14,8 +14,8 @@
 	<!-- <constant name="struts.custom.i18n.resources" value="com.my.action.EmpAction"/> -->
 
 	<package name="oa" extends="struts-default">
-		<action name="index">
-			<result>/index.jsp</result>
+		<action name="login">
+			<result>/LoginAndExit/Login.jsp</result>
 		</action>
         <!-- 员工模块 -->
 		<action name="ea!*" class="com.gump.action.EmployeeAction" method="{1}">

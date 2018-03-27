@@ -50,7 +50,7 @@ public class EditEmployeeInfoAction {
 	public String showEmployeeInfo() throws Exception {
 		ActionContext context = ActionContext.getContext();
 		employee = (Employee) context.getSession().get("account");
-		context.put("positionName",poService.selectPositionById(employee.getEmpPosId()));
+		context.put("positionName",poService.getPositionById(employee.getEmpPosId()).get(0).getPosName());
 		//这个1是部门的id,到时自己进行修改
 		context.put("departmentName", departDao.selectDepartmentById(1));
 		return "editUserInfoUI";
@@ -62,7 +62,7 @@ public class EditEmployeeInfoAction {
 	 * @throws Exception
 	 */
 	public String modifyEmployeeInfo() throws Exception {
-		employee.setEmpPosId(poService.selectPositionByName(positionName).getPosId());
+		employee.setEmpPosId(poService.getPositionByName(positionName).get(0).getPosId());
 		//这个教育部是部门名字，自己进行修改
 		employee.setEmpDepId(departDao.selectDepartmentByName("教育部").getDepId());
 		empService.doUpdate(employee);
