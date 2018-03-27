@@ -27,6 +27,7 @@
 	    	alert("请选择部门");
 	    	return false;
 	    }
+	}
 </script>
 </head>
 <body>
