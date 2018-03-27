@@ -61,8 +61,9 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 	public void doUpdate(Employee emp) {
 		try {
 			//获得连接对象
+			System.out.println("empid的值为"+emp.getEmpId());
 			Connection conn = ds.getConnection();
-			new QueryRunner().update(conn,"update employee set empName=?,empAccount=?,empSex=?,empAge=?,empDepId=?,empPosId=?,empStatus=?,empTel=?",emp.getEmpName(),emp.getEmpAccount(),emp.getEmpSex(),emp.getEmpAge(),emp.getEmpDepId(),emp.getEmpPosId(),emp.getEmpStatus(),emp.getEmpTel());
+			new QueryRunner().update(conn,"update employee set empName=?,empAccount=?,empSex=?,empAge=?,empDepId=?,empPosId=?,empStatus=?,empTel=? where empId=?",emp.getEmpName(),emp.getEmpAccount(),emp.getEmpSex(),emp.getEmpAge(),emp.getEmpDepId(),emp.getEmpPosId(),emp.getEmpStatus(),emp.getEmpTel(),emp.getEmpId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -131,5 +132,6 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			return null;
 		}
 	}
+
 
 }
