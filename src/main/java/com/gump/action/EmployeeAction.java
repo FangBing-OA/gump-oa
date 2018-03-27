@@ -100,7 +100,7 @@ public class EmployeeAction extends ActionSupport{
 	 * @return
 	 */
 	public String doUpdate(){
-		System.out.println("从前端传过来的id"+empId);
+		System.out.println("从前端传过来的id---"+empId);
 		//setEmp(iEmployeeService.getEmpById(empId));
 		Employee emp=iEmployeeService.getEmpById(empId);
 		System.out.println(emp.getEmpAge());
@@ -108,6 +108,16 @@ public class EmployeeAction extends ActionSupport{
 		return "toupdate";
 	}
 	
+	public String doGx(){
+		System.out.println("从前端传过来的id---"+emp.getEmpId());
+		System.out.println("从前端传过来的年龄---"+emp.getEmpAge());
+		System.out.println("从前端传过来的性别---"+emp.getEmpSex());
+		//setEmp(iEmployeeService.getEmpById(empId));
+		 iEmployeeService.doUpdate(emp);
+		System.out.println("程序以更新");
+		//ActionContext.getContext().put("emp",emp);
+		return "togx";
+	}
 	/**
 	 * 跳转到新增员工的页面
 	 * @return

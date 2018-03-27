@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
 	<title>用户信息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script language="javascript" src="../script/jquery.js"></script>
-    <script language="javascript" src="../script/pageCommon.js" charset="utf-8"></script>
-    <script language="javascript" src="../script/PageUtils.js" charset="utf-8"></script>
-    <script language="javascript" src="../script/DemoData.js" charset="utf-8"></script>
-	<script language="javascript" src="../script/DataShowManager.js" charset="utf-8"></script>
-    <link type="text/css" rel="stylesheet" href="../style/blue/pageCommon.css" />
+    <script language="javascript" src="/gump-oa/html/script/jquery.js"></script>
+    <script language="javascript" src="/gump-oa/html/script/pageCommon.js" charset="utf-8"></script>
+    <script language="javascript" src="/gump-oa/html/script/PageUtils.js" charset="utf-8"></script>
+    <script language="javascript" src="/gump-oa/html/script/DemoData.js" charset="utf-8"></script>
+	<script language="javascript" src="/gump-oa/html/script/DataShowManager.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="/gump-oa/html/style/blue/pageCommon.css" />
     <script type="text/javascript">
     </script>
 </head>
@@ -29,50 +30,53 @@
 
 <!--显示表单内容-->
 <div id=MainArea>
-    <form action="list.html">
+      <form action="ea!doGx" method="post">
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
         	<img border="0" width="4" height="7" src="../style/blue/images/item_point.gif" /> 用户信息 </div> 
         </div>
-        
+     
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr><td width="100">所属部门</td>
-                        <td><select name="departmentId" class="SelectStyle">
+                        <td><select name="emp.empDepId" class="SelectStyle">
                                 <option value="0" selected="selected">请选择部门</option>
-                                <option value="7">┠总经理室</option>
-                                <option value="1">┠市场部</option>
-                                <option value="2">　┠咨询部</option>
-                                <option value="3">　┠招生部</option>
-                                <option value="4">┠教学部</option>
-                                <option value="5">┠后勤部</option>
+                                <option value="1">人设部</option>
+                                <option value="2">教育部</option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                                <option value="6"></option>
                             </select> 
                         </td>
                     </tr>
-                    <tr><td>登录名</td>
-                        <td><input type="text" name="loginName" class="InputStyle"/> *
-							（登录名要唯一）
+                    <tr><td>登录账号</td>
+                       
+                        <td><input type="text" name="emp.empAccount" class="InputStyle" value="<s:property value="#emp.empAccount"/>"/> *
+							（登录账号要唯一）
+							<input type="hidden" name="emp.empId"  value="<s:property value="#emp.empId"/>">
 						</td>
                     </tr>
                     <tr><td>姓名</td>
-                        <td><input type="text" name="name" class="InputStyle"/> *</td>
+                        <td><input type="text" name="emp.empName" class="InputStyle" value="<s:property value="#emp.empName"/>"/> *</td>
                     </tr>
 					<tr><td>性别</td>
-                        <td><input type="RADIO" name="sex" value="男" id="male"/><label for="male">男</label>
-							<input type="RADIO" name="sex" value="女" id="female"/><label for="female">女</label>
+                        <td><input type="RADIO" name="emp.empSex" value="男" id="male"/><label for="male">男</label>
+							<input type="RADIO" name="emp.empSex" value="女" id="female"/><label for="female">女</label>
 						</td>
                     </tr>
 					<tr><td>联系电话</td>
-                        <td><input type="text" name="phoneNumber" class="InputStyle"/></td>
+                        <td><input type="text" name="emp.empTel" class="InputStyle" value="<s:property value="#emp.empTel"/>"/></td>
                     </tr>
-                    <tr><td>E-mail</td>
-                        <td><input type="text" name="email" class="InputStyle"/></td>
+                    <tr><td>年龄</td>
+                        <td><input type="text" name="emp.empAge" class="InputStyle" value="<s:property value="#emp.empAge"/>"/></td>
                     </tr>
                     <tr><td>备注</td>
                         <td><textarea name="description" class="TextareaStyle"></textarea></td>
                     </tr>
                 </table>
+               
             </div>
         </div>
         
@@ -83,27 +87,13 @@
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
-                <table cellpadding="0" cellspacing="0" class="mainForm">
-                    <tr>
-						<td width="100">岗位</td>
-                        <td><select name="roleIdList" multiple="true" size="10" class="SelectStyle">
-                                <option value="1">程序员</option>
-                                <option value="2">行政秘书</option>
-                                <option value="3">出纳</option>
-                                <option value="4">总经理</option>
-                                <option value="5">测试员</option>
-                            </select>
-                            按住Ctrl键可以多选或取消选择
-                        </td>
-                    </tr>
-                </table>
+ 
             </div>
         </div>		
 		
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <input type="image" src="../style/images/save.png"/>
-            <a href="javascript:history.go(-1);"><img src="../style/images/goBack.png"/></a>
+            <input type="submit" value="提交"> 
         </div>
     </form>
 </div>
