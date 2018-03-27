@@ -21,11 +21,15 @@
 <link type="text/css" rel="stylesheet"
 	href="/gump-oa/html/style/blue/pageCommon.css" />
 <script type="text/javascript">
-	
+	function select(){
+	    var id=document.getElementById("selectId");
+	    if(id.value==123){
+	    	alert("请选择部门");
+	    	return false;
+	    }
 </script>
 </head>
 <body>
-
 	<div id="Title_bar_Head">
 		<div id="Title_Head"></div>
 		<div id="Title">
@@ -35,11 +39,16 @@
 		</div>
 		<div id="Title_End"></div>
 	</div>
-
 	<div id="QueryArea">
 		<div style="height: 30px; float: left">
-			<form action="DepartmentAction!selectByName" method="post">
-				<s:textfield name="department.depName" theme="simple">按部门名称查询：</s:textfield>
+			<form action="DepartmentAction!selectById" method="post" onsubmit="return select();">
+			
+			<%-- <s:textfield name="department.depName">按部门名称查询：</s:textfield> --%>
+			
+				<s:select list="#request.li" name="department.depId" id="selectId" 
+				theme="simple" listKey="depId" listValue="depName"
+				 headerKey="123" headerValue="--请选择查询部门--" >按部门名称查询：</s:select>
+				
 				<s:submit type="image"
 					src="/gump-oa/html/style/blue/images/button/query.PNG"
 					theme="simple"></s:submit>

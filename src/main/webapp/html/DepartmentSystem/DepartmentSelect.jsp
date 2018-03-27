@@ -17,6 +17,13 @@
 	<script language="javascript" src="/gump-oa/html/script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="/gump-oa/html/style/blue/pageCommon.css" />
     <script type="text/javascript">
+    function select(){
+	    var id=document.getElementById("selectId");
+	    if(id.value==123){
+	    	alert("请选择部门");
+	    	return false;
+	    }
+	}
     </script>
 </head>
 <body>
@@ -28,11 +35,12 @@
         </div>
         <div id="Title_End"></div>
     </div>
-    
     <div id="QueryArea">
 	<div style="height: 30px; float:left" >
-		<form action="DepartmentAction!selectByName" method="post">
-			<s:textfield name="department.depName" theme="simple">按部门名称查询：</s:textfield>
+		<form action="DepartmentAction!selectById" method="post" onsubmit="return select();">
+			<s:select list="#session.lii" name="department.depId" id="selectId" 
+				theme="simple" listKey="depId" listValue="depName"
+				 headerKey="123" headerValue="--请选择查询部门--" >按部门名称查询：</s:select>
 			<s:submit type="image" src="/gump-oa/html/style/blue/images/button/query.PNG" theme="simple"></s:submit>
 		</form>
 	</div>
@@ -41,7 +49,7 @@
 		<%-- <form action="DepartmentAction!selectById" method="post">
 			<s:textfield name="department.depId" theme="simple">按id查询：</s:textfield>
 			<s:submit type="image" src="/gump-oa/html/style/blue/images/button/query.PNG" theme="simple"></s:submit>
-<!-- 			<input type="IMAGE" src="../style/blue/images/button/query.PNG"/> -->
+      <!-- 	<input type="IMAGE" src="../style/blue/images/button/query.PNG"/> -->
 		</form> --%>
 	</div>
 </div>
@@ -77,7 +85,10 @@
     </s:form>
     <!-- 其他功能超链接 -->
      <div id="TableTail">
-    </div>
+			<div id="TableTail_inside">
+				<a href="http://localhost:8080/gump-oa/DepartmentAction!depList">返回首页</a>
+			</div>
+		</div>
 </div>
 <!--分页信息-->
 <%-- <div id=PageSelectorBar>
