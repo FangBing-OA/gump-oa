@@ -71,7 +71,7 @@ public class LoginOrExitAction extends ActionSupport {
 			 List<Position> selectPosById = ips.getPositionById(empByAccount.getEmpPosId());
 			 Position position = selectPosById.get(0);
 			// 职位id 为1是普通员工staff，为2是管理员html
-			if (position.getPosId() == 1) {
+			if (position.getPosId() == 4) {
 				return "ToStaffIndex";
 			} else if (position.getPosId()==2 ) {
 				return "ToHtmlIndex";
