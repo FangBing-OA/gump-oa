@@ -47,9 +47,7 @@ public class Message {
 		return mesTime;
 	}
 	public void setMesTime(String mesTime) {
-		Date date = new Date();
-		String timeString = TimeCycleUtils.dateToDetailString(date);
-		this.mesTime = timeString;
+		this.mesTime = mesTime;
 	}
 	public boolean isMesRead() {
 		return mesRead;
@@ -58,6 +56,10 @@ public class Message {
 		this.mesRead = mesRead;
 	}
 	
+	public void setTime(){
+		Date date = new Date();
+		String timeString = TimeCycleUtils.dateToDetailString(date);
+		this.mesTime = timeString;
+	}
 	
-
 }

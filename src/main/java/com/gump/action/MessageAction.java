@@ -1,5 +1,6 @@
 package com.gump.action;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,44 @@ import com.gump.service_impl.MessageServiceImpl;
 import com.gump.utils.TimeCycleUtils;
 import com.gump.vo.Message;
 import com.gump.vo.Page;
+import com.opensymphony.xwork2.ModelDriven;
 
-public class MessageAction implements SessionAware {
-	private Page page;//页面信息
+public class MessageAction implements SessionAware,ModelDriven<Message>{
+	private Page page;//页面信息---------------------//使用时要new
 	private Message message;//消息
+	private int messageCurrent;//当前页数，用于从前台传值
+	private int messageId;//消息Id，用于从前台传值
 	private List<Integer> idList;//消息Id集合
-	private IMessageService ims;
+	private static String keyword;//关键字，用于Sa查询
+	private IMessageService ims = new MessageServiceImpl();//實例化IMessageService
 	private Map<String, Object> mySession;
 	
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public int getMessageId() {
+		return messageId;
+	}
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
+	}
+	public int getMessageCurrent() {
+		return messageCurrent;
+	}
+	public void setMessageCurrent(int messageCurrent) {
+		this.messageCurrent = messageCurrent;
+	}
+	public Map<String, Object> getMySession() {
+		return mySession;
+	}
+	public void setMySession(Map<String, Object> mySession) {
+		this.mySession = mySession;
+	}
+
 	public IMessageService getIms() {
 		return ims;
 	}
@@ -62,8 +93,14 @@ public class MessageAction implements SessionAware {
 	 * 执行发送,转到发件箱
 	 * @return
 	 */
-	public String doSave(){//提示信息
+	public String doSave(){
 		ims = new MessageServiceImpl();
+		//得到帐号
+		/************>>>>>>>>>>>>>>>未确定******************/
+		String account = (String)mySession.get("account");
+		message.setMesSender("2014302057");
+		message.setTime();
+		message.setMesRead(false);
 		boolean flag = ims.saveMessage(message);
 		return "dosave";
 	}
@@ -86,8 +123,17 @@ public class MessageAction implements SessionAware {
 	 * @return
 	 */
 	public String toShow(){
-		ims = new MessageServiceImpl();
-		ims.getMessageById(message.getMesId());
+		ims.updateMessageRead(messageId);
+		message = ims.getMessageById(messageId);
+		return "toshow";
+	}
+	
+	/**
+	 * 转到查看信息页面(自己查看)
+	 * @return
+	 */
+	public String toShowMyself(){
+		message = ims.getMessageById(messageId);
 		return "toshow";
 	}
 	
@@ -117,14 +163,14 @@ public class MessageAction implements SessionAware {
 		/************>>>>>>>>>>>>>>>未确定******************/
 		String account = (String)mySession.get("account");
 		//获得总记录数
-		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account);
+		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, "2014302057");
 		page.setCount((int)count);
 		//从session中获得当前页
 		Page pageSession = (Page)mySession.get("messageInBox");
 		page.setCurrentPage(pageSession.getCurrentPage());
 		
 		//获得返回消息集合
-		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account, page);
+		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, "2014302057", page);
 		page.setData(list);
 		
 		//将数据存入session
@@ -137,7 +183,6 @@ public class MessageAction implements SessionAware {
 	 * @return
 	 */
 	public String toRedirectInBox(){
-		System.out.println("进入收件箱");
 		ims = new MessageServiceImpl();
 		//得到当前时间
 		Date date = new Date();
@@ -148,12 +193,13 @@ public class MessageAction implements SessionAware {
 		/************>>>>>>>>>>>>>>>未确定******************/
 		String account = (String)mySession.get("account");
 		//获得总记录数
-		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account);
-		page.setCount((int)count);
+		int count = (int)(ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, "2014302057"));
+		page = new Page();
+		page.setCount(count);
 		page.setCurrentPage(1);
 		
 		//获得返回消息集合
-		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account, page);
+		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, "2014302057", page);
 		page.setData(list);
 		
 		//将数据存入session
@@ -166,7 +212,6 @@ public class MessageAction implements SessionAware {
 	 * @return
 	 */
 	public String toInBoxAllPage(){
-		ims = new MessageServiceImpl();
 		//得到当前时间
 		Date date = new Date();
 		String timeEnd = TimeCycleUtils.dateToDetailString(date);
@@ -176,12 +221,13 @@ public class MessageAction implements SessionAware {
 		/************>>>>>>>>>>>>>>>未确定******************/
 		String account = (String)mySession.get("account");
 		//获得总记录数
-		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account);
+		page = new Page();
+		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00",timeEnd,"2014302057");
 		page.setCount((int)count);
-		page.setCurrentPage(page.getCurrentPage());
+		page.setCurrentPage(messageCurrent);
 		
 		//获得返回消息集合
-		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account, page);
+		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, "2014302057", page);
 		page.setData(list);
 		
 		//将数据存入session
@@ -201,12 +247,12 @@ public class MessageAction implements SessionAware {
 		/************>>>>>>>>>>>>>>>未确定******************/
 		String account = (String)mySession.get("account");
 		//得到总总记录数
-		long count = ims.countMessageNotRead(account);
+		long count = ims.countMessageNotRead("2014302057");
 		page.setCount((int)count);
 		page.setCurrentPage(page.getCurrentPage());
 		
 		//获得返回消息集合
-		List<Message> list = ims.listMessageNotRead(account, page);
+		List<Message> list = ims.listMessageNotRead("2014302057", page);
 		page.setData(list);
 		
 		//将数据存入session
@@ -244,14 +290,15 @@ public class MessageAction implements SessionAware {
 		/************>>>>>>>>>>>>>>>未确定******************/
 		String account = (String)mySession.get("account");
 		//获得总记录数
-		long count = ims.countSendMessage(account);
+		long count = ims.countSendMessage("2014302057");
 		page.setCount((int)count);
 		//从session中获得当前页
 		Page pageSession = (Page)mySession.get("messageInBox");
 		page.setCurrentPage(pageSession.getCurrentPage());	
 		
 		//获得返回消息集合
-		List<Message> list = ims.listSendMseeage(account, page);
+		List<Message> list = ims.listSendMseeage("2014302057", page);
+		System.out.println("-------------"+list.size());
 		page.setData(list);
 		
 		//将数据存入session
@@ -271,12 +318,13 @@ public class MessageAction implements SessionAware {
 		/************>>>>>>>>>>>>>>>未确定******************/
 		String account = (String)mySession.get("account");
 		//获得总记录数
-		long count = ims.countSendMessage(account);
+		long count = ims.countSendMessage("2014302057");
+		page = new Page();
 		page.setCount((int)count);
 		page.setCurrentPage(1);
 		
 		//获得返回消息集合
-		List<Message> list = ims.listSendMseeage(account, page);
+		List<Message> list = ims.listSendMseeage("2014302057", page);
 		page.setData(list);
 		
 		//将数据存入session
@@ -296,14 +344,14 @@ public class MessageAction implements SessionAware {
 		/************>>>>>>>>>>>>>>>未确定******************/
 		String account = (String)mySession.get("account");
 		//获得总记录数
-		long count = ims.countSendMessage(account);
+		long count = ims.countSendMessage("2014302057");
+		page = new Page();
 		page.setCount((int)count);
 		//从session中获得当前页
-		Page page = (Page)mySession.get("messageInBox");
-		page.setCurrentPage(page.getCurrentPage());	
+		page.setCurrentPage(messageCurrent);	
 		
 		//获得返回消息集合
-		List<Message> list = ims.listSendMseeage(account, page);
+		List<Message> list = ims.listSendMseeage("2014302057", page);
 		page.setData(list);
 		
 		//将数据存入session
@@ -313,5 +361,54 @@ public class MessageAction implements SessionAware {
 	/*******************************************************************************************/
 
 
-	/*******************************************************************************************/
+	/********************************************html中message***********************************************/
+	
+	/**
+	 * 获得拥有关键字所有消息的指定页数的信息，刷新页面(上一页、下一页、首页、尾页)
+	 * @return
+	 */
+	public String toInBoxAllPageInSa(){
+		//获得总记录数
+		page = new Page();
+		if(null == keyword){
+			keyword="";
+		}
+		long count = ims.countMessageByKeyword(keyword);
+		page.setCount((int)count);
+		page.setCurrentPage(messageCurrent);
+		
+		//获得返回消息集合
+		List<Message> list = ims.listMessageByKeyword(keyword, page);
+		page.setData(list);
+		
+		//将数据存入session
+		mySession.put("messageInBox", page);
+		
+		return "toallSa";
+	}
+
+	/**
+	 * 转到查看信息页面(自己查看)
+	 * @return
+	 */
+	public String toShowMyselfInSa(){
+		message = ims.getMessageById(messageId);
+		return "toshowSa";
+	}
+	
+	/**
+	 * 删除消息
+	 * @return
+	 */
+	public String doRemoveMessage(){
+		idList = new ArrayList<Integer>();
+		idList.add(messageId);
+		ims.removeMessage(idList);
+		return "toallreturn";
+	}
+	public Message getModel() {
+		return getMessage();
+	}
+	
+	/********************************************************************************************************/
 }
