@@ -1,5 +1,6 @@
 package com.gump.service_impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.gump.dao.IEmployeeDao;
@@ -51,4 +52,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		iEmployeeDao.doDelete(empId);
 	}
 
+	public List<Employee> findByCom(String empName, int empDepId) throws SQLException {		
+		return iEmployeeDao.findByCom(empName, empDepId);
+	}
+
+	/**
+	 * 通过账号查询用户并返回一个用户对象
+	 */
+	
+	public Employee getEmpByAccount(String account) {
+		// TODO Auto-generated method stub
+		iEmployeeDao.getEmpByAccount(account);
+		return null;
+	}
 }

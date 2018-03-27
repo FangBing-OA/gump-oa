@@ -1,5 +1,6 @@
 package com.gump.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.gump.vo.Employee;
@@ -40,5 +41,12 @@ public interface IEmployeeService {
 	 * @param empId
 	 */
 	void doDelete(int empId);
-
+	
+	List<Employee> findByCom(String empName,int empDepId) throws SQLException;
+	
+	/**
+	 * 通过账号获得员工
+	 * @return
+	 */
+	Employee getEmpByAccount(String account);
 }

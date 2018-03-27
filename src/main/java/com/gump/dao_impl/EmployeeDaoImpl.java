@@ -29,7 +29,10 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		try {
 			//获得连接对象
 			Connection conn = ds.getConnection();
+			//进入查询
+			System.out.println("进入查询");
 			List<Employee> emps = new QueryRunner().query(conn,"select * from employee",new BeanListHandler<Employee>(Employee.class));
+			System.out.println("abcd"+emps);
 			return emps;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +75,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		try {
 			//获得连接对象
 			Connection conn = ds.getConnection();
-			new QueryRunner().update(conn,"insert into employee (empName,empAccount,empSex,empAge,empDepId,empPosId,empStatus,empTel)values(?,?,?,?,?,?,?,?)",emp.getEmpName(),emp.getEmpAccount(),emp.getEmpSex(),emp.getEmpAge(),emp.getEmpDepId(),emp.getEmpPosId(),emp.getEmpStatus(),emp.getEmpTel());
+			new QueryRunner().update(conn,"insert into employee (empName,empAccount,empSex,empAge,empDepId,empPosId,empStatus,empTel)values(?,?,?,?,?,?,?,?)",emp.getEmpName(),emp.getEmpAccount(),emp.getEmpSex(),emp.getEmpAge(),emp.getEmpDepId(),emp.getEmpPosId(),"在职",emp.getEmpTel());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -88,6 +91,44 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			new QueryRunner().update(conn,"delete from employee where empId=?",empId);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public List<Employee> findByCom(String empName, int empDepId) throws SQLException {
+	     
+		//获得连接对象
+		Connection conn = ds.getConnection();
+		//进入查询
+		System.out.println("进入联合查询");
+		List<Employee> emps;
+		try {
+			emps = new QueryRunner().query(conn,"select * from employee where empName=? and empDepId =?",new BeanListHandler<Employee>(Employee.class),empName,empDepId);
+			System.out.println(emps);
+			return emps;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//System.out.println("abcd"+emps);
+		return null;
+	}
+	
+	/**
+	 * 通过账号获得员工
+	 * 
+	 * @return
+	 */
+	public Employee getEmpByAccount(String account) {
+		try {
+			// 获得连接对象
+			System.out.println("来到了dao实现。"+account);
+			Connection conn = ds.getConnection();
+			Employee emp = new QueryRunner().query(conn, "select * from employee where empAccount=?",
+					new BeanHandler<Employee>(Employee.class), account);
+			System.out.println("来到了dao实现并且查询结果为。"+emp.getEmpPosId());
+			return emp;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

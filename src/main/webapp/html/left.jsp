@@ -14,7 +14,7 @@
 <div id="Menu">
     <ul id="MenuUl">
         <li class="level1">
-      <div onClick="menuClick(this)" class="level1Style"><img src="style/images/MenuIcon/FUNC20001.gif" class="Icon" /> <a target="right" href="http://localhost:8080/gump-oa/ea!getAllEmp">员工管理</a></div>
+      <div onClick="menuClick(this)" class="level1Style"><img src="style/images/MenuIcon/FUNC20001.gif" class="Icon" />  <a target="right" href="/gump-oa/ea!getAllEmp">员工管理</a></div>
         </li>
         
         <li class="level1">
