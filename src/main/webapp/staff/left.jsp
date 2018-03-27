@@ -25,7 +25,7 @@
             <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /> 信息管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
-                    <div onclick="check()" class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" /> 短消息</div>
+                    <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" /> 短消息</div>
                     <ul style="display: inline;" id="message" >
                         <li class="level3Head"><a target="right" href="ma!toSave.action">发送短消息</a></li>
                         <li class="level33"><a target="right" href="ma!toRedirectInBox.action">已接收</a></li>

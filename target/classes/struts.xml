@@ -20,11 +20,12 @@
         <!-- 员工模块 -->
 		<action name="ea!*" class="com.gump.action.EmployeeAction" method="{1}">
 			<result name="tolist" >html/StaffSystem/StaffList.jsp</result>
-			<result name="toupdate">html/StaffSystem/StaffAdd.jsp</result>
+			<result name="togx" type="redirectAction">ea!getAllEmp</result>
+			<result name="toupdate">html/StaffSystem/StaffUpdate.jsp</result>
 			<result name="toadd" type="redirectAction">ea!getAllEmp</result>
 			<result name="tofindbycom">html/StaffSystem/StaffList.jsp</result>
 		    <result name="dodelete">html/StaffSystem/StaffList.jsp</result>
-			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom</allowed-methods>
+			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom,doGx</allowed-methods>
 		</action>
 		
 		<action name="editUserInfoUI_*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
@@ -53,17 +54,23 @@
 		</action>
 		<!-- 信息模块 -->
 		<action name="ma!*" class="com.gump.action.MessageAction" method="{1}">
-			<result name="tosave">/staff/MessageSystem/MessageSend.jsp</result>
-			<result name="dosave" type="redirect">/staff/MessageSystem/MessageSend.jsp</result>
+			<!-- 普通用户 -->
+			<result name="tosave">/staff/MessageSystem/MessagSend.jsp</result>
+			<result name="dosave" type="redirectAction">ma!toRedirectInBox</result>
 			<result name="toshow">/staff/MessageSystem/MessageShow.jsp</result>
 			<result name="toinbox">/staff/MessageSystem/MessageInBox.jsp</result>
-			<result name="toreinbox" type="redirect">/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="toreinbox" >/staff/MessageSystem/MessageInBox.jsp</result>
 			<result name="toall">/staff/MessageSystem/MessageInBox.jsp</result>
 			<result name="tonot">/staff/MessageSystem/MessageInBox.jsp</result>
 			<result name="toreply">/staff/MessageSystem/MessageInBox.jsp</result>
-			<result name="toout">/staff/MessageSystem/MessageInBox.jsp</result>
-			<result name="toreout" type="redirect">/staff/MessageSystem/MessageInBox.jsp</result>
-			<allowed-methods>toSave,doSave,doRemove,toShow,doReturn,toInBox,toRedirectInBox,toInBoxAllPage,toInBoxAllPage,toInBoxNotReadPage,toReplyPage,toOutbox,toRedirectOutbox,toOutBoxPage</allowed-methods>
+			<result name="toout">/staff/MessageSystem/MessageOutBox.jsp</result>
+			<result name="toreout">/staff/MessageSystem/MessageOutBox.jsp</result>
+			<result name="tosend">/staff/MessageSystem/MessageOutBox.jsp</result>
+			<!--管理员  -->
+			<result name="toallSa">/html/MessageSystem/MessageInBox.jsp</result>
+			<result name="toshowSa">/html/MessageSystem/MessageShow.jsp</result>
+			<result name="toallreturn" type="redirectAction">ma!toInBoxAllPageInSa?messageCurrent=%{messageCurrent}</result>
+			<allowed-methods>doRemoveMessage,toShowMyselfInSa,toInBoxAllPageInSa,toSave,toShowMyself,doSave,doRemove,toShow,doReturn,toInBox,toRedirectInBox,toInBoxAllPage,toInBoxAllPage,toInBoxNotReadPage,toReplyPage,toOutbox,toRedirectOutbox,toOutBoxPage</allowed-methods>
 		</action>
 		<!-- 公文模块 -->
 		<action name="da!*" class="com.gump.action.DocumentAction"
@@ -93,5 +100,14 @@
 			<allowed-methods>depList,addDep,updateDep,getName,selectByName,selectById,deleteDep</allowed-methods>
 		</action>
 	</package>
+	
+	<!-- ajax_消息 -->
+	<package name="mesvalidate" extends="struts-default" namespace="/mesvalidate">  
+            <action name="pluginAjax" class="com.gump.action.MessageVaildateAction" method="pluginAjax">  
+                <result type="json">  
+                    <param name="excludeNullProperties">true</param>  
+                </result>  
+            </action>  
+	</package>  
 </struts>
 

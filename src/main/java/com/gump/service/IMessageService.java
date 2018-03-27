@@ -84,4 +84,33 @@ public interface IMessageService {
 	 */
 	public long countSendMessage(String account);
 	
+	/************************************************************************/
+	
+	/**
+	 * 查看所有消息的总数
+	 * @return
+	 */
+	public long countAllMessage();
+	
+	/**
+	 * 通过关键字查看消息
+	 * @param keyword
+	 * @return
+	 */
+	public List<Message> listMessageByKeyword(String keyword,Page page);
+	
+	/**
+	 * 查看关键字所在消息总数
+	 * @return
+	 */
+	public long countMessageByKeyword(String keyword);
+	
+	/**
+	 * 查看所有消息
+	 * @param page
+	 * @return
+	 */
+	public List<Message> listAllMseeage(Page page);
+		
+	
 }

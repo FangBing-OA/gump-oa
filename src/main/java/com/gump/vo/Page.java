@@ -10,7 +10,7 @@ public class Page {
     private List<?> data; // 当前页数据
 
     public Page() {
-        this.pageSize = 10;
+        this.pageSize = 3;
     }
 
     public int getPageSize() {

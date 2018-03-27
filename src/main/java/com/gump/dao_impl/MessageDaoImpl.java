@@ -39,8 +39,6 @@ public class MessageDaoImpl implements IMessageDao {
 
 	public boolean removeMessage(List<Integer> mesIdList) {
 		// TODO Auto-generated method stub
-		System.out.println("--------------------------------");
-		System.out.println("size-----" + mesIdList.size());
 		DataSource ds = PoolFactory.getDS();
 		//判断mesIdList是否为空，不为空则操作数据库
 		if(null != mesIdList){
@@ -83,7 +81,6 @@ public class MessageDaoImpl implements IMessageDao {
 		}
 		//拼接分页及降序排列
 		sql += " order by mesTime DESC" + " limit " + pageLimit + "," + pageSize;
-		System.out.println(sql);
 		try {
 			list = new QueryRunner(ds).query(sql,new BeanListHandler<Message>(Message.class));
 		} catch (SQLException e) {
@@ -110,7 +107,7 @@ public class MessageDaoImpl implements IMessageDao {
 		obj[3] = pageLimit;
 		obj[4] = pageSize;
 		try {
-			list = new QueryRunner(ds).query(sql, obj, new BeanListHandler<Message>(Message.class));
+			list = new QueryRunner(ds).query(sql, new BeanListHandler<Message>(Message.class), obj);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -142,7 +139,6 @@ public class MessageDaoImpl implements IMessageDao {
 		DataSource ds = PoolFactory.getDS();
 		//查询某帐号在某时间段中的消息总数
 		String sql = "select count(*) from message where mesReceiver = ? and mesTime >= ? and mesTime <= ?";
-		System.out.println(sql);
 		long i = 0;
 		Object [] obj = new Object[3];
 		obj[0] = account;
@@ -174,7 +170,7 @@ public class MessageDaoImpl implements IMessageDao {
 		obj[1] = pageLimit;
 		obj[2] = pageSize;
 		try {
-			list = new QueryRunner(ds).query(sql,obj,new BeanListHandler<Message>(Message.class));
+			list = new QueryRunner(ds).query(sql,new BeanListHandler<Message>(Message.class),obj);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -233,4 +229,94 @@ public class MessageDaoImpl implements IMessageDao {
 				}
 				return message;
 	}
+	
+	/***************************************SA DAO***************************************************/
+	
+	
+	public long countAllMessage() {
+		// TODO Auto-generated method stub
+		DataSource ds = PoolFactory.getDS();
+		
+		long i = 0;
+		//查询已发送消息条数
+		String sql = "select count(*) from message";
+		
+		try {
+			i = new QueryRunner(ds).query(sql,new ScalarHandler<Long>(1));
+			if(i > 0){
+				return i;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public long countMessageByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		DataSource ds = PoolFactory.getDS();
+		long i = 0;
+		//查询已发送消息条数
+		String sql = "select count(*) from message where mesTitle like '%"+keyword+"%' "
+				+ "or mesSender like '%"+keyword+"%' "
+				+ "or mesReceiver like '%"+keyword+"%' or "
+				+ "mesContent like '%"+keyword+"%' order by mesTime DESC";
+		
+		try {
+			i = new QueryRunner(ds).query(sql,new ScalarHandler<Long>(1));
+			if(i > 0){
+				return i;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
+	
+	public List<Message> listAllMseeage(Page page) {
+		// TODO Auto-generated method stub
+		int pageSize = page.getPageSize();//每页显示多少条  
+		int pageLimit = (page.getCurrentPage()-1)*pageSize;//从第pageLimit条数据拿值
+		List<Message> list = null;
+		
+		DataSource ds = PoolFactory.getDS();
+		
+		//sql:select * from message where mesReceiver = ? limit ?,?		查询已发送消息
+		String sql = "select * from message order by mesTime DESC limit ?,?";
+		Object obj[] = new Object[2];
+		obj[0] = pageLimit;
+		obj[1] = pageSize;
+		try {
+			list = new QueryRunner(ds).query(sql,new BeanListHandler<Message>(Message.class),obj);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<Message> listMessageByKeyword(String keyword,Page page){
+		List<Message> list = null;
+		DataSource ds = PoolFactory.getDS();
+		int pageSize = page.getPageSize();//每页显示多少条  
+		int pageLimit = (page.getCurrentPage()-1)*pageSize;//从第pageLimit条数据拿值
+		
+		//sql:select * from message where mesReceiver = ? limit ?,?		查询已发送消息
+		String sql = "select * from message where mesTitle like '%"+keyword+"%' "
+				+ "or mesSender like '%"+keyword+"%' "
+				+ "or mesReceiver like '%"+keyword+"%' or "
+				+ "mesContent like '%"+keyword+"%' order by mesTime DESC limit ?,?";
+		try {
+			list = new QueryRunner(ds).query(sql,new BeanListHandler<Message>(Message.class),pageLimit,pageSize);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

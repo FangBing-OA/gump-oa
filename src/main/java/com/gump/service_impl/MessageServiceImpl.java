@@ -3,12 +3,13 @@ package com.gump.service_impl;
 import java.util.List;
 
 import com.gump.dao.IMessageDao;
+import com.gump.dao_impl.MessageDaoImpl;
 import com.gump.service.IMessageService;
 import com.gump.vo.Message;
 import com.gump.vo.Page;
 
 public class MessageServiceImpl implements IMessageService {
-	private IMessageDao md;
+	private IMessageDao md = new MessageDaoImpl();
 
 	public boolean saveMessage(Message message) {
 		// TODO Auto-generated method stub
@@ -59,5 +60,33 @@ public class MessageServiceImpl implements IMessageService {
 		// TODO Auto-generated method stub
 		return md.getMessageById(mesId);
 	}
+
+	
+	
+	
+	public long countAllMessage() {
+		// TODO Auto-generated method stub
+		return md.countAllMessage();
+	}
+
+	public List<Message> listMessageByKeyword(String keyword, Page page) {
+		// TODO Auto-generated method stub
+		return md.listMessageByKeyword(keyword, page);
+	}
+
+	public long countMessageByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return md.countMessageByKeyword(keyword);
+	}
+
+	public List<Message> listAllMseeage(Page page) {
+		// TODO Auto-generated method stub
+		return md.listAllMseeage(page);
+	}
+
+	
+	
+	
+	
 
 }

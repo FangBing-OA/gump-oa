@@ -1,31 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@taglib uri="/struts-tags" prefix="s"%><%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <title>已收短消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script language="javascript" src="../script/jquery.js"></script>
-    <script language="javascript" src="../script/pageCommon.js" charset="utf-8"></script>
-    <script language="javascript" src="../script/PageUtils.js" charset="utf-8"></script>
-    <script language="javascript" src="../script/DemoData.js" charset="utf-8"></script>
-	<script language="javascript" src="../script/DataShowManager.js" charset="utf-8"></script>
-    <link type="text/css" rel="stylesheet" href="../style/blue/pageCommon.css" />
+    <script language="javascript" src="/gump-oa/staff/script/jquery.js"></script>
+    <script language="javascript" src="/gump-oa/staff/script/pageCommon.js" charset="utf-8"></script>
+    <script language="javascript" src="/gump-oa/staff/script/PageUtils.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="/gump-oa/staff/style/blue/pageCommon.css" />
     <script type="text/javascript">
     </script>
+    <style type="text/css">
+    td{
+		text-align:center
+    }
+    </style>
 </head>
 <body>
+	<s:actionmessage />
 
-<div id="Title_bar">
+	<div id="Title_bar">
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="../style/images/title_arrow.gif"/> 收件箱
+            <img border="0" width="13" height="13" src="/gump-oa/staff/style/images/title_arrow.gif"/> 收件箱
         </div>
         <div id="Title_End"></div>
     </div>
 </div>
 
+<s:form action="ma!toInBoxAllPageInSa" theme="simple">
+<div>
+	<s:textfield name="keyword"></s:textfield>
+	<s:submit value="查询" cssStyle="background-color:#F3F9FD;"></s:submit>
+</div>
+</s:form>
+<!-- 判断查询结果是否为空 -->
+<s:if test="page.data.size>0">
+	
+<s:form action="" theme="simple">
 <div id="MainArea">
     <table cellspacing="0" cellpadding="0" class="TableStyle">
        
@@ -41,16 +56,26 @@
         </thead>
         
         <!--显示数据列表-->
-        <tbody id="TableData" class="dataContainer" datakey="messageList">
-            <tr class="TableDetail1 template">
-            	<td style="color:red;">${message.priority}&nbsp;</td>
-                <td><a href="show.html">${message.title}</a>&nbsp;</td>
-				<td>${message.sender}&nbsp;</td>
-				<td>${message.postTime}&nbsp;</td>
-                <td><a href="saveUI.html">回复</a>
-					<a onClick="return delConfirm()" href="#">删除</a>
-                </td>
-            </tr>
+        <tbody id="TableData" class="dataContainer">
+        	<s:iterator value="page.data" var="mes">
+	            <tr class="TableDetail1 template">
+	            	<s:if test="#mes.mesRead==false">
+	            		<td style="color:red;">未读</td>
+	            	</s:if>
+	            	<s:else>
+	            		<td>已读</td>
+	            	</s:else>
+	                <td><a href="ma!toShow?messageId=<s:property value="#mes.mesId"/>"><s:property value="#mes.mesTitle"/></a></td>
+					<td><s:property value="#mes.mesSender"/></td>
+					<td><s:property value="#mes.mesTime"/></td>
+	                <td><s:a action="ma!doRemoveMessage" >删除
+	                		<s:param name="messageId" value="#mes.mesId"></s:param>
+	                		<s:param name="messageCurrent" value="page.currentPage"></s:param>
+	                	</s:a>
+						<!-- <a onClick="return delConfirm()" href="#">删除</a> -->
+	                </td>
+	            </tr>
+            </s:iterator>
         </tbody>
     </table>
     
@@ -60,42 +85,27 @@
         </div>
     </div>
 </div>
-
+</s:form>
 <!--分页信息-->
 <div id=PageSelectorBar>
 	<div id=PageSelectorMemo>
-		页次：7/13页 &nbsp;
-		每页显示：30条 &nbsp;
-		总记录数：385条
+		页次：<s:property value="page.currentPage"/>/<s:property value="page.pageTotal"/>页 &nbsp;
+		每页显示：<s:property value="page.pageSize"/>条 &nbsp;
+		总记录数：<s:property value="page.count"/>条
 	</div>
 	<div id=PageSelectorSelectorArea>
-		<!--
-		<IMG SRC="../style/blue/images/pageSelector/firstPage2.png"/>
-		-->
-		<a href="javascript:void(0)" title="首页" style="cursor: hand;">
-			<img src="../style/blue/images/pageSelector/firstPage.png"/></a>
-		
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">3</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">4</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">5</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">6</span>
-		<span class="PageSelectorNum PageSelectorSelected">7</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">8</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">9</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">10</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">11</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPageNum(2);">12</span>
-		
-		<!--
-		<IMG SRC="../style/blue/images/pageSelector/lastPage2.png"/>
-		-->
-		<a href="#" title="尾页" style="cursor: hand;"><img src="../style/blue/images/pageSelector/lastPage.png"/></a>
-		
-		转到：
-		<input onFocus="this.select();" maxlength="2" class="inputStyle" type="text" value="1" name="currPage" tabindex="0"/>
-		<input type="submit" name="goBtn" value="Go" class="MiddleButtonStyle" />
+    	<a href="ma!toInBoxAllPageInSa?messageCurrent=<s:property value="1"/>" ><img src="/gump-oa/staff/style/blue/images/pageSelector/firstPage.png"/></a>
+    	<a href="ma!toInBoxAllPageInSa?messageCurrent=<s:property value="page.currentPage-1"/>" >上一頁</a>
+    	<a href="ma!toInBoxAllPageInSa?messageCurrent=<s:property value="page.currentPage+1"/>" >下一頁</a>
+    	<a href="ma!toInBoxAllPageInSa?messageCurrent=<s:property value="page.pageTotal"/>" ><img src="/gump-oa/staff/style/blue/images/pageSelector/lastPage.png"/></a>
 	</div>
 </div>
-
+</s:if>
+<s:else>
+	<hr>
+	<center>
+		<h1>查询结果为空</h1>
+	</center>
+</s:else>
 </body>
 </html>

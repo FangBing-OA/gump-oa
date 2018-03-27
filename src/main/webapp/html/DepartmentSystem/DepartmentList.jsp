@@ -55,7 +55,7 @@
 					theme="simple"></s:submit>
 			</form>
 		</div>
-		<div style="height: 30px; float: left">&nbsp&nbsp&nbsp</div>
+		<div style="height: 30px; float: left">&nbsp;&nbsp;&nbsp;</div>
 		<div style="height: 30px; float: left">
 			<%-- <form action="DepartmentAction!selectById" method="post">
 				<s:textfield name="department.depId" theme="simple">按id查询：</s:textfield>

@@ -21,7 +21,6 @@ public class PoolFactory {
 	}
 	
 	public static DataSource getDS(){
-		System.out.println("wwwwwwwwww");
 		return ds;
 	}
 }
