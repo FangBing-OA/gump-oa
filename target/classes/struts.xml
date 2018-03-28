@@ -19,7 +19,8 @@
 		</action>
         <!-- 员工模块 -->
 		<action name="ea!*" class="com.gump.action.EmployeeAction" method="{1}">
-			<result name="tolist" >html/StaffSystem/StaffList.jsp</result>
+			<result name="toadminlist" >html/StaffSystem/StaffList.jsp</result>
+			<result name="tostafflist" >staff/StaffSystem/StaffList.jsp</result>
 			<result name="togx" type="redirectAction">ea!getAllEmp</result>
 			<result name="toupdate">html/StaffSystem/StaffUpdate.jsp</result>
 			<result name="toadd" type="redirectAction">ea!getAllEmp</result>
@@ -28,8 +29,9 @@
 			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom,doGx</allowed-methods>
 		</action>
 		
-		<action name="editUserInfoUI_*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
+		<action name="EditEmployeeInfoAction!*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
 			<result name="editUserInfoUI">/html/Person_Config/editUserInforUI.jsp</result>
+			<allowed-methods>showEmployeeInfo,modifyEmployeeInfo</allowed-methods>
 		</action>
 	
 		<action name="editPasswordUI" class="com.gump.action.ModifyEmployeePasAction">
@@ -47,7 +49,8 @@
 		
 		<!-- 职位模块 -->
 		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
-			<result name="toPositionList">/html/PositionSystem/PositionList.jsp</result>
+			<result name="toadminlist">/html/PositionSystem/PositionList.jsp</result>
+			<result name="tostafflist">/staff/PositionSystem/PositionList.jsp</result>
 			<result name="goUpdatePage">/html/PositionSystem/PositionUpdate.jsp</result>
 			<result name="goAddPage">/html/PositionSystem/PositionAdd.jsp</result>
 			<allowed-methods>PositionBy,getPositionById,getPositionByName,listPosition,updatePosition,goUpdatePositionPage,addPosition,goAddPositionPage,removePosition</allowed-methods>
@@ -79,18 +82,19 @@
 			<allowed-methods>add,remove,modify,saveinquery</allowed-methods>
 		</action>
 		<!-- 公告模块 -->
-		<action name="na!*" class="com.gump.action.NotListAction"
-			method="{1}">
-			<result type="dispatcher" name='success'>LanDisk_Folder/list.jsp
-			</result>
-			<result name='sb'>list.jsp</result>
-			<result name='bs'>list.jsp</result>
-			<result name='fail'>list.jsp</result>
-			<allowed-methods>execute,delete,add,update</allowed-methods>
+		<action name="na!*" class="com.gump.action.NotListAction" method="{1}">
+			<result name='toadminlist'>/html/NoticeSystem/NoticeList.jsp</result>
+			<result name='tostafflist'>/staff/NoticeSystem/NoticeList.jsp</result>
+			<result name='sb'>/html/NoticeSystem/NoticeList.jsp</result>
+			<result name='bs'>/html/NoticeSystem/NoticeList.jsp</result>
+			<result name='fail'>/html/NoticeSystem/NoticeUpdate.jsp</result>
+			<result name='doUpdate'>/html/NoticeSystem/NoticeList.jsp</result>
+			<allowed-methods>execute,delete,add,update,doUpdate</allowed-methods>
 		</action>
 		<!-- 部门模块 -->
 		<action name="DepartmentAction!*" class="com.gump.action.DepartmentAction" method="{1}">
-			<result name="success">/html/DepartmentSystem/DepartmentList.jsp</result>
+			<result name="toadminlist">/html/DepartmentSystem/DepartmentList.jsp</result>
+			<result name="tostafflist">/staff/DepartmentSystem/DepartmentList.jsp</result>
 			<result name="success1" type='redirectAction'>
 				<param name="actionName">DepartmentAction!depList</param>
 				<param name="namespace">/</param>

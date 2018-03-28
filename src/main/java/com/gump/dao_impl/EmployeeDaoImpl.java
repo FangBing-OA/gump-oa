@@ -121,11 +121,9 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 	public Employee getEmpByAccount(String account) {
 		try {
 			// 获得连接对象
-			System.out.println("来到了dao实现。"+account);
 			Connection conn = ds.getConnection();
 			Employee emp = new QueryRunner().query(conn, "select * from employee where empAccount=?",
 					new BeanHandler<Employee>(Employee.class), account);
-			System.out.println("来到了dao实现并且查询结果为。"+emp.getEmpPosId());
 			return emp;
 		} catch (SQLException e) {
 			e.printStackTrace();

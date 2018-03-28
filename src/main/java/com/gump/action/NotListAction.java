@@ -2,6 +2,7 @@ package com.gump.action;
 
 import java.util.List;
 
+import com.gump.commons.JudgeRole;
 import com.gump.dao.INoticeDao;
 import com.gump.dao_impl.NoticeDaoImpl;
 import com.gump.vo.Notice;
@@ -89,7 +90,11 @@ public class NotListAction {
 	public String execute() throws Exception {
 		INoticeDao noticeDao = new NoticeDaoImpl();
 		notices = noticeDao.queryAll();
-		return "success";
+		if(JudgeRole.isAdmin()){
+			return "toadminlist";
+		}else{
+			return "tostafflist";
+		}
 	}
 
 	/**
@@ -99,7 +104,6 @@ public class NotListAction {
 	 * @throws Exception
 	 */
 	public String delete() throws Exception {
-		System.out.println(getNotId());
 		INoticeDao noticeDao = new NoticeDaoImpl();
 		noticeDao.deleteNotByID(getNotId());
 		notices = noticeDao.queryAll();
@@ -113,12 +117,14 @@ public class NotListAction {
 	 * @throws Exception
 	 */
 	public String add() throws Exception {
-		if (getTitle() == null||getContent()==null||getTitle().equals("")||getContent().equals("")) {
-			System.out.println("11111111");
+		if (getTitle() == null||getContent()==null||getTitle().equals("")||getContent().equals("")) 
+		{
+			INoticeDao noticeDao = new NoticeDaoImpl();
+			notices = noticeDao.queryAll();
 			return "sb";
 		} else {
-			System.out.println("222222222");
 			INoticeDao noticeDao = new NoticeDaoImpl();
+			notices = noticeDao.queryAll();
 			noticeDao.addNot(getTitle(), getContent(), "GZB");
 			return "bs";
 		}
@@ -130,8 +136,10 @@ public class NotListAction {
 	public String update() throws Exception{
 		//通过ID查询公告的标题和内容
 		INoticeDao noticeDao = new NoticeDaoImpl();
+		System.out.println(noticeDao.queryById(getNotId()).getNotId());
 		setUpdateTitle(noticeDao.queryById(getNotId()).getNotTitle());
 		setUpdateContent(noticeDao.queryById(getNotId()).getNotContent());
+		setUpdateId(noticeDao.queryById(getNotId()).getNotId());
 		return "fail";
 	}
 	
@@ -141,6 +149,9 @@ public class NotListAction {
 	 */
 	public String doUpdate() throws Exception{
 		INoticeDao noticeDao = new NoticeDaoImpl();
+		notices = noticeDao.queryAll();
+		System.out.println(getUpdateId());
+		System.out.println(getUpdateTitle());
 		noticeDao.updateNotById(getUpdateId(), getUpdateTitle(), getUpdateContent());
 		return "doUpdate";
 	}

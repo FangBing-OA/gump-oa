@@ -86,9 +86,9 @@
 		总记录数：<s:property value='page.count'/>条
 	</div>
 	<div id=PageSelectorSelectorArea>
-		<a href="pa!listPosition?page.currentPage=<s:property value='page.currentPage-1'/>"  name="first" title="上一页" style="cursor: hand;">
+		<a href="pa!listPosition?g=<s:property value='page.currentPage-1'/>"  name="first" title="上一页" style="cursor: hand;">
 			<img src="/gump-oa/html/style/blue/images/pageSelector/firstPage.png"/></a>
-		<a href="pa!listPosition?page.currentPage=<s:property value='page.currentPage+1'/>" name="last"  title="下一页" style="cursor: hand;">
+		<a href="pa!listPosition?g=<s:property value='page.currentPage+1'/>" name="last"  title="下一页" style="cursor: hand;">
 			<img src="/gump-oa/html/style/blue/images/pageSelector/lastPage.png"/></a>
 	</div>
 </div>

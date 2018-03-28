@@ -1,5 +1,8 @@
+<%@page import="org.apache.struts2.ServletActionContext"%>
+<%@page import="com.gump.vo.Employee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,14 +21,14 @@
 		
 		<div id="Head1Right">
 			<div id="Head1Right_UserName">
-                <img border="0" width="13" height="14" src="style/images/top/user.gif" /> 您好，<b>管理员</b>
+                <img border="0" width="13" height="14" src="style/images/top/user.gif" /> 您好，<b><s:property value="%{#session.account.empName}"/>(员工)</b>
 			</div>
 			<div id="Head1Right_UserDept"></div>
 			<div id="Head1Right_Time"></div>
 		</div>
 		
         <div id="Head1Right_SystemButton">
-            <a target="_parent" href="System_User/logout.html">
+            <a target="_parent" href="LoginOrExit!Exit">
 				<img width="78" height="20" alt="退出系统" src="style/blue/images/top/logout.gif" />
 			</a>
         </div>

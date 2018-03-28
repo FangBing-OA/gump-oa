@@ -11,14 +11,14 @@
 </head>
 
 <body>
-	<table border=0 cellspacing=0 cellpadding=0 width=100% height=100%>
+	<table border=0 cellspacing=0 cellpadding=0 width=100% height=100% style="margin-top:200px;">
 		<tr>
 			<td align=center>
 				<div id=Logout>
 					<div id=AwokeMsg>
 						<img id=LogoutImg
 							src="../html/style/blue/images/logout/logout.gif" border=0 /><img
-							id=LogoutTitle src="../style/blue/images/logout/logout1.gif"
+							id=LogoutTitle src="../html/style/blue/images/logout/logout1.gif"
 							border=0 />
 					</div>
 					<div id=LogoutOperate>

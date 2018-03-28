@@ -24,16 +24,15 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="/gump-oa/html/style/images/title_arrow.gif"/> 职位信息
+            <img border="0" width="13" height="13" src="/gump-oa/html/style/images/title_arrow.gif"/> 新增职位信息
         </div>
         <div id="Title_End"></div>
     </div>
 </div>
 
 <!--显示表单内容-->
-<div id=MainArea>
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
-        	<img border="0" width="4" height="7" src="/gump-oa/html/style/blue/images/item_point.gif" /> 职位信息 </div> 
+        	<img border="0" width="4" height="7" src="/gump-oa/html/style/blue/images/item_point.gif" /> 新增职位信息 </div> 
         </div>
         
         <!-- 表单内容显示 -->
@@ -52,6 +51,5 @@
               </s:form>
             </div>
         </div>
-        
 </body>
 </html>

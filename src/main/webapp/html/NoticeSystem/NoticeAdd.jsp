@@ -22,7 +22,7 @@
 
 <!--显示表单内容-->
 <div id="MainArea">
-    <form action="notList!add" method="post">
+    <form action="na!add" method="post">
         <div class="ItemBlock_Title1"><!-- 信息说明<DIV CLASS="ItemBlock_Title1">
         	<IMG BORDER="0" WIDTH="4" HEIGHT="7" SRC="../style/blue/images/item_point.gif" /> 信息内容 </DIV>  -->
         </div>

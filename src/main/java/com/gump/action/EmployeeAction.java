@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.Parameter.Request;
 
+import com.gump.commons.JudgeRole;
 import com.gump.service.IEmployeeService;
 import com.gump.service_impl.EmployeeServiceImpl;
 import com.gump.vo.Employee;
@@ -80,8 +81,11 @@ public class EmployeeAction extends ActionSupport{
 		setEmps(iEmployeeService.getAllEmp());
 	   // List<Employee> emps=iEmployeeService.getAllEmp();
 		//ActionContext.getContext().put("emps",emps);
-		System.out.println("获得所有的员工信息");
-		return "tolist";
+		if(JudgeRole.isAdmin()){
+			return "toadminlist";
+		}else{
+			return "tostafflist";
+		}
 	}
 	
 	/**

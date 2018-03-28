@@ -20,7 +20,7 @@ public class LoginOrExitAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	// 定义一个账号属性
-	private String account;
+	private String loginname;
 
 	// 定义一个一个密码属性
 	private String password;
@@ -31,12 +31,14 @@ public class LoginOrExitAction extends ActionSupport {
 	// 调用职位接口不知道为什么不行
 	 IPositionDao ips = new PositionDaoImpl();
 
-	public String getAccount() {
-		return account;
+	
+
+	public String getLoginname() {
+		return loginname;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setLoginname(String loginname) {
+		this.loginname = loginname;
 	}
 
 	public String getPassword() {
@@ -48,49 +50,45 @@ public class LoginOrExitAction extends ActionSupport {
 	}
 
 	// 登录方法
-	public String Login() throws Exception {
-		System.out.println("进来了action" +"\n"+"account>>>>"+account+"\npassword>>>>"+password);
-		System.out.println(getAccount());
+	public void Login() throws Exception {
 		// 查找该账号对象
-		Employee empByAccount = ims.getEmpByAccount(getAccount());
-		System.out.println("职位id"+empByAccount.getEmpPosId());
+		Employee empByAccount = ims.getEmpByAccount(getLoginname());
 		// 如果查询为空返回登录
-		if (empByAccount.equals(null)){
-			System.out.println("empByAccount为空");
+		if (null==empByAccount){
 			// 弹窗提示。href是点击确定后跳转的地方
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write("<html><head><meta charset='UTF-8'></head>"
-					+ "<script language='javascript'>alert('请先登录');window.location.href='/gump-oa/LoginAndExit/Login.jsp';</script>");
-			return "ToLogin";
+					+ "<script language='javascript'>alert('账号或密码不正确');window.location.href='/gump-oa/LoginAndExit/Login.jsp';</script>");
 
 			// 如果存在且密码配对成功就进去页面
-		} else if (empByAccount.getEmpPassword().equals(getPassword())) {
-			System.out.println("--------------------------------------");
+		} else if (empByAccount.getEmpPassword().equals(getPassword())&&empByAccount.getEmpPassword().equals(getPassword())) {
 			// 把登录账号放在session里面
-			ServletActionContext.getRequest().getSession().setAttribute("NowStaff", empByAccount);
+			ServletActionContext.getRequest().getSession().setAttribute("account", empByAccount);
 			// 查询职位
 			 List<Position> selectPosById = ips.getPositionById(empByAccount.getEmpPosId());
 			 Position position = selectPosById.get(0);
-			// 职位id 为1是普通员工staff，为2是管理员html
+			// 职位id 为4是普通员工staff，为2是管理员html
 			if (position.getPosId() == 4) {
-				return "ToStaffIndex";
+				ServletActionContext.getResponse().getWriter().write("<html><head><meta charset='UTF-8'></head>"
+						+ "<script language='javascript'>window.location.href='/gump-oa/staff/index.jsp';</script>");
 			} else if (position.getPosId()==2 ) {
-				return "ToHtmlIndex";
+				ServletActionContext.getResponse().getWriter().write("<html><head><meta charset='UTF-8'></head>"
+						+ "<script language='javascript'>window.location.href='/gump-oa/html/index.jsp';</script>");
 			}
 
 		}
 		// 如果密码不正确就显示
+		ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 		ServletActionContext.getResponse().getWriter().write("<html><head><meta charset='UTF-8'></head>"
-				+ "<script language='javascript'>alert('账号或者密码不正确');window.location.href='/gump-oa/LoginAndExit/Login.jsp';</script>");
-		return "ToLogin";
+				+ "<script language='javascript'>alert('密码不正确');window.location.href='/gump-oa/LoginAndExit/Login.jsp';</script>");
 
 	}
 
 	// 退出方法
 	public String Exit() {
 		// 退出的时候把员工对象删除
-		ServletActionContext.getRequest().getSession().removeAttribute("NowStaff");
+		ServletActionContext.getRequest().getSession().removeAttribute("account");
 		return "ToExit";
-
 	}
 
 }

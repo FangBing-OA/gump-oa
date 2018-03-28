@@ -13,9 +13,10 @@ import com.gump.utils.TimeCycleUtils;
 import com.gump.vo.Employee;
 import com.gump.vo.Message;
 import com.gump.vo.Page;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class MessageAction implements SessionAware,ModelDriven<Message>{
+public class MessageAction implements ModelDriven<Message>{
 	private Page page;//页面信息---------------------//使用时要new
 	private Message message;//消息
 	private int messageCurrent;//当前页数，用于从前台传值
@@ -98,7 +99,7 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		ims = new MessageServiceImpl();
 		//得到帐号
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		message.setMesSender(nowStaff.getEmpAccount());
 		message.setTime();
 		message.setMesRead(false);
@@ -162,7 +163,7 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		String timeEnd = TimeCycleUtils.dateToDetailString(date);
 		//得到帐号
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
 		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account);
@@ -193,7 +194,7 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		//ActionContext context = ActionContext.getContext();
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
 		int count = (int)(ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account));
@@ -222,7 +223,7 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		//ActionContext context = ActionContext.getContext();
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
 		page = new Page();
@@ -249,7 +250,7 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		//ActionContext context = ActionContext.getContext();
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//得到总总记录数
 		long count = ims.countMessageNotRead(account);
@@ -293,7 +294,7 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		//ActionContext context = ActionContext.getContext();
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
 		long count = ims.countSendMessage(account);
@@ -322,16 +323,16 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		//ActionContext context = ActionContext.getContext();
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
-		String account = (String)mySession.get(nowStaff.getEmpAccount());
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		//获得总记录数
-		long count = ims.countSendMessage(account);
+		System.out.println(nowStaff.getEmpAccount()+"--------------");
+		long count = ims.countSendMessage(nowStaff.getEmpAccount());
 		page = new Page();
 		page.setCount((int)count);
 		page.setCurrentPage(1);
 		
 		//获得返回消息集合
-		List<Message> list = ims.listSendMseeage(account, page);
+		List<Message> list = ims.listSendMseeage(nowStaff.getEmpAccount(), page);
 		page.setData(list);
 		
 		//将数据存入session
@@ -349,7 +350,7 @@ public class MessageAction implements SessionAware,ModelDriven<Message>{
 		//ActionContext context = ActionContext.getContext();
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
-		Employee nowStaff = (Employee)mySession.get("NowStaff");
+		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
 		long count = ims.countSendMessage(account);

@@ -2,6 +2,7 @@ package com.gump.action;
 
 import java.util.List;
 
+import com.gump.commons.JudgeRole;
 import com.gump.service_impl.PositionServiceImpl;
 import com.gump.vo.Page;
 import com.gump.vo.Position;
@@ -9,13 +10,23 @@ import com.gump.vo.Position;
 public class PositionAction{
 	
 	private List<Position> positionList;//职位集合
-	private Page page = new Page();//当前页面
+	private Page page;//当前页面
+	private int g;
 	private Position position ;//职位vo对象
 	private List<Position> listName;//下拉框集合
 	private int posId;
 	
 	
 	
+	public int getG() {
+		return g;
+	}
+
+	public void setG(int g) {
+		this.g = g;
+		System.out.println("g:::::"+g);
+	}
+
 	public List<Position> getListName() {
 		return listName;
 	}
@@ -81,29 +92,27 @@ public class PositionAction{
 	 * @return
 	 */
 	public String listPosition(){
+		
+		   page = new Page();
+		   
 		   //获取所有的职位名称集合(实际为所有职位信息集合)
 		   listName = new PositionServiceImpl().AllPosition();
 		   
-			/*//若上一页小于1，则设置当前页面为1
-			if(page.getCurrentPage() <= 1){
-				page.setCurrentPage(1);
-			//若上一页大于总页面数，则设置当前页面为总页面数
-			}else if(page.getCurrentPage() > page.getPageTotal()){
-				page.setCurrentPage(page.getPageTotal());
-			}*/
+		   //获取总记录数并设置
+		   int count = (int)new PositionServiceImpl().getPositionCount();
+		   page.setCount(count);
+			
+		   page.setCurrentPage(g); 
 		   
-			//获取总记录数并设置
-			int count = (int)new PositionServiceImpl().getPositionCount();
-			page.setCount(count);
-			
-			
-			
 			//设置当前页面
 			page.setCurrentPage(page.getCurrentPage());
-			System.out.println("当前页面为：-------"+page.getCurrentPage()+"---------");
 			//开始查询所有记录数
 			positionList  = new PositionServiceImpl().listPosition(page);
-		    return "toPositionList";
+			if(JudgeRole.isAdmin()){
+				return "toadminlist";
+			}else{
+				return "tostafflist";
+			}
 	}
 	
 	
@@ -112,6 +121,8 @@ public class PositionAction{
 	 * @return
 	 */
 	public String getPositionById(){
+		
+		page = new Page();
 		//获取总记录数并设置
 		int count = (int)new PositionServiceImpl().getPositionCount();
 		page.setCount(count);
@@ -191,6 +202,7 @@ public class PositionAction{
 	 * 修改职位信息操作
 	 */
 	public String  updatePosition(){
+		page = new Page();
 		//获取所有的职位名称集合(实际为所有职位信息集合)
 		listName = new PositionServiceImpl().AllPosition();
 		

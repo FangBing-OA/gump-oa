@@ -10,7 +10,7 @@
 <body>
 
 <!--显示表单内容-->
-    <form action="na!doUpdate?updateId=updateId" method="post">
+    <form action="na!doUpdate" method="post">
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
             <img border="0" width="4" height="7" src="../style/blue/images/item_point.gif" />  </div> 
         </div>
@@ -19,13 +19,16 @@
             <div class="ItemBlock">
                 <table cellpadding="0" cellspacing="0" class="mainForm" style="border-collapse:separate;
 border-spacing:15px 30px;">
-                   
+					<tr>
+						<td><s:hidden name="updateId"/></td>
+					</tr>
                     <tr><td>公告标题</td>
-                        <td><input type="text" name="name" class="InputStyle" name='updateTitle'/></td>
+                    	
+                       <td><s:textfield name="updateTitle" theme="simple"/></td>
                     </tr>
                    
                     <tr><td>公告内容</td>
-                        <td><textarea name="description" class="TextareaStyle" name="updateContent"></textarea></td>
+                        <td><s:textarea name="updateContent" theme="simple"/></td>
                     </tr> 
                 
                     <tr>

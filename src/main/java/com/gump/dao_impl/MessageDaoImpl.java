@@ -188,6 +188,7 @@ public class MessageDaoImpl implements IMessageDao {
 		
 		try {
 			i = new QueryRunner(ds).query(sql,account,new ScalarHandler<Long>(1));
+			System.out.println("-----"+i);
 			if(i > 0){
 				return i;
 			}

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.junit.Test;
 
+import com.gump.commons.JudgeRole;
 import com.gump.dao.IDepartmentDao;
 import com.gump.dao_impl.DepartmentImpl;
 import com.gump.vo.Department;
@@ -31,7 +32,11 @@ public class DepartmentAction  implements Serializable{
 		List<Department> list=d.selectdep();
 		request.setAttribute("li", list);
 		ServletActionContext.getRequest().getSession().setAttribute("lii",list);
-		return "success";
+		if(JudgeRole.isAdmin()){
+			return "toadminlist";
+		}else{
+			return "tostafflist";
+		}
 	}
 	
 	public String addDep(){
