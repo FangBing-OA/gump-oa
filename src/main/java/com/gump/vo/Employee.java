@@ -11,6 +11,20 @@ public class Employee {
 	private int empPosId;// 员工职位ID
 	private String empStatus;// 员工状态
 	private String empTel;// 员工电话
+	private String empDepName; //部门名称
+	private String empPosName; //职位名称
+	public String getEmpDepName() {
+		return empDepName;
+	}
+	public void setEmpDepName(String empDepName) {
+		this.empDepName = empDepName;
+	}
+	public String getEmpPosName() {
+		return empPosName;
+	}
+	public void setEmpPosName(String empPosName) {
+		this.empPosName = empPosName;
+	}
 	
 	public String getEmpPassword() {
 		return empPassword;

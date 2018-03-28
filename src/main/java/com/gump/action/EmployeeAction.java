@@ -9,9 +9,15 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.Parameter.Request;
 
 import com.gump.commons.JudgeRole;
+import com.gump.dao.IPositionDao;
+import com.gump.dao_impl.DepartmentImpl;
 import com.gump.service.IEmployeeService;
+import com.gump.service.IPositionService;
 import com.gump.service_impl.EmployeeServiceImpl;
+import com.gump.service_impl.PositionServiceImpl;
+import com.gump.vo.Department;
 import com.gump.vo.Employee;
+import com.gump.vo.Position;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -77,8 +83,18 @@ public class EmployeeAction extends ActionSupport{
 	 * @return
 	 */
 	public String getAllEmp(){
-		//调用service层的方法
-		setEmps(iEmployeeService.getAllEmp());
+		//调用service层的方法 此方法为查询所有的用户
+		 List<Employee> allEmps = iEmployeeService.getAllEmp();
+		 IPositionService ipos=new PositionServiceImpl();
+		 DepartmentImpl dep=new DepartmentImpl();
+		  for(Employee emp:allEmps)
+		  {
+			 Department depart= dep.selectDepartmentById(emp.getEmpDepId());
+			 emp.setEmpDepName(depart.getDepName());
+			 List<Position> posit = ipos.getPositionById(emp.getEmpPosId());
+			 emp.setEmpPosName(posit.get(0).getPosName());
+		  }
+		setEmps(allEmps);
 	   // List<Employee> emps=iEmployeeService.getAllEmp();
 		//ActionContext.getContext().put("emps",emps);
 		if(JudgeRole.isAdmin()){
@@ -104,6 +120,14 @@ public class EmployeeAction extends ActionSupport{
 	 * @return
 	 */
 	public String doUpdate(){
+	   DepartmentImpl dep=new DepartmentImpl();
+	   IPositionService ipos=new PositionServiceImpl();
+	    List<Position> listposs=ipos.AllPosition();
+	  List<Department> lists=dep.selectdep();
+	  System.out.println("部门下拉框"+lists);
+	  System.out.println("职位下拉框"+lists);
+	  ActionContext.getContext().put("lists",lists);	
+	  ActionContext.getContext().put("listposs",listposs);
 		System.out.println("从前端传过来的id---"+empId);
 		//setEmp(iEmployeeService.getEmpById(empId));
 		Employee emp=iEmployeeService.getEmpById(empId);
@@ -136,11 +160,28 @@ public class EmployeeAction extends ActionSupport{
 	 */
 	public String doAdd(){
 		//调用service层的方法
+
 		iEmployeeService.doAdd(emp);
 		System.out.println("从前端取出的年纪"+emp.getEmpAge());
 		//获得所有的员工
 		setEmps(iEmployeeService.getAllEmp());
 		return "toadd";
+	}
+	/**
+	 * 动态生成部门和职位的下拉框
+	 * @return
+	 */
+	public String select()
+	{
+		DepartmentImpl dep=new DepartmentImpl();
+		IPositionService ipos=new PositionServiceImpl();
+	    List<Position> listposs=ipos.AllPosition();
+	  List<Department> lists=dep.selectdep();
+	  System.out.println("部门下拉框"+lists);
+	  System.out.println("职位下拉框"+lists);
+	  ActionContext.getContext().put("lists",lists);	
+	  ActionContext.getContext().put("listposs",listposs);
+		return "select";
 	}
 	
 	/**

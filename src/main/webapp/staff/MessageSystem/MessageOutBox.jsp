@@ -32,6 +32,8 @@
     </div>
 </div>
 
+<s:if test="page.data.size>0">
+
 <div id="MainArea">
     <table cellspacing="0" cellpadding="0" class="TableStyle">
        
@@ -84,6 +86,9 @@
     	<a href="ma!toOutBoxPage?messageCurrent=<s:property value="page.pageTotal"/>" ><img src="/gump-oa/staff/style/blue/images/pageSelector/lastPage.png"/></a>
 	</div>
 </div>
-
+</s:if>
+<s:else>
+没有数据
+</s:else>
 </body>
 </html>

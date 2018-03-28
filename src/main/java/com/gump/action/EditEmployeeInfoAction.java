@@ -1,7 +1,9 @@
 package com.gump.action;
 
 import com.gump.dao.IDepartmentDao;
+import com.gump.dao.IEmployeeDao;
 import com.gump.dao_impl.DepartmentImpl;
+import com.gump.dao_impl.EmployeeDaoImpl;
 import com.gump.service.IEmployeeService;
 import com.gump.service.IPositionService;
 import com.gump.service_impl.EmployeeServiceImpl;
@@ -15,8 +17,17 @@ public class EditEmployeeInfoAction {
 	private IEmployeeService empService = new EmployeeServiceImpl();
 	//自动注入
 	private Employee employee;
+	private int empId;
 	private String positionName;
 	private String departmentName;
+
+	public int getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
 
 	public String getDepartmentName() {
 		return departmentName;
@@ -48,12 +59,13 @@ public class EditEmployeeInfoAction {
 	 * @throws Exception
 	 */
 	public String showEmployeeInfo() throws Exception {
+		
 		ActionContext context = ActionContext.getContext();
 		employee = (Employee) context.getSession().get("account");
-		context.put("positionName",poService.getPositionById(employee.getEmpPosId()).get(0).getPosName());
-		//这个1是部门的id,到时自己进行修改
-		context.put("departmentName", departDao.selectDepartmentById(1));
-		return "editUserInfoUI";
+		setEmployee(employee);
+		setDepartmentName(departDao.selectDepartmentById(employee.getEmpDepId()).getDepName());
+		setPositionName(poService.getPositionById(employee.getEmpPosId()).get(0).getPosName());
+		return "showempinfo";
 	}
 	
 	/**
@@ -62,11 +74,26 @@ public class EditEmployeeInfoAction {
 	 * @throws Exception
 	 */
 	public String modifyEmployeeInfo() throws Exception {
-		employee.setEmpPosId(poService.getPositionByName(positionName).get(0).getPosId());
-		//这个教育部是部门名字，自己进行修改
-		employee.setEmpDepId(departDao.selectDepartmentByName("教育部").getDepId());
-		empService.doUpdate(employee);
+		IEmployeeDao iEmployeeDao = new EmployeeDaoImpl();
+		// 通过员工ID获得员工信息
+		Employee emp = iEmployeeDao.getEmpById(empId);
+		setEmployee(emp);
+		// 获得该员工的部门名称
+		setDepartmentName(departDao.selectDepartmentById(employee.getEmpDepId()).getDepName());
+		// 获得该员工的职位信息
+		setPositionName(poService.getPositionById(employee.getEmpPosId()).get(0).getPosName());
 		
 		return "editUserInfoUI";
+	}
+	
+	/**
+	 * 保存修改
+	 * @return
+	 */
+	public String saveEmp(){
+		IEmployeeDao iEmployeeDao = new EmployeeDaoImpl();
+		System.out.println(employee);
+		iEmployeeDao.doUpdate(employee);
+		return "showempinfo";
 	}
 }

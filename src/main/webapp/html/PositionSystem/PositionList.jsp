@@ -55,17 +55,15 @@
         <tbody id="TableData" class="dataContainer" >
 			<!-- 正在审批或审批完成的表单显示示例 -->
 			<s:iterator value="positionList" var="pos"> 
-			  <s:form action="pa!goUpdatePositionPage" theme="simple">
-			   
 				<tr>
-				    <td align="center"><s:textfield name="position.posId" value='%{posId}' cssStyle="border: 0px red solid; text-align:center; background:#F3F9FD"/></td>
-					<td align="center"><s:textfield name="position.posName" value='%{posName}' cssStyle="border: 0px red solid; text-align:center;  background:#F3F9FD"/> </td>
-					<td align="center"><s:textfield name="position.posDescribe" value='%{posDescribe}' cssStyle="border: 0px red solid; text-align:center;  background:#F3F9FD"/></td>
-					<td align="center"><a onClick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="pa!removePosition?position.posId=<s:property value='%{posId}'/>">删除</a>
-						<s:submit value="修改"/> 
+				    <td align="center"><s:textfield   theme="simple" name="position.posId" value='%{posId}' cssStyle="border: 0px red solid; text-align:center; background:#F3F9FD; font-size: 12px; color: #005791;"/></td>
+					<td align="center"><s:textfield   theme="simple" name="position.posName" value='%{posName}' cssStyle="border: 0px red solid; text-align:center;  background:#F3F9FD; font-size: 12px; color: #005791;"/> </td>
+					<td align="center"><s:textfield   theme="simple" name="position.posDescribe" value='%{posDescribe}' cssStyle="border: 0px red solid; text-align:center;  background:#F3F9FD; font-size: 12px; color: #005791"/></td>
+					<td align="center">
+					    <a onClick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="pa!removePosition?position.posId=<s:property value='%{posId}'/>">删除</a>
+						<a href="pa!goUpdatePositionPage?position.posId=<s:property value='%{posId}'/>&position.posName=<s:property value='%{posName}'/>&position.posDescribe=<s:property value='%{posDescribe}'/>">修改</a> 
 				    </td>
 				</tr>
-		      </s:form> 
 			</s:iterator>
         </tbody>
     </table>

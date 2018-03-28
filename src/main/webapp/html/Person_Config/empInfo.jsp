@@ -30,7 +30,7 @@
 
 <!--显示表单内容-->
 <div id=MainArea>
-    <form action="EditEmployeeInfoAction!saveEmp" enctype="multipart/form-data">
+    <form action="../System_User/list.html" enctype="multipart/form-data">
         <div class="ItemBlock_Title1"><!-- 信息说明<DIV CLASS="ItemBlock_Title1">
         	<IMG BORDER="0" WIDTH="4" HEIGHT="7" SRC="../style/blue/images/item_point.gif" /> 个人信息 </DIV>  -->
         </div>
@@ -41,44 +41,40 @@
                 <table cellpadding="0" cellspacing="0" class="mainForm">
 					<tr>
                         <td width="150">账号</td>
-                        <td><input type="text" name="employee.empAccount" value="<s:property value='employee.empAccount'/>"></td>
+                        <td><s:property value='employee.empAccount'/></td>
 						<td rowspan="5" align="right">
 							<img src="http://localhost:8080/gump-oa/html/style/images/defaultAvatar.gif"/>
 						</td>
                     </tr>
                     <tr>
                         <td>姓名</td>
-                        <td><input type="text" name="employee.empName" value="<s:property value='employee.empName'/>"></td>
+                        <td><s:property value='employee.empName'/></td>
                     </tr>
 					<tr>
                         <td>性别</td>
-                        <td><input type="text" name="employee.empSex" value="<s:property value='employee.empSex'/>"></td>
+                        <td><s:property value='employee.empSex'/></td>
                     </tr>
 					<tr>
                         <td>年龄</td>
-                        <td><input type="text" name="employee.empAge" value="<s:property value='employee.empAge'/>"></td>
+                        <td><s:property value='employee.empAge'/></td>
                     </tr>
 					<tr>
                         <td>部门</td>
                         <td><input type="hidden" name="employee.empDepId" value="<s:property value='employee.empDepId'/>">
-                        	<input type="text" name="departmentName" value="<s:property value='departmentName'/>"></td>
+                        	<s:property value='departmentName'/></td>
                     </tr>
 					<tr>
                         <td>职位</td>
                         <td><input type="hidden" name="employee.empPosId" value="<s:property value='employee.empPosId'/>">
-                        	<input type="text" name="positionName" value="<s:property value='positionName'/>"></td>
+                        	<s:property value='positionName'/></td>
                     </tr>
 					<tr>
                         <td>状态</td>
-                        <td><input type="text" name="employee.empStatus" value="<s:property value='employee.empStatus'/>"></td>
+                        <td><s:property value='employee.empStatus'/></td>
                     </tr>
 					<tr>
                         <td>电话</td>
-                        <td><input type="text" name="employee.empTel" value="<s:property value='employee.empTel'/>"></td>
-                    </tr>
-					<tr>
-                        <td>头像</td>
-                        <td><input type="file" name="resource" class="InputStyle" style="width: 400px;"/></td>
+                        <td><s:property value='employee.empTel'/></td>
                     </tr>
                 </table>
             </div>
@@ -86,7 +82,10 @@
        
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-        	<input type="submit" value="保存修改"/>
+        	<a href="EditEmployeeInfoAction!modifyEmployeeInfo?empId=<s:property value='employee.empId'/>">修改个人信息</a>
+            <input type="image" src="../style/images/save.png"/>
+            <!-- 点击保存执行editUserInfoUI的modifyEmployeeInfo方法 -->
+            <a href="/gump-oa/editUserInfoUI_modifyEmployeeInfo.action"><img src="http://localhost:8080/gump-oa/html/style/images/goBack.png"/></a>
         </div>
     </form>
 </div>

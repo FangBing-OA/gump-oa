@@ -42,13 +42,17 @@
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr><td width="100">所属部门</td>
                         <td><select name="emp.empDepId" class="SelectStyle">
-                                <option value="0" selected="selected">请选择部门</option>
-                                <option value="1">人设部</option>
-                                <option value="2">教育部</option>
-                                <option value="3"></option>
-                                <option value="4"></option>
-                                <option value="5"></option>
-                                <option value="6"></option>
+                                <s:iterator value="#request.lists" var="list">                             
+                                <option value="<s:property value="#list.depId"/>"><s:property value="#list.depName"/></option>
+                                </s:iterator>
+                            </select> 
+                        </td>
+                    </tr>
+                    <tr><td width="100">职位</td>
+                        <td><select name="emp.empPosId" class="SelectStyle">
+                              <s:iterator value="#request.listposs" var="listpos">                             
+                                <option value="<s:property value="#listpos.posId"/>"><s:property value="#listpos.posName"/></option>
+                                </s:iterator>
                             </select> 
                         </td>
                     </tr>

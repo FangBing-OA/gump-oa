@@ -86,12 +86,12 @@
 			<tr class="TableDetail1 template">
 			   
 				<td><s:property value="#request.emp.empName"/></td>
-				<td><s:property value="#emp.empDepId"/></td>
+				<td><s:property value="#emp.empDepName"/></td>
 				<td>	
 				 	<s:property value="#emp.empSex"/>
 				</td>
 				<td><s:property value="#emp.empAge"/></td>
-				<td><s:property value="#emp.empPosId"/></td>
+				<td><s:property value="#emp.empPosName"/></td>
 				<td><s:property value="#emp.empTel"/></td>
 			</tr>
 			</s:iterator>

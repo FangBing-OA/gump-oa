@@ -24,7 +24,6 @@ public class MessageAction implements ModelDriven<Message>{
 	private List<Integer> idList;//消息Id集合
 	private static String keyword;//关键字，用于Sa查询
 	private IMessageService ims = new MessageServiceImpl();//實例化IMessageService
-	private Map<String, Object> mySession;
 	
 	
 	public String getKeyword() {
@@ -44,12 +43,6 @@ public class MessageAction implements ModelDriven<Message>{
 	}
 	public void setMessageCurrent(int messageCurrent) {
 		this.messageCurrent = messageCurrent;
-	}
-	public Map<String, Object> getMySession() {
-		return mySession;
-	}
-	public void setMySession(Map<String, Object> mySession) {
-		this.mySession = mySession;
 	}
 
 	public IMessageService getIms() {
@@ -77,10 +70,6 @@ public class MessageAction implements ModelDriven<Message>{
 		this.idList = idList;
 	}
 	
-	public void setSession(Map<String, Object> arg0) {
-		// TODO Auto-generated method stub
-		this.mySession = arg0;
-	}
 	
 	/************************发送界面**********************************/	
 	/**
@@ -164,20 +153,18 @@ public class MessageAction implements ModelDriven<Message>{
 		//得到帐号
 		/************>>>>>>>>>>>>>>>未确定******************/
 		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
-		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
-		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account);
-		page.setCount((int)count);
-		//从session中获得当前页
-		Page pageSession = (Page)mySession.get("messageInBox");
-		page.setCurrentPage(pageSession.getCurrentPage());
+		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, nowStaff.getEmpAccount());
+		if(count !=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(messageCurrent);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, nowStaff.getEmpAccount(), page);
+			page.setData(list);
+		}
 		
-		//获得返回消息集合
-		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account, page);
-		page.setData(list);
-		
-		//将数据存入session
-		mySession.put("messageInBox", page);
 		return "toinbox";
 	}
 	
@@ -195,19 +182,18 @@ public class MessageAction implements ModelDriven<Message>{
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
 		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
-		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
-		int count = (int)(ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account));
-		page = new Page();
-		page.setCount(count);
-		page.setCurrentPage(1);
+		int count = (int)(ims.countMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, nowStaff.getEmpAccount()));
+		if(count !=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(1);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd,  nowStaff.getEmpAccount(), page);
+			page.setData(list);
+		}
 		
-		//获得返回消息集合
-		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account, page);
-		page.setData(list);
-		
-		//将数据存入session
-		mySession.put("messageInBox", page);
 		return "toreinbox";
 	}
 	
@@ -224,19 +210,18 @@ public class MessageAction implements ModelDriven<Message>{
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
 		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
-		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
 		page = new Page();
-		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00",timeEnd,account);
-		page.setCount((int)count);
-		page.setCurrentPage(messageCurrent);
-		
-		//获得返回消息集合
-		List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, account, page);
-		page.setData(list);
-		
-		//将数据存入session
-		mySession.put("messageInBox", page);
+		long count = ims.countMessageInTimeQuantum("1990-01-01 00:00:00",timeEnd,nowStaff.getEmpAccount());
+		if(count !=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(messageCurrent);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listMessageInTimeQuantum("1990-01-01 00:00:00", timeEnd, nowStaff.getEmpAccount(), page);
+			page.setData(list);
+		}
 		
 		return "toall";
 	}
@@ -251,18 +236,17 @@ public class MessageAction implements ModelDriven<Message>{
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
 		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
-		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//得到总总记录数
-		long count = ims.countMessageNotRead(account);
-		page.setCount((int)count);
-		page.setCurrentPage(page.getCurrentPage());
-		
-		//获得返回消息集合
-		List<Message> list = ims.listMessageNotRead(account, page);
-		page.setData(list);
-		
-		//将数据存入session
-		mySession.put("messageNotReadInBox", page);
+		long count = ims.countMessageNotRead(nowStaff.getEmpAccount());
+		if(count !=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(messageCurrent);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listMessageNotRead(nowStaff.getEmpAccount(), page);
+			page.setData(list);
+		}
 		
 		return "tonot";
 	}
@@ -295,21 +279,17 @@ public class MessageAction implements ModelDriven<Message>{
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
 		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
-		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
-		long count = ims.countSendMessage(account);
-		page.setCount((int)count);
-		//从session中获得当前页
-		Page pageSession = (Page)mySession.get("messageInBox");
-		page.setCurrentPage(pageSession.getCurrentPage());	
-		
-		//获得返回消息集合
-		List<Message> list = ims.listSendMseeage(account, page);
-		System.out.println("-------------"+list.size());
-		page.setData(list);
-		
-		//将数据存入session
-		mySession.put("messageOutBox", page);
+		long count = ims.countSendMessage(nowStaff.getEmpAccount());
+		if(count !=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(messageCurrent);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listSendMseeage(nowStaff.getEmpAccount(), page);
+			page.setData(list);
+		}
 		return "toout";
 	}
 	
@@ -325,18 +305,17 @@ public class MessageAction implements ModelDriven<Message>{
 		/************>>>>>>>>>>>>>>>未确定******************/
 		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
 		//获得总记录数
-		System.out.println(nowStaff.getEmpAccount()+"--------------");
 		long count = ims.countSendMessage(nowStaff.getEmpAccount());
-		page = new Page();
-		page.setCount((int)count);
-		page.setCurrentPage(1);
+		if(count !=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(1);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listSendMseeage(nowStaff.getEmpAccount(), page);
+			page.setData(list);
+		}
 		
-		//获得返回消息集合
-		List<Message> list = ims.listSendMseeage(nowStaff.getEmpAccount(), page);
-		page.setData(list);
-		
-		//将数据存入session
-		mySession.put("messageOutBox", page);
 		return "toreout";
 	}
 	
@@ -351,20 +330,19 @@ public class MessageAction implements ModelDriven<Message>{
 		//Map<String, Object> session = context.getSession();
 		/************>>>>>>>>>>>>>>>未确定******************/
 		Employee nowStaff = (Employee)ActionContext.getContext().getSession().get("account");
-		String account = (String)mySession.get(nowStaff.getEmpAccount());
 		//获得总记录数
-		long count = ims.countSendMessage(account);
-		page = new Page();
-		page.setCount((int)count);
-		//从session中获得当前页
-		page.setCurrentPage(messageCurrent);	
+		long count = ims.countSendMessage(nowStaff.getEmpAccount());
+		if(count!=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(messageCurrent);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listSendMseeage(nowStaff.getEmpAccount(), page);
+			page.setData(list);
+		}
 		
-		//获得返回消息集合
-		List<Message> list = ims.listSendMseeage(account, page);
-		page.setData(list);
 		
-		//将数据存入session
-		mySession.put("messageOutBox", page);
 		return "tosend";
 	}
 	/*******************************************************************************************/
@@ -383,15 +361,15 @@ public class MessageAction implements ModelDriven<Message>{
 			keyword="";
 		}
 		long count = ims.countMessageByKeyword(keyword);
-		page.setCount((int)count);
-		page.setCurrentPage(messageCurrent);
-		
-		//获得返回消息集合
-		List<Message> list = ims.listMessageByKeyword(keyword, page);
-		page.setData(list);
-		
-		//将数据存入session
-		mySession.put("messageInBox", page);
+		if(count!=0){
+			page = new Page();
+			page.setCount((int)count);
+			page.setCurrentPage(messageCurrent);
+			
+			//获得返回消息集合
+			List<Message> list = ims.listMessageByKeyword(keyword, page);
+			page.setData(list);
+		}
 		
 		return "toallSa";
 	}

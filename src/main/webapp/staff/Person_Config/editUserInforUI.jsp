@@ -30,7 +30,7 @@
 
 <!--显示表单内容-->
 <div id=MainArea>
-    <form action="EditEmployeeInfoAction!saveEmp" enctype="multipart/form-data">
+    <form action="../System_User/list.html" enctype="multipart/form-data">
         <div class="ItemBlock_Title1"><!-- 信息说明<DIV CLASS="ItemBlock_Title1">
         	<IMG BORDER="0" WIDTH="4" HEIGHT="7" SRC="../style/blue/images/item_point.gif" /> 个人信息 </DIV>  -->
         </div>
@@ -86,7 +86,9 @@
        
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-        	<input type="submit" value="保存修改"/>
+            <input type="image" src="../style/images/save.png"/>
+            <!-- 点击保存执行editUserInfoUI的modifyEmployeeInfo方法 -->
+            <a href="/gump-oa/editUserInfoUI_modifyEmployeeInfo.action"><img src="http://localhost:8080/gump-oa/html/style/images/goBack.png"/></a>
         </div>
     </form>
 </div>

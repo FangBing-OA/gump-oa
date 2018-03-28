@@ -80,8 +80,13 @@ public class DepartmentAction  implements Serializable{
 		int depId=Integer.valueOf(request.getParameter("department.depId"));
 		IDepartmentDao ddo = new DepartmentImpl();
 		setDepartment(ddo.selectDepartmentById(depId));
-		return "success4";
+		if(JudgeRole.isAdmin()){
+			return "toadminlistsel";
+		}else{
+			return "tostafflistsel";
+		}
 	}
+
 	public String deleteDep(){
 		String depName=request.getParameter("department.depName");
 		System.out.print(depName);

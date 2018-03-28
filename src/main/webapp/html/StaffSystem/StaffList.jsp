@@ -87,12 +87,12 @@
 			<tr class="TableDetail1 template" align="center">
 			   
 				<td><s:property value="#request.emp.empName"/></td>
-				<td><s:property value="#emp.empDepId"/></td>
+				<td><s:property value="#emp.empDepName"/></td>
 				<td>	
 				 	<s:property value="#emp.empSex"/>
 				</td>
 				<td><s:property value="#emp.empAge"/></td>
-				<td><s:property value="#emp.empPosId"/></td>
+				<td><s:property value="#emp.empPosName"/></td>
 				<td><s:property value="#emp.empTel"/></td>
 				<td><a href="/gump-oa/ea!doDelete?empId=<s:property value="#emp.empId"/>">删除
 				</a>
@@ -106,7 +106,7 @@
     <!-- 其他功能超链接 -->
      <div id="TableTail">
         <div id="TableTail_inside">
-            <a href="html/StaffSystem/StaffAdd.jsp"><img src="/gump-oa/html/style/images/createNew.png" /></a>
+            <a href="/gump-oa/ea!select.action"><img src="/gump-oa/html/style/images/createNew.png" /></a>
         </div>
     </div>
 </div>

@@ -29,11 +29,12 @@
 			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom,doGx</allowed-methods>
 		</action>
 		
+		<!-- 个人信息模块 -->
 		<action name="EditEmployeeInfoAction!*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
 			<result name="editUserInfoUI">/html/Person_Config/editUserInforUI.jsp</result>
-			<allowed-methods>showEmployeeInfo,modifyEmployeeInfo</allowed-methods>
+			<result name="showempinfo">/html/Person_Config/empInfo.jsp</result>
+			<allowed-methods>showEmployeeInfo,modifyEmployeeInfo,saveEmp</allowed-methods>
 		</action>
-	
 		<action name="editPasswordUI" class="com.gump.action.ModifyEmployeePasAction">
 			<result name="modify">/html/Person_Config/editPasswordUI.jsp</result>
 		</action>
@@ -95,6 +96,8 @@
 		<action name="DepartmentAction!*" class="com.gump.action.DepartmentAction" method="{1}">
 			<result name="toadminlist">/html/DepartmentSystem/DepartmentList.jsp</result>
 			<result name="tostafflist">/staff/DepartmentSystem/DepartmentList.jsp</result>
+			<result name="toadminlistsel">/html/DepartmentSystem/DepartmentSelect.jsp</result>
+			<result name="tostafflistsel">/staff/DepartmentSystem/DepartmentSelect.jsp</result>
 			<result name="success1" type='redirectAction'>
 				<param name="actionName">DepartmentAction!depList</param>
 				<param name="namespace">/</param>
@@ -103,6 +106,7 @@
 			<result name="success4">/html/DepartmentSystem/DepartmentSelect.jsp</result>
 			<allowed-methods>depList,addDep,updateDep,getName,selectByName,selectById,deleteDep</allowed-methods>
 		</action>
+
 	</package>
 	
 	<!-- ajax_消息 -->
