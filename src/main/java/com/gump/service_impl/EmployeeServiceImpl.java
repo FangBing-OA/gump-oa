@@ -52,8 +52,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		iEmployeeDao.doDelete(empId);
 	}
 
-	public List<Employee> findByCom(String empName, int empDepId) throws SQLException {		
-		return iEmployeeDao.findByCom(empName, empDepId);
+	public List<Employee> findByCom(String empName) throws SQLException {		
+		return iEmployeeDao.findByCom(empName);
 	}
 
 	/**

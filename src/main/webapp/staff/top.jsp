@@ -65,7 +65,8 @@
 		<div id="Head2_FunctionList">
 			<marquee style="WIDTH: 100%;" onMouseOver="this.stop()" onMouseOut="this.start()" 
 				scrollamount=1 scrolldelay=30 direction=left>
-				<b>这是滚动的消息</b>
+			<span>最新公告：</span>
+				<b><s:property value="%{#session.noticeTitle}"/></b>
 			</marquee>
 		</div>
 	</div>

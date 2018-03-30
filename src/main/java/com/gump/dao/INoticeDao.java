@@ -22,4 +22,6 @@ public interface INoticeDao {
 	//添加公告
 	public void addNot(String notTitle,String notContent,String notSender) throws Exception;
 
+	//获得最新的一条公告信息
+	public Notice getNewestNot();
 }

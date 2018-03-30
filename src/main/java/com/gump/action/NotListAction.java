@@ -124,8 +124,8 @@ public class NotListAction {
 			return "sb";
 		} else {
 			INoticeDao noticeDao = new NoticeDaoImpl();
-			notices = noticeDao.queryAll();
 			noticeDao.addNot(getTitle(), getContent(), "GZB");
+			notices = noticeDao.queryAll();
 			return "bs";
 		}
 	}
@@ -149,10 +149,10 @@ public class NotListAction {
 	 */
 	public String doUpdate() throws Exception{
 		INoticeDao noticeDao = new NoticeDaoImpl();
-		notices = noticeDao.queryAll();
 		System.out.println(getUpdateId());
 		System.out.println(getUpdateTitle());
 		noticeDao.updateNotById(getUpdateId(), getUpdateTitle(), getUpdateContent());
+		notices = noticeDao.queryAll();
 		return "doUpdate";
 	}
 }

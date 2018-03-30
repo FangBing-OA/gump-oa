@@ -23,9 +23,7 @@
 					</div>
 					<div id=LogoutOperate>
 						<img src="../html/style/blue/images/logout/logout2.gif" border=0 />
-						<a href="/gump-oa/LoginAndExit/Login.jsp">重新登入系统</a>
-						<img src="../html/style/blue/images/logout/logout3.gif" border=0 />
-						<a href="javascript:window.opener=null;window.close();">关闭此页面</a>
+						<a href="http://localhost:8080/gump-oa/LoginAndExit/Login.jsp">重新登入系统</a>
 					</div>
 				</div>
 			</td>

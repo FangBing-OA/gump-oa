@@ -95,7 +95,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		}
 	}
 
-	public List<Employee> findByCom(String empName, int empDepId) throws SQLException {
+	public List<Employee> findByCom(String empName) throws SQLException {
 	     
 		//获得连接对象
 		Connection conn = ds.getConnection();
@@ -103,7 +103,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		System.out.println("进入联合查询");
 		List<Employee> emps;
 		try {
-			emps = new QueryRunner().query(conn,"select * from employee where empName=? and empDepId =?",new BeanListHandler<Employee>(Employee.class),empName,empDepId);
+			emps = new QueryRunner().query(conn,"select * from employee where empName=?",new BeanListHandler<Employee>(Employee.class),empName);
 			System.out.println(emps);
 			return emps;
 		} catch (SQLException e) {

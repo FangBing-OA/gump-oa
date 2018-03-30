@@ -42,7 +42,7 @@ public interface IEmployeeService {
 	 */
 	void doDelete(int empId);
 	
-	List<Employee> findByCom(String empName,int empDepId) throws SQLException;
+	List<Employee> findByCom(String empName) throws SQLException;
 	
 	/**
 	 * 通过账号获得员工

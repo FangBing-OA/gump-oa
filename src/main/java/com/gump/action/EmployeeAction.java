@@ -69,11 +69,11 @@ public class EmployeeAction extends ActionSupport{
 	public String tofindbycom() throws SQLException
 	{
 		String empName=getEmp().getEmpName();
-		Integer empDepId=getEmp().getEmpDepId();
+		//Integer empDepId=getEmp().getEmpDepId();
 	   // String empDepName="研发部";
-		setEmps(iEmployeeService.findByCom(empName, empDepId));
+		setEmps(iEmployeeService.findByCom(empName));
 		System.out.println("传过来的姓名-------"+empName);
-		System.out.println("传过来的部门id------"+empDepId);
+		//System.out.println("传过来的部门id------"+empDepId);
 		
 		return "tofindbycom";
 	}

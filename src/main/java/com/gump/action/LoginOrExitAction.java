@@ -5,11 +5,15 @@ import java.util.List;
 import org.apache.struts2.ServletActionContext;
 
 import com.gump.dao.IEmployeeDao;
+import com.gump.dao.INoticeDao;
 import com.gump.dao.IPositionDao;
 import com.gump.dao_impl.EmployeeDaoImpl;
+import com.gump.dao_impl.NoticeDaoImpl;
 import com.gump.dao_impl.PositionDaoImpl;
 import com.gump.vo.Employee;
+import com.gump.vo.Notice;
 import com.gump.vo.Position;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginOrExitAction extends ActionSupport {
@@ -32,6 +36,7 @@ public class LoginOrExitAction extends ActionSupport {
 	 IPositionDao ips = new PositionDaoImpl();
 
 	
+
 
 	public String getLoginname() {
 		return loginname;
@@ -68,10 +73,15 @@ public class LoginOrExitAction extends ActionSupport {
 			 List<Position> selectPosById = ips.getPositionById(empByAccount.getEmpPosId());
 			 Position position = selectPosById.get(0);
 			// 职位id 为4是普通员工staff，为2是管理员html
+			 //获得最新的公告
+			 INoticeDao iNoticeDao = new NoticeDaoImpl();
+			 Notice notice = iNoticeDao.getNewestNot();
 			if (position.getPosId() == 4) {
+				ActionContext.getContext().getSession().put("noticeTitle", notice.getNotTitle());
 				ServletActionContext.getResponse().getWriter().write("<html><head><meta charset='UTF-8'></head>"
 						+ "<script language='javascript'>window.location.href='/gump-oa/staff/index.jsp';</script>");
 			} else if (position.getPosId()==2 ) {
+				ActionContext.getContext().getSession().put("noticeTitle", notice.getNotTitle());
 				ServletActionContext.getResponse().getWriter().write("<html><head><meta charset='UTF-8'></head>"
 						+ "<script language='javascript'>window.location.href='/gump-oa/html/index.jsp';</script>");
 			}

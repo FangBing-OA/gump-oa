@@ -85,7 +85,7 @@ public class PositionAction{
 		}else{
 			positionList = new PositionServiceImpl().getPositionByName(position.getPosName());
 		} 
-		return "toPositionList";
+		return "toadminlist";
 	}
 	/**
 	 * 查询所有的职位信息
@@ -135,7 +135,7 @@ public class PositionAction{
 		
 		//获取所有的职位名称集合(实际为所有职位信息集合)
 		listName  = new PositionServiceImpl().AllPosition();
-		return "toPositionList";
+		return "toadminlist";
 	}
 
 	
@@ -149,7 +149,7 @@ public class PositionAction{
 		
 		//开始查询记录
 		positionList = new PositionServiceImpl().getPositionByName(position.getPosName());
-		return "toPositionList";
+		return "toadminlist";
 	}
 	
 	/**

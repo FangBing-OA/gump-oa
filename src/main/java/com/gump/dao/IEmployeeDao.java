@@ -45,7 +45,7 @@ public interface IEmployeeDao {
 	 * 根据员工姓名和部门名称查询人数
 	 * @throws SQLException 
 	 */
-	List<Employee> findByCom(String empName,int empDepId) throws SQLException;
+	List<Employee> findByCom(String empName) throws SQLException;
 
 	/**
 	 * 通过账号获得员工信息

@@ -1,3 +1,5 @@
+<%@page import="org.apache.struts2.ServletActionContext"%>
+<%@page import="com.gump.vo.Employee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -26,7 +28,7 @@
 		</div>
 		
         <div id="Head1Right_SystemButton">
-            <a target="_parent" href="System_User/logout.html">
+            <a target="_parent" href="LoginOrExit!Exit">
 				<img width="78" height="20" alt="退出系统" src="style/blue/images/top/logout.gif" />
 			</a>
         </div>
@@ -63,7 +65,8 @@
 		<div id="Head2_FunctionList">
 			<marquee style="WIDTH: 100%;" onMouseOver="this.stop()" onMouseOut="this.start()" 
 				scrollamount=1 scrolldelay=30 direction=left>
-				<b>这是滚动的消息</b>
+			<span>最新公告：</span>
+				<b><s:property value="%{#session.noticeTitle}"/></b>
 			</marquee>
 		</div>
 	</div>

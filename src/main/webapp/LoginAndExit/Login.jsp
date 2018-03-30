@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
+<title>GUMP OA登录系统</title>
 <link href="css/user.css" type="text/css" rel="stylesheet" />
 
 <link rel="stylesheet" href="static/login/bootstrap.min.css" />
@@ -117,13 +117,13 @@ body {
 						</div>
 					</div>
 					<div style="float: right; padding-right: 10%;">
-						<!-- <div style="float: left; margin-top: 3px; margin-right: 2px;">
+						<div style="float: left; margin-top: 3px; margin-right: 2px;">
 							<font color="white">记住密码</font>
 						</div>
 						<div style="float: left;">
 							<input name="form-field-checkbox" id="saveid" type="checkbox"
 								onclick="savePaw();" style="padding-top: 0px;" />
-						</div> -->
+						</div>
 					</div>
 					<div class="form-actions">
 						<div style="width: 86%; padding-left: 8%;">

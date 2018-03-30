@@ -26,7 +26,8 @@
 			<result name="toadd" type="redirectAction">ea!getAllEmp</result>
 			<result name="tofindbycom">html/StaffSystem/StaffList.jsp</result>
 		    <result name="dodelete">html/StaffSystem/StaffList.jsp</result>
-			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom,doGx</allowed-methods>
+		       <result name="select">html/StaffSystem/StaffAdd.jsp</result>
+			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom,doGx,select</allowed-methods>
 		</action>
 		
 		<!-- 个人信息模块 -->

@@ -1,5 +1,6 @@
 package com.gump.dao_impl;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -73,6 +74,19 @@ public class NoticeDaoImpl implements INoticeDao{
 		String date = format.format(d);
 		String sql = "insert into notice(notTitle,notContent,notDate,notSender) values(?,?,?,?)";
 		queryRunner.update(sql, notTitle,notContent,date,notSender);
+	}
+	public Notice getNewestNot(){
+		DataSource ds = PoolFactory.getDS();
+		Notice notice;
+		try {
+			QueryRunner queryRunner = new QueryRunner(ds);
+			String sql = "select * from notice order by notId desc limit 0,1";
+			notice = queryRunner.query(sql, new BeanHandler<Notice>(Notice.class));
+			return notice;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
