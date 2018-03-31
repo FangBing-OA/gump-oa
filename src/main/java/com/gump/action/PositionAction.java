@@ -24,7 +24,6 @@ public class PositionAction{
 
 	public void setG(int g) {
 		this.g = g;
-		System.out.println("g:::::"+g);
 	}
 
 	public List<Position> getListName() {

@@ -17,11 +17,24 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	private IEmployeeDao iEmployeeDao = new EmployeeDaoImpl();
 	
+	public Integer countEmpByDepId(int depid)
+	{
+		return iEmployeeDao.countEmpByDepId(depid);
+	}
+	
+	/**
+	 * 根据部门id查询员工数
+	 */
+	public boolean  bEmpByDepId(int depid)
+	{
+		return iEmployeeDao.bEmpByDepId(depid);
+	}
+	
 	/**
 	 * 获得所有员工信息
 	 */
-	public List<Employee> getAllEmp() {
-		return iEmployeeDao.getAllEmp();
+	public List<Employee> getAllEmp(int currentPage) {
+		return iEmployeeDao.getAllEmp(currentPage);
 	}
 	
 	/**
@@ -64,5 +77,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		// TODO Auto-generated method stub
 		iEmployeeDao.getEmpByAccount(account);
 		return null;
+	}
+
+	@Override
+	public List<Employee> getAllEmp() {
+		return iEmployeeDao.getAllEmp();
 	}
 }

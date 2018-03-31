@@ -73,7 +73,7 @@
 </div>
 
 <!--分页信息-->
-<div id=PageSelectorBar>
+<div id=PageSelectorBar style="padding-left:0;padding-right:0;">
 	<div id=PageSelectorMemo>
 		页次：<s:property value="page.currentPage"/>/<s:property value="page.pageTotal"/>页 &nbsp;
 		每页显示：<s:property value="page.pageSize"/>条 &nbsp;

@@ -11,8 +11,7 @@
 
 <div id="StatusBar">
     <div id="Online">
-    	在线人员：共 <span class="OnlineUser" id="onlineUserNum"></span> 人
-        <span class="OnlineView"><a href="javascript:void(0)">[查看在线名单]</a></span>
+    	
     </div>
 </div>
 

@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>用户信息</title>
+	<title>部门信息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script language="javascript" src="/gump-oa/html/script/jquery.js"></script>
     <script language="javascript" src="/gump-oa/html/script/pageCommon.js" charset="utf-8"></script>
@@ -14,6 +14,13 @@
 	<script language="javascript" src="/gump-oa/html/script/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="/gump-oa/html/style/blue/pageCommon.css" />
     <script type="text/javascript">
+   /*  $(function(){
+    	$('#depchange').change(function(){
+    		$.ajax({
+    			url:"/gump-oa/DepartmentAction!AjAx",
+    		})	
+    	});
+    });     */
     </script>
 </head>
 <body>
@@ -41,7 +48,7 @@
             <div class="ItemBlock">
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr><td width="100"><h1>部门名称</h1></td>
-                    	<td><s:textfield name="department.depName" theme="simple"></s:textfield></td>
+                    	<td><s:textfield name="department.depName" theme="simple" id="depchange"></s:textfield></td>
                     </tr>
                     <tr><td><h1>部门人数</h1></td>
                     	<td><s:textfield name="department.depNum" class="InputStyle" theme="simple"></s:textfield></td>

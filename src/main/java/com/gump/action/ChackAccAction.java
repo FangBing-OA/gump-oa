@@ -13,7 +13,6 @@ public class ChackAccAction {
 
 	public String doChack(){
 		//获得前端参数
-		System.out.println("abcd");
 		return "abc";
 	}
 }

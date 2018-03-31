@@ -11,9 +11,16 @@ import org.junit.Test;
 import com.gump.commons.JudgeRole;
 import com.gump.dao.IDepartmentDao;
 import com.gump.dao_impl.DepartmentImpl;
+import com.gump.dao_impl.EmployeeDaoImpl;
+import com.gump.service.IEmployeeService;
+import com.gump.service_impl.EmployeeServiceImpl;
 import com.gump.vo.Department;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class DepartmentAction  implements Serializable{
+public class DepartmentAction extends ActionSupport{
+	IDepartmentDao dep=new DepartmentImpl();
+	IDepartmentDao ddo=new DepartmentImpl();
+	
 	private static final long serialVersionUID = 1L;
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private Department department;
@@ -25,11 +32,24 @@ public class DepartmentAction  implements Serializable{
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-	
+
+	public void validateAddDep() {
+		IDepartmentDao dao=new DepartmentImpl();
+		List<Department> list=dao.selectdep();
+		if(department==null||department.getDepName()==null||department.getDepName().equals("")){
+			return;
+		}else{
+		for(int i=0;i<list.size();i++){
+			if(department.getDepName().equals(list.get(i).getDepName())){
+				this.addFieldError("depName.forminput", getText("部门名称已经存在，请更换！！！"));
+			}
+		}
+		super.validate();
+		}
+	}
 	
 	public String depList(){
-		IDepartmentDao d = new DepartmentImpl(); 
-		List<Department> list=d.selectdep();
+		List<Department> list=ddo.selectdep();
 		request.setAttribute("li", list);
 		ServletActionContext.getRequest().getSession().setAttribute("lii",list);
 		if(JudgeRole.isAdmin()){
@@ -38,60 +58,60 @@ public class DepartmentAction  implements Serializable{
 			return "tostafflist";
 		}
 	}
-	
 	public String addDep(){
-		Department de =new Department();
-		de.setDepName(department.getDepName());
-		de.setDepNum(department.getDepNum());
-		de.setDepDescribe(department.getDepDescribe());
-		IDepartmentDao dep=new DepartmentImpl();
-		dep.addDep(de);
+		dep.addDep(department);
 		return "success1";
 	}
 	
 	
 	public String updateDep(){
 		String depName=(String) ServletActionContext.getRequest().getSession().getAttribute("departmentName");
-		
-		Department de =new Department();
-		de.setDepName(department.getDepName());
-		de.setDepNum(department.getDepNum());
-		de.setDepDescribe(department.getDepDescribe());
-		IDepartmentDao dep=new DepartmentImpl();
-		dep.nameupdatedepDescribe(de, depName);
+		dep.nameupdatedepDescribe(department, depName);
 		return "success1";
 	}
 	
 	public String getName(){
 		String depName=(String) request.getParameter("department.depName");
-		IDepartmentDao ddo = new DepartmentImpl();
-		setDepartment(ddo.selectDepartmentByName(depName));
+		setDepartment(ddo.selectDepartmentByName(department.getDepName()));
 		ServletActionContext.getRequest().getSession().setAttribute("departmentName",depName);
 		return "success3";
 	}
 	
 	public String selectByName(){
-		String depName=request.getParameter("department.depName");
-		IDepartmentDao ddo = new DepartmentImpl();
-		setDepartment(ddo.selectDepartmentByName(depName));
+		setDepartment(ddo.selectDepartmentByName(department.getDepName()));
 		return "success4";
 	}
+	
 	public String selectById(){
-		int depId=Integer.valueOf(request.getParameter("department.depId"));
-		IDepartmentDao ddo = new DepartmentImpl();
-		setDepartment(ddo.selectDepartmentById(depId));
+		setDepartment(ddo.selectDepartmentById(department.getDepId()));
 		if(JudgeRole.isAdmin()){
 			return "toadminlistsel";
 		}else{
 			return "tostafflistsel";
 		}
 	}
-
+	
+	/**
+	 * 删除部门
+	 * @return
+	 */
 	public String deleteDep(){
 		String depName=request.getParameter("department.depName");
-		System.out.print(depName);
-		IDepartmentDao ddo = new DepartmentImpl();
+		Department department=ddo.selectDepartmentByName(depName);
+		int depid=department.getDepId();
+		//查看是否有员工；有员工就不删除，没有员工就删除
+		IEmployeeService emp=new EmployeeServiceImpl();
+		if(emp.bEmpByDepId(depid)){
+			List<Department> list=ddo.selectdep();
+			request.setAttribute("li", list);
+			super.addActionError("<script type='text/javascript'>alert('部门删除失败');</script>");
+			/*super.addActionError("部门删除失败");*/
+		/*	this.addActionMessage(aMessage);  */
+			return "toadminlist";
+		}else{
 		ddo.namedrop(depName);
 		return "success1";
+		}
 	}
+	
 }

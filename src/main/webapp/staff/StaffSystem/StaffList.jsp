@@ -32,13 +32,13 @@
 <div id="QueryArea">
 	<div style="height: 30px">
 	     
-	 <s:form theme="simple" action="ea!tofindbycom" method="post">
+	 <s:form theme="simple" action="ea!tofindbycom?currentPage=1" method="post">
 	    <table border=0 cellspacing=3 cellpadding=5>
 			<tr>
-				<td>按员工姓名查询：</td>
+				<td>按关键字查询：</td>
 				<td><s:textfield name="emp.empName"></s:textfield>
 				</td>
-				<td><a href=""><input type="IMAGE" src="/gump-oa/html/style/blue/images/button/query.PNG"/></a></td>
+				<td><a href="/gump-oa/ea!tofindbycom"><input type="IMAGE" src="/gump-oa/html/style/blue/images/button/query.PNG"/></a></td>
 			</tr>
 		</table>    
 	 </s:form>
@@ -83,9 +83,9 @@
         <tbody id="TableData"  datakey="formList">
 			<!-- 正在审批或审批完成的表单显示示例 -->
 		    <s:iterator value="emps" var="emp">
-			<tr class="TableDetail1 template">
+			<tr class="TableDetail1 template" align="center">
 			   
-				<td><s:property value="#request.emp.empName"/></td>
+				<td><s:property value="#emp.empName"/></td>
 				<td><s:property value="#emp.empDepName"/></td>
 				<td>	
 				 	<s:property value="#emp.empSex"/>
@@ -99,10 +99,19 @@
     </table>
     
     <!-- 其他功能超链接 -->
-</div>
+     <div id="TableTail">
+        <div id="TableTail_inside">
+            <label>总数:  <s:property value="count"/></label>
+            <label>总页数:  <s:property value="count/4+1"/></label>
+            <label>当前页数:  <s:property value="currentPage"/></label>
+           <a href="/gump-oa/ea!getAllEmp?currentPage=<s:property value="currentPage-1"/>">上一页</a>
+           <a href="/gump-oa/ea!getAllEmp?currentPage=<s:property value="currentPage+1"/>">下一页</a>
+       </div>
+       <div>
+      </div>
+     </div>
 
-<div class="Description">
-</div>
+
 
 </body>
 </html>

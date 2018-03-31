@@ -16,6 +16,7 @@ public class Notice {
 	private String notDate;
 	//公告发布者
 	private String notSender;
+	
 	public int getNotId() {
 		return notId;
 	}

@@ -31,7 +31,7 @@
 
 <!--显示表单内容-->
 <div id=MainArea>
-    <form action="ea!doAdd" method="post">
+    <form action="ea!doAdd?currentPage=1" method="post">
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
         	<img border="0" width="4" height="7" src="../style/blue/images/item_point.gif" /> 用户信息 </div> 
         </div>

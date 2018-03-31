@@ -158,4 +158,5 @@
 	</div>
 
 </body>
+<s:actionerror escape="false"/>
 </html>

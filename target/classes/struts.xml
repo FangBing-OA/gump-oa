@@ -17,21 +17,22 @@
 		<action name="login">
 			<result>/LoginAndExit/Login.jsp</result>
 		</action>
-        <!-- 员工模块 -->
+		 <!-- 员工模块 -->
 		<action name="ea!*" class="com.gump.action.EmployeeAction" method="{1}">
 			<result name="toadminlist" >html/StaffSystem/StaffList.jsp</result>
 			<result name="tostafflist" >staff/StaffSystem/StaffList.jsp</result>
-			<result name="togx" type="redirectAction">ea!getAllEmp</result>
+			<result name="togx" type="redirectAction">ea!getAllEmp?currentPage=1</result>
 			<result name="toupdate">html/StaffSystem/StaffUpdate.jsp</result>
-			<result name="toadd" type="redirectAction">ea!getAllEmp</result>
+			<result name="toadd" type="redirectAction">ea!getAllEmp?currentPage=1</result>
 			<result name="tofindbycom">html/StaffSystem/StaffList.jsp</result>
 		    <result name="dodelete">html/StaffSystem/StaffList.jsp</result>
 		       <result name="select">html/StaffSystem/StaffAdd.jsp</result>
 			<allowed-methods>getAllEmp,getEmpById,doUpdate,toAdd,doAdd,doDelete,tofindbycom,doGx,select</allowed-methods>
 		</action>
-		
+
 		<!-- 个人信息模块 -->
-		<action name="EditEmployeeInfoAction!*" class="com.gump.action.EditEmployeeInfoAction" method="{1}">
+		<action name="EditEmployeeInfoAction!*" class="com.gump.action.EditEmployeeInfoAction"
+			method="{1}">
 			<result name="editUserInfoUI">/html/Person_Config/editUserInforUI.jsp</result>
 			<result name="showempinfo">/html/Person_Config/empInfo.jsp</result>
 			<allowed-methods>showEmployeeInfo,modifyEmployeeInfo,saveEmp</allowed-methods>
@@ -39,18 +40,20 @@
 		<action name="editPasswordUI" class="com.gump.action.ModifyEmployeePasAction">
 			<result name="modify">/html/Person_Config/editPasswordUI.jsp</result>
 		</action>
-		
+
 		<!--登录 模块 -->
-		<action name="LoginOrExit!*"  class="com.gump.action.LoginOrExitAction"  method="{1}">
+		<action name="LoginOrExit!*" class="com.gump.action.LoginOrExitAction"
+			method="{1}">
 			<result name="ToLogin">/LoginAndExit/Login.jsp</result>
 			<result name="ToStaffIndex" type="redirect">/staff/index.jsp </result>
-			<result name="ToHtmlIndex"  type="redirect">/html/index.jsp</result>
+			<result name="ToHtmlIndex" type="redirect">/html/index.jsp</result>
 			<result name="ToExit">/LoginAndExit/Exit.jsp </result>
 			<allowed-methods>Login,Exit</allowed-methods>
 		</action>
-		
+
 		<!-- 职位模块 -->
-		<action name="pa!*" class="com.gump.action.PositionAction" method="{1}">
+		<action name="pa!*" class="com.gump.action.PositionAction"
+			method="{1}">
 			<result name="toadminlist">/html/PositionSystem/PositionList.jsp</result>
 			<result name="tostafflist">/staff/PositionSystem/PositionList.jsp</result>
 			<result name="goUpdatePage">/html/PositionSystem/PositionUpdate.jsp</result>
@@ -58,43 +61,66 @@
 			<allowed-methods>PositionBy,getPositionById,getPositionByName,listPosition,updatePosition,goUpdatePositionPage,addPosition,goAddPositionPage,removePosition</allowed-methods>
 		</action>
 		<!-- 信息模块 -->
-		<action name="ma!*" class="com.gump.action.MessageAction" method="{1}">
+		<action name="ma!*" class="com.gump.action.MessageAction"
+			method="{1}">
 			<!-- 普通用户 -->
 			<result name="tosave">/staff/MessageSystem/MessagSend.jsp</result>
 			<result name="dosave" type="redirectAction">ma!toRedirectInBox</result>
 			<result name="toshow">/staff/MessageSystem/MessageShow.jsp</result>
 			<result name="toinbox">/staff/MessageSystem/MessageInBox.jsp</result>
-			<result name="toreinbox" >/staff/MessageSystem/MessageInBox.jsp</result>
+			<result name="toreinbox">/staff/MessageSystem/MessageInBox.jsp
+			</result>
 			<result name="toall">/staff/MessageSystem/MessageInBox.jsp</result>
 			<result name="tonot">/staff/MessageSystem/MessageInBox.jsp</result>
 			<result name="toreply">/staff/MessageSystem/MessageInBox.jsp</result>
 			<result name="toout">/staff/MessageSystem/MessageOutBox.jsp</result>
 			<result name="toreout">/staff/MessageSystem/MessageOutBox.jsp</result>
 			<result name="tosend">/staff/MessageSystem/MessageOutBox.jsp</result>
-			<!--管理员  -->
+			<!--管理员 -->
 			<result name="toallSa">/html/MessageSystem/MessageInBox.jsp</result>
 			<result name="toshowSa">/html/MessageSystem/MessageShow.jsp</result>
-			<result name="toallreturn" type="redirectAction">ma!toInBoxAllPageInSa?messageCurrent=%{messageCurrent}</result>
+			<result name="toallreturn" type="redirectAction">ma!toInBoxAllPageInSa?messageCurrent=%{messageCurrent}
+			</result>
 			<allowed-methods>doRemoveMessage,toShowMyselfInSa,toInBoxAllPageInSa,toSave,toShowMyself,doSave,doRemove,toShow,doReturn,toInBox,toRedirectInBox,toInBoxAllPage,toInBoxAllPage,toInBoxNotReadPage,toReplyPage,toOutbox,toRedirectOutbox,toOutBoxPage</allowed-methods>
 		</action>
 		<!-- 公文模块 -->
-		<action name="da!*" class="com.gump.action.DocumentAction"
+		<action name="da!*"  class="com.gump.action.DocumentAction"
 			method="{1}">
-			<result name="success">/success.jsp</result>
-			<allowed-methods>add,remove,modify,saveinquery</allowed-methods>
+			<result name="add_success" type="redirect">da!inqueryAll</result>
+			<result name="error">/html/DocumentSystem/error.jsp</result>
+			<result name="inquery_success">/html/DocumentSystem/DocumentList.jsp</result>
+			<result name="remove_success" type="redirect">da!inqueryAll</result>
+			<result name="inqueryAll_success">/html/DocumentSystem/DocumentList.jsp</result>
+			<result name="modify_success">/html/DocumentSystem/DocumentUpdate.jsp</result>
+			<result name="inqueryBySender_success">/html/DocumentSystem/DocumentSend.jsp</result>
+			<result name="inqueryByReceiver_success">/html/DocumentSystem/DocumentReceive.jsp</result>
+			<result name="newAdd_success">/html/DocumentSystem/DocumentAdd.jsp</result>
+			<result name="page_success">/html/DocumentSystem/DocumentList.jsp</result>
+			<result name="download_success" type="stream">
+			<param name="inputName">is</param>
+			<param name="contentDisposition">attachment;fileName=${fileName}</param>
+			<param name="contentType">application/octet-stream</param>
+			</result>
+			<allowed-methods>download,add,remove,modify,saveinquery,inquery,inqueryAll,newAdd,pageMethod,QueryBySender,QueryByReceiver</allowed-methods>
 		</action>
+
 		<!-- 公告模块 -->
-		<action name="na!*" class="com.gump.action.NotListAction" method="{1}">
-			<result name='toadminlist'>/html/NoticeSystem/NoticeList.jsp</result>
+		<action name="na!*" class="com.gump.action.NotListAction"
+			method="{1}">
+			<result name='toadd'>/html/NoticeSystem/NoticeAdd.jsp</result>
+			<result name="toallSaEmp">/staff/NoticeSystem/NoticeList.jsp
+			</result>
+			<result name='toallSa'>/html/NoticeSystem/NoticeList.jsp</result>
 			<result name='tostafflist'>/staff/NoticeSystem/NoticeList.jsp</result>
 			<result name='sb'>/html/NoticeSystem/NoticeList.jsp</result>
 			<result name='bs'>/html/NoticeSystem/NoticeList.jsp</result>
 			<result name='fail'>/html/NoticeSystem/NoticeUpdate.jsp</result>
 			<result name='doUpdate'>/html/NoticeSystem/NoticeList.jsp</result>
-			<allowed-methods>execute,delete,add,update,doUpdate</allowed-methods>
+			<allowed-methods>executeEmp,toAdd,execute,delete,add,update,doUpdate</allowed-methods>
 		</action>
 		<!-- 部门模块 -->
 		<action name="DepartmentAction!*" class="com.gump.action.DepartmentAction" method="{1}">
+			<result name="input">/html/DepartmentSystem/DepartmenAdd.jsp</result>
 			<result name="toadminlist">/html/DepartmentSystem/DepartmentList.jsp</result>
 			<result name="tostafflist">/staff/DepartmentSystem/DepartmentList.jsp</result>
 			<result name="toadminlistsel">/html/DepartmentSystem/DepartmentSelect.jsp</result>
@@ -108,15 +134,12 @@
 			<allowed-methods>depList,addDep,updateDep,getName,selectByName,selectById,deleteDep</allowed-methods>
 		</action>
 
+		<!-- ajax_消息 -->
+		<!-- <action name="meajax!*" class="com.gump.action.MessageVaildateAction"
+			method="{1}">
+			<result name="success">/staff/MessageSystem/MessagSend.jsp</result>
+			<allowed-methods>vaildateMesReceiver</allowed-methods>
+		</action> -->
 	</package>
-	
-	<!-- ajax_消息 -->
-	<!-- <package name="mesvalidate" extends="struts-default" namespace="/mesvalidate">  
-            <action name="pluginAjax" class="com.gump.action.MessageVaildateAction" method="pluginAjax">  
-                <result type="json">  
-                    <param name="excludeNullProperties">true</param>  
-                </result>  
-            </action>  
-	</package>  --> 
 </struts>
 

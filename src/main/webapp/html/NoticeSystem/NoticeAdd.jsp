@@ -14,7 +14,7 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="../style/images/title_arrow.gif"/> 发送消息
+            <img border="0" width="13" height="13" src="/gump-oa/html/style/images/title_arrow.gif"/> 发送消息
         </div>
         <div id="Title_End"></div>
     </div>
@@ -46,8 +46,8 @@
         
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-			<input type="IMAGE" src="../style/blue/images/button/send.png" id="submit" name="submit"/>
-			<a href="javascript:history.go(-1);"><img src="../style/images/goBack.png"/></a>
+			<input type="IMAGE" src="/gump-oa/html/style/blue/images/button/send.png" id="submit" name="submit"/>
+			<a href="javascript:history.go(-1);"><img src="/gump-oa/html/style/images/goBack.png"/></a>
         </div>
     </form>
 </div>

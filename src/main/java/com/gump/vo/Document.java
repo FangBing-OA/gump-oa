@@ -1,16 +1,27 @@
 package com.gump.vo;
+ 
+import com.gump.service_impl.DocumentServiceImpl;
 
 public class Document {
-	private int docId;//公文id
-	private String docSender;//公文发送者
-	private String docReceiver;//公文接收者
-	private String docTitle;//公文标题
-	private String docTime;//公文时间
-	private String docContent;//公文内容
+	private int docId;//鍏枃id
+	private String docSender;//鍏枃鍙戦�佽��
+	private String docReceiver;//
+	private String docTitle;//鍏枃鏍囬
+	private String docTime;//鍏枃鏃堕棿
+	private String docContent;//鍏枃鍐呭
+	private String fileName;
 	
 	
 	
-   //getter and settr method
+	
+	
+   public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	//getter and settr method
 	public int getDocId() {
 		return docId;
 	}
@@ -47,5 +58,24 @@ public class Document {
 	public void setDocContent(String docContent) {
 		this.docContent = docContent;
 	}
+	//constructor method
+	public Document(){
+		
+	}
+	public Document(String docSender, String docReceiver, String docTitle, String docTime, String docContent) {
+		super();
+		this.docSender = docSender;
+		this.docReceiver = docReceiver;
+		this.docTitle = docTitle;
+		this.docTime = docTime;
+		this.docContent = docContent;
+	}
+	@Override
+	public String toString() {
+		return "Document [docId=" + docId + ", docSender=" + docSender + ", docReceiver=" + docReceiver + ", docTitle="
+				+ docTitle + ", docTime=" + docTime + ", docContent=" + docContent + "]";
+	}
+	
+	
 	
 }

@@ -10,6 +10,7 @@ import com.gump.dao.IPositionDao;
 import com.gump.dao_impl.EmployeeDaoImpl;
 import com.gump.dao_impl.NoticeDaoImpl;
 import com.gump.dao_impl.PositionDaoImpl;
+import com.gump.utils.MD5Utils;
 import com.gump.vo.Employee;
 import com.gump.vo.Notice;
 import com.gump.vo.Position;
@@ -47,6 +48,8 @@ public class LoginOrExitAction extends ActionSupport {
 	}
 
 	public String getPassword() {
+		// 进行MD5加密
+		password = MD5Utils.md5(password);
 		return password;
 	}
 
@@ -66,7 +69,7 @@ public class LoginOrExitAction extends ActionSupport {
 					+ "<script language='javascript'>alert('账号或密码不正确');window.location.href='/gump-oa/LoginAndExit/Login.jsp';</script>");
 
 			// 如果存在且密码配对成功就进去页面
-		} else if (empByAccount.getEmpPassword().equals(getPassword())&&empByAccount.getEmpPassword().equals(getPassword())) {
+		} else if (empByAccount.getEmpAccount().equals(getLoginname())&&empByAccount.getEmpPassword().equals(getPassword())) {
 			// 把登录账号放在session里面
 			ServletActionContext.getRequest().getSession().setAttribute("account", empByAccount);
 			// 查询职位

@@ -37,7 +37,7 @@
     
     <div id="Head2">
         <div id="Head2_Awoke">
-            <ul id="AwokeNum">
+            <%-- <ul id="AwokeNum">
                 <li><a target="desktop" href="javascript:void(0)">
 						<img border="0" width="11" height="13" src="style/images/top/msg.gif" /> 消息
 						<span id="msg"></span>
@@ -59,7 +59,7 @@
 				  
                 <!-- 是否有待审批文档的提示2，提示审批 -->
                 <li id="messageArea">您有 1 个待审批文档，请及时审批！★★★★★</li>
-            </ul>
+            </ul> --%>
         </div>
         
 		<div id="Head2_FunctionList">

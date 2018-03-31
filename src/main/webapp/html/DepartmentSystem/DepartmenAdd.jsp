@@ -22,7 +22,7 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="../style/images/title_arrow.gif"/> 用户信息
+            <img border="0" width="13" height="13" src="../style/images/title_arrow.gif"/> 部门信息
         </div>
         <div id="Title_End"></div>
     </div>
@@ -34,13 +34,14 @@
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
         	<img border="0" width="4" height="7" src="../style/blue/images/item_point.gif" /> 新建部门信息 </div> 
         </div>
-        
+         
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr><td width="100"><h1>部门名称</h1></td>
-                    <td><s:textfield class="InputStyle" name="department.depName" theme="simple" /></td>
+                    <td><s:textfield class="InputStyle" name="department.depName" theme="simple" />
+                    </td>
                        <%--  <td><select name="departmentId" class="SelectStyle">
                                 <option value="0" selected="selected">请选择部门</option>
                                 <option value="7">┠总经理室</option>
@@ -53,15 +54,18 @@
                         </td> --%>
                     </tr>
                     <tr><td><h1>部门人数</h1></td>
-                    	<td><s:textfield class="InputStyle" name="department.depNum" theme="simple"></s:textfield></td>
+                    	<td><s:textfield class="InputStyle" name="department.depNum" theme="simple" value="0" readonly="true"></s:textfield></td>
                     </tr>
                    
                     <tr><td><h1>备注</h1></td>
-                        <td><textarea  name="department.depDescribe" class="TextareaStyle"></textarea></td>
+                        <td><textarea name="department.depDescribe" class="TextareaStyle" theme="simple"></textarea></td>
                     </tr>
                 </table>
+                <s:fielderror style="color:red" theme="simple"></s:fielderror>
             </div>
         </div>
+         
+        
         <!-- 
 		<div class="ItemBlock_Title1">信息说明<div class="ItemBlock_Title1">
         	<img border="0" width="4" height="7" src="../style/blue/images/item_point.gif" /> 岗位设置 </div> 

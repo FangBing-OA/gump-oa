@@ -10,24 +10,30 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.gump.dao.INoticeDao;
 import com.gump.utils.PoolFactory;
 import com.gump.vo.Notice;
+import com.gump.vo.Page;
 
 public class NoticeDaoImpl implements INoticeDao{
 	
 	/**
 	 * 查询所有公告
 	 */
-	public List<Notice> queryAll() throws Exception {
+	public List<Notice> queryAll(Page page) throws Exception {
 		// TODO Auto-generated method stub
 		
 		//获取数据源
 		DataSource ds = PoolFactory.getDS();
+		
+		int pageSize = page.getPageSize();//每页显示多少条  
+		int pageLimit = (page.getCurrentPage()-1)*pageSize;//从第pageLimit条数据拿值
+		
 		QueryRunner queryRunner = new QueryRunner(ds);
-		String sql = "select * from notice";
-		List<Notice> notices = queryRunner.query(sql, new BeanListHandler<Notice>(Notice.class));
+		String sql = "select * from notice order by notDate DESC limit ?,?";
+		List<Notice> notices = queryRunner.query(sql, new BeanListHandler<Notice>(Notice.class),pageLimit,pageSize);
 		return notices;
 	}
 	/**
@@ -75,6 +81,7 @@ public class NoticeDaoImpl implements INoticeDao{
 		String sql = "insert into notice(notTitle,notContent,notDate,notSender) values(?,?,?,?)";
 		queryRunner.update(sql, notTitle,notContent,date,notSender);
 	}
+	
 	public Notice getNewestNot(){
 		DataSource ds = PoolFactory.getDS();
 		Notice notice;
@@ -87,6 +94,26 @@ public class NoticeDaoImpl implements INoticeDao{
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public long countAllNotice() {
+		// TODO Auto-generated method stub
+		DataSource ds = PoolFactory.getDS();
+		
+		long i = 0;
+		//查询已发送消息条数
+		String sql = "select count(*) from notice";
+		
+		try {
+			i = new QueryRunner(ds).query(sql,new ScalarHandler<Long>(1));
+			if(i > 0){
+				return i;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

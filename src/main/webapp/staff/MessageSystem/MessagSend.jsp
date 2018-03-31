@@ -1,3 +1,4 @@
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
@@ -6,7 +7,7 @@
 <head>
 	<title>发送消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script language="javascript" src="/gump-oa/staff/script/jquery.js"></script>
+	<%-- <script language="javascript" src="/gump-oa/staff/script/jquery.js"></script> --%>
     <script language="javascript" src="/gump-oa/staff/script/pageCommon.js" charset="utf-8"></script>
     <script language="javascript" src="/gump-oa/staff/script/PageUtils.js" charset="utf-8"></script>
     <script language="javascript" src="/gump-oa/staff/script/DemoData.js" charset="utf-8"></script>
@@ -33,12 +34,47 @@ $(function(){
 			}
 		});
 	}); */
+/* 	function gg(){
+		$.ajax({
+                url: "meajax!vaildateMesReceiver.action",
+                type: "get",
+                data: {
+                	mesReceiver: function() {
+                        return document.getElementById("message.mesReceiver").value;
+                    }
+                },
+                dataType: "text",
+                dataFilter: function(data, type) {
+                	alert(data);
+                    if (data == "true")
+                        return true;
+                    else
+                        return false;
+                },
+                success:function(data){
+                	 label.text(" ").addClass("success");
+                },
+                error:function(){
+                	alert("出错了");
+                }
+		});
+			
+	} */
 	
 	$("#send").validate({
 		rules:{
 			"message.mesReceiver":{
 				"required":true,
-				"rangelength":[0,50]
+				"rangelength":[0,50],
+				/* "remote": {
+					url: "meajax!vaildateMesReceiver.action",
+	                data: {
+	                	mesReceiver: function() {
+	                        return document.getElementById("message.mesReceiver").value;
+	                    }
+	                },
+	                dataType: "text",
+				} */
 			},
 			"message.mesTitle":{
 				"required":true,
@@ -52,7 +88,8 @@ $(function(){
 		messages:{
 			"message.mesReceiver":{
 				"required":"账号不能为空",
-				"rangelength":"账号不能超过50字"
+				"rangelength":"账号不能超过50字",
+				/* "remote":jQuery.format("账号不存在") */
 			},
 			"message.mesTitle":{
 				"required":"标题不能为空",

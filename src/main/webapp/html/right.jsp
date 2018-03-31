@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>GUMP OA</title>
 </head>
 <body>
-
+<div style="margin-top:200px;margin-left:250px;">
+	<h1><font style="color:blue;">欢迎进入</font> <font style="color:red;">G</font><font style="color:green;">U</font><font style="color:blue;">M</font><font style="color:red;">P</font> <font style="color:blue;">O</font><font style="color:green;">A</font> <font  style="color:blue;">系统</font></h1>
+</div>
 </body>
 </html>

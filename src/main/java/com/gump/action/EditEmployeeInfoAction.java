@@ -92,7 +92,6 @@ public class EditEmployeeInfoAction {
 	 */
 	public String saveEmp(){
 		IEmployeeDao iEmployeeDao = new EmployeeDaoImpl();
-		System.out.println(employee);
 		iEmployeeDao.doUpdate(employee);
 		return "showempinfo";
 	}

@@ -22,32 +22,33 @@
 			href="http://localhost:8080/gump-oa/DepartmentAction!depList">部门管理</a></div>
         </li>
         <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /> 信息管理</div>
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /><a target="right" href="ma!toInBoxAllPageInSa?messageCurrent=1" >信息管理</a></div>
+        </li>
+        
+        <li class="level1">
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" /> 公告管理</div>
             <ul style="display: none;" class="MenuLevel2">
                 <li class="level2">
-                   <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" /> 短消息</div>
+                   <div class="level2Style"><img src="style/images/MenuIcon/menu_arrow_close.gif" />公告管理</div>
                     <ul style="display: inline;" id="message" >
-                        <li class="level3Head"><a target="right" href="ma!toSave.action">发送短消息</a></li>
-                        <li class="level33"><a target="right" href="ma!toRedirectInBox?messageCurrent=1">已接收</a></li>
-                        <li class="level33"><a target="right" href="ma!toRedirectOutbox?messageCurrent=1">已发送</a></li>
+                        <li class="level3Head"><a target="right" href="na!toAdd.action">添加公告</a></li>
+                        <li class="level33"><a target="right" href="na!execute?noticeCurrent=1">查看公告</a></li>
                     </ul>
                 </li>
             </ul>
         </li>
         
-        
-        
-        <li class="level1">
-            <div class="level1Style"><img src="style/images/MenuIcon/FUNC20056.gif" class="Icon" />  <a target="right"
-			href="na!execute">公告管理</a></div>
-
-        </li>
-        
-        
-        
-        <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20070.gif" class="Icon" />  <a target="right"
-			href="Flow_FormFlow_Old/mySubmittedList.html">公文管理</a></div>
+       <li class="level1">
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" />公文管理</div>
+            <ul style="display: none;" class="MenuLevel2">
+                <li class="level2">
+                    <ul style="display: inline;" id="message" >
+                        <li class="level3Head"><a target="right" href="/gump-oa/da!newAdd.action">发送公文</a></li>
+                        <li class="level33"><a target="right" href="/gump-oa/da!QueryByReceiver.action">收件箱</a></li>
+                        <li class="level33"><a target="right" href="/gump-oa/da!QueryBySender.action">发件箱</a></li>
+                    </ul>
+                </li>
+            </ul>
         </li>
         
         <li class="level1">

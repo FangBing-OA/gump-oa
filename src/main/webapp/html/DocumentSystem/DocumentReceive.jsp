@@ -47,7 +47,7 @@
         <!-- 表头-->
         <thead>
             <tr align="CENTER" valign="MIDDLE" id="TableTitle">
-				<td width="115px">公文接收者</td>
+				<td width="115px">公文发送者</td>
 				<td width="115px">公文主题</td>
 				<td width="115px">公文时间</td>
 				<td width="115px">附件名</td>
@@ -63,7 +63,7 @@
 			<!-- 正在审批或审批完成的表单显示示例 -->
 			<s:iterator value="docList" var="doc">
 			<tr align="center">
-				<td width="115px"><s:property value="#doc.docReceiver"/></td>
+				<td width="115px"><s:property value="#doc.docSender"/></td>
 				<td width="115px"><s:property value="#doc.docTitle"/></td>
 				<td width="115px"><s:property value="#doc.docTime"/></td>
 				<td width="115px"><a href="/gump-oa/da!download.action?fileName=<s:property value="#doc.fileName"/>"><s:property value="#doc.fileName"/></a></td>

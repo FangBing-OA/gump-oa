@@ -11,13 +11,24 @@ import com.gump.vo.Employee;
  *
  */
 public interface IEmployeeDao {
+	
+	/**
+	 *根据部门id查询人数
+	 */
+    Integer countEmpByDepId(int depid);
+
+	/**
+	 * 获得所有员工信息
+	 * @return
+	 */
+	List<Employee> getAllEmp(int currentPage);
 
 	/**
 	 * 获得所有员工信息
 	 * @return
 	 */
 	List<Employee> getAllEmp();
-
+	
 	/**
 	 * 通过ID获得员工信息
 	 * @return
@@ -53,4 +64,6 @@ public interface IEmployeeDao {
 	 */
 	
 	Employee getEmpByAccount(String account);
+	
+	 boolean  bEmpByDepId(int depid);
 }

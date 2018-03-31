@@ -39,15 +39,23 @@
         
         <li class="level1">
             <div class="level1Style"><img src="style/images/MenuIcon/FUNC20056.gif" class="Icon" />  <a target="right"
-			href="na!execute">公告管理</a></div>
+			href="na!executeEmp?noticeCurrent=1">公告管理</a></div>
 
         </li>
         
         
         
         <li class="level1">
-            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20070.gif" class="Icon" />  <a target="right"
-			href="Flow_FormFlow_Old/mySubmittedList.html">公文管理</a></div>
+            <div onClick="menuClick(this);" class="level1Style"><img src="style/images/MenuIcon/FUNC20064.gif" class="Icon" />公文管理</div>
+            <ul style="display: none;" class="MenuLevel2">
+                <li class="level2">
+                    <ul style="display: inline;" id="message" >
+                        <li class="level3Head"><a target="right" href="/gump-oa/da!newAdd.action">发送公文</a></li>
+                        <li class="level33"><a target="right" href="/gump-oa/da!QueryByReceiver.action">收件箱</a></li>
+                        <li class="level33"><a target="right" href="/gump-oa/da!QueryBySender.action">发件箱</a></li>
+                    </ul>
+                </li>
+            </ul>
         </li>
         
         <li class="level1">

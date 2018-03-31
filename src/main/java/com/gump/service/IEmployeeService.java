@@ -11,13 +11,33 @@ import com.gump.vo.Employee;
  *
  */
 public interface IEmployeeService {
+	
+	/**
+	 * 根据部门id查询人数
+	 * @param depid
+	 * @return
+	 */
+	public Integer countEmpByDepId(int depid);
+	
+	/**
+	 * 根据部门id查询员工数
+	 * @param depid
+	 * @return
+	 */
+	 boolean  bEmpByDepId(int depid);
+
+	/**
+	 * 获得所有的员工信息
+	 * @return
+	 */
+	List<Employee> getAllEmp(int currentPage);
 
 	/**
 	 * 获得所有的员工信息
 	 * @return
 	 */
 	List<Employee> getAllEmp();
-
+	
 	/**
 	 * 通过ID获得员工
 	 * @return
@@ -42,6 +62,9 @@ public interface IEmployeeService {
 	 */
 	void doDelete(int empId);
 	
+	/*
+	 * 联合查询
+	 */
 	List<Employee> findByCom(String empName) throws SQLException;
 	
 	/**
